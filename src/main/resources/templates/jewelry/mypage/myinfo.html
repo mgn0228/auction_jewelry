@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<head>
+    <title>회원정보수정 - PUBLIC ACTION</title>
+    <th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+    <th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+
+    <th:block th:if="${cm.jscssimport == 'Y'}">
+        <script th:src="'/js/content/mypage/'+${pid}+'.js?v=1.0.0'"></script>
+    </th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+    <a href="#gnb">주메뉴 바로가기</a>
+    <a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+    <header id="header">
+        <h1 class="logo"><a href="/">AUTOMART</a></h1>
+        <th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+        <div id="gnb_bg"></div>
+    </header>
+    <!-- //header -->
+    <hr/>
+
+    <article id="container" class="container">
+        <th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+        <section id="contents" class="contents">
+            <ul class="step_box">
+                <li>약관동의</li>
+                <li>실명확인</li>
+                <li class="on">정보입력</li>
+                <li>가입완료</li>
+            </ul>
+            <form id="updateForm" frmid="updateForm" class="updateForm">
+                <fieldset>
+                    <legend>회원정보수정</legend>
+                    <h3 class="tit_ty4">회원정보수정</h3>
+                    <p class="txt_right2"><strong class="txt_must">*</strong> 필수 입력사항입니다.</p>
+                    <table class="tbl_data5">
+                        <caption>정보입력에 대한 이름, 아이디, 비밀번호, 비밀번호 확인, 휴대폰번호 , Email, 이메일 수신 동의</caption>
+                        <colgroup>
+                            <col style="width:21.5%">
+                            <col style="width:78.5%">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><strong class="txt_must">*</strong> 아이디</th>
+                            <td>
+                                <input type="text" name="memberId" title="아이디" class="inp_ty2 mr16" style="width:228px;"
+                                       disabled="disabled"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].memberId : ''}">
+                                <!--									<button type="button" class="btn_ty1">중복확인</button>
+                                                                    ※ 아이디는 6자리 이상의 영문 또는 숫자로 등록하셔야 합니다.-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><strong class="txt_must">*</strong> 이름</th>
+                            <td>
+                                <input type="text" title="이름" class="inp_ty2" style="width:228px;" disabled="disabled"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].name : ''}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><strong class="txt_must">*</strong> 휴대폰번호</th>
+                            <td>
+                                <input type="text" id="phone1" title="휴대폰번호 앞자리" class="inp_ty2" style="width:58px;"
+                                       disabled="disabled"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].phone.substring(0,3) : ''}">
+                                <span class="mr4 ml4">―</span>
+                                <input type="text" id="phone2" title="휴대폰번호 가운데자리" class="inp_ty2" style="width:58px;"
+                                       disabled="disabled"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].phone.substring(3,7) : ''}">
+                                <span class="mr4 ml4">―</span>
+                                <input type="text" id="phone3" title="휴대폰번호 끝자리" class="inp_ty2 mr16"
+                                       style="width:58px;"
+                                       disabled="disabled"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].phone.substring(7,11) : ''}">
+                                <button type="button" class="btn_ty2" onclick="openPass()">휴대폰 번호 변경</button>
+                                <!--
+                                                                    ※ 낙찰 안내 및 비밀번호 분실시 아이디/비밀번호 찾기에서 문자 발송시 사용됩니다.
+                                -->
+                            </td>
+                        </tr>
+<!--                        <tr>-->
+<!--                            <th scope="row"><strong class="txt_must">*</strong> 현재 비밀번호</th>-->
+<!--                            <td>-->
+<!--                                <input type="text" name="currentPwd" title="비밀번호" defenc="Y" class="inp_ty2 mr16 form-control"-->
+<!--                                       style="width:228px;"-->
+<!--                                       maxlength="20"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th scope="row"><strong class="txt_must">*</strong> 새 비밀번호</th>-->
+<!--                            <td>-->
+<!--                                <input type="text" name="newPwd" title="비밀번호" defenc="Y"-->
+<!--                                       class="inp_ty2 mr16 form-control"-->
+<!--                                       style="width:228px;" maxlength="20"/>-->
+<!--                                &lt;!&ndash;                                ※ 8자리 이상의 영문 + 숫자 혼합으로 구성하여야 합니다.&ndash;&gt;-->
+<!--                                <span id="pwdFeedback" class="msg">※ 8자리 이상의 영문 + 숫자 혼합으로 구성하여야 합니다.</span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th scope="row"><strong class="txt_must">*</strong> 새 비밀번호 확인</th>-->
+<!--                            <td>-->
+<!--                                <input type="password" name="confirmPwd" title="비밀번호 확인" class="inp_ty2 flat_left mr20"-->
+<!--                                       style="width:228px;" maxlength="20"/>-->
+<!--                                <span id="confirmFeedback" class="msg"></span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                        <!--
+                                                    <tr class="bar"><td colspan="2"><td></tr>
+                        -->
+                        <tr class="bar">
+                            <td colspan="2">
+                            <td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>
+                                <input type="text" name="emailId" title="Email id" class="inp_ty2 form-control" style="width:168px;"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].emailId : ''}"> @
+                                <input type="text" name="emailDomain" title="Email 주소" class="inp_ty2 form-control"
+                                       style="width:168px;"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].emailDomain : ''}">
+                                <select title="선택" name="domainSelect" class="sel_ty3" style="width:210px;">
+                                    <option value="">직접입력</option>
+                                    <th:block th:each="item : ${getEmailList}">
+                                        <option th:value="${item.codeNm}" th:text="${item.codeVal}"></option>
+                                    </th:block>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">SMS 수신 동의</th>
+                            <td>
+                                <div class="check_agree">
+                                    <input id="agree_t1" type="radio" name="agreeSms" value="Y" class="form-control"
+                                           th:checked="${mainContent[0].agreeSms == 'Y'}"/>
+                                    <label for="agree_t1" class="mr46">동의함</label>
+                                </div>
+                                <div class="check_agree">
+                                    <input id="agree_t1_2" type="radio" name="agreeSms" value="N" class="form-control"
+                                           th:checked="${mainContent[0].agreeSms == 'N'}"/>
+                                    <label for="agree_t1_2">동의하지 않음</label>
+                                </div>
+                                <p class="txt1 mt10">※ 수신 동의하면 정보 소식을 받아보실 수 있습니다.
+                                    (회원가입 및 회사주요공지 등의 메일은 수신동의와 관계없이 발송됩니다.) </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">이메일 수신 동의</th>
+                            <td>
+                                <div class="check_agree">
+                                    <input id="agree_t2" type="radio" name="agreeEmail" value="Y" class="form-control"
+                                           th:checked="${mainContent[0].agreeEmail == 'Y'}"/>
+                                    <label for="agree_t2" class="mr46">동의함</label>
+                                </div>
+                                <div class="check_agree">
+                                    <input id="agree_t2_2" type="radio" name="agreeEmail" value="N" class="form-control"
+                                           th:checked="${mainContent[0].agreeEmail == 'N'}"/>
+                                    <label for="agree_t2_2">동의하지 않음</label>
+                                </div>
+                                <p class="txt1 mt10">※ 수신 동의하면 정보 소식을 받아보실 수 있습니다.
+                                    (회원가입 및 회사주요공지 등의 메일은 수신동의와 관계없이 발송됩니다.) </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <br/>
+                    <h3 class="tit_ty4">낙찰자 배송지 정보</h3>
+                    <p class="txt_right2"><strong class="txt_must">*</strong> 낙찰시 택배 수령을 이용할 경우에 입력해야 합니다.</p>
+                    <table class="tbl_data5">
+                        <caption>택배 수령 주소</caption>
+                        <colgroup>
+                            <col style="width:21.5%">
+                            <col style="width:78.5%">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row"> 주소</th>
+                            <td>
+                                <input type="text" name="zipCode" title="우편번호" class="inp_ty2 mr16 form-control" style="width:100px;"
+                                       maxlength="5"
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].zipCode : ''}"
+                                       placeholder="우편번호"/>
+                                <button type="button" class="btn_ty1" onclick="searchAddress()">주소찾기</button>
+                                <br/>
+                                <input type="text" name="addr" title="기본 주소" class="inp_ty2 mr16 form-control" style="width:320px;"
+                                       value=""
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].addr : ''}"
+                                       placeholder="주소찾기 클릭"/>
+                                <input type="text" name="addrDetail" title="상세 주소" class="inp_ty2 mr16 form-control"
+                                       style="width:320px;" value=""
+                                       th:value="${not #lists.isEmpty(mainContent) ? mainContent[0].addrDetail : ''}"
+                                       placeholder="상세주소 입력"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--
+                                        <p class="mt10 txt_ty1">회원 가입 이후에 이름과 아이디의 변경은 불가하므로 재가입을 통해서만 가능합니다. (오토마트로 연락바랍니다)</p>
+                    -->
+                    <div class="btn_center">
+                        <button type="button" class="btn_ty4 mr8" onclick="changeMemberInfo()">회원정보 변경</button>
+                        <button type="button" class="btn_ty9 mr8" onclick="cancelMember()">회원 탈퇴요청</button>
+                        <button type="button" class="btn_ty5" onclick="location.href='/changePwd'">비밀번호 변경</button>
+                    </div>
+                </fieldset>
+
+                <input type="hidden" name="email" class="form-control">
+            </form>
+        </section>
+
+        <form name="form_chk" method="post">
+            <input type="hidden" name="m" value="checkplusService">
+            <input type="hidden" name="EncodeData">
+        </form>
+    </article>
+    <!-- //container -->
+    <hr/>
+
+    <th:block th:replace="~{jewelry_include/footer_public_1::footer}"></th:block>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@charset "utf-8";
+
+/* main_container */
+.main_container{position:relative;}
+.tit_mty1{position:relative;padding:56px 0 15px;margin-bottom:36px;color:#443933;font-size:28px;font-family:nsr;font-weight:600;line-height:1.54;text-align:center;}
+.tit_mty1:after{content:" ";display:block;position:absolute;top:107px;left:50%;margin-left:-103px;width:206px;height:1px;background:#c7c3c1;}
+/*
+.tit_mty1:after{content:" ";display:block;position:absolute;top:107px;left:50%;margin-left:-23px;width:46px;height:1px;background:#c7c3c1;}
+*/
+
+/* main_visual */
+.main_visual{height:545px;background:url('./../images/main/visual.jpg') no-repeat 50% 0;background-size:cover;}
+.main_visual .visual_in{width:1000px;margin:0 auto;padding:85px 0 0 8px;}
+.main_visual p{color:#4e4231;font-size:16px;font-family:nsr;line-height:1.54;}
+.main_visual .tit{font-size:38px;font-weight:600;margin-bottom:20px;line-height:1.4;}
+.main_visual .tit strong{color:#046c8e;display:block;}
+.main_visual .tit span{color:#cd4806;}
+
+
+/* link_box */
+.link_box{height:150px;position:relative;margin-top:-150px;}
+.link_box:after{content:'';position:absolute;right:0;top:0;width:100%;height:150px;background:#241710;opacity:0.8;z-index:1;}
+.link_box ul{position:relative;z-index:2;width:980px;margin:0 auto;}
+.link_box li{position:relative;float:left;width:325px;border-right:1px solid #504540;height:150px;}
+.link_box li:first-child{border-left:1px solid #504540}
+.link_box li a{display:block;padding:82px 0 0 32px;}
+.link_box li a:hover{text-decoration:none;}
+.link_box li strong{display:block;font-size:24px;color:#fff;font-family:nsr;}
+.link_box li strong span{color:#f8c806;}
+.link_box li .num{color:#cccccc;font-size:14px;}
+.link_box li .go{font-size:0;position:absolute;right:31px;bottom:21px;width:34px;height:34px;background:url('./../images/common/arrow_2.png') no-repeat 0 0;}
+.link_box .m1{background:url('./../images/main/ico_public_2.png') no-repeat 31px 25px;}
+.link_box .m2 strong span{color:#fb9503;}
+.link_box .m2{background:url('./../images/main/ico_public_1.png') no-repeat 31px 18px;}
+.link_box .m3 strong span{color:#b2e91c;}
+.link_box .m3{background:url('./../images/main/ico_public_3.png') no-repeat 31px 19px;}
+
+
+/* search_box */
+.search_box{width:980px;margin:0 auto;}
+
+
+/* notice_wrap */
+/*
+.notice_wrap{background:#f5f5f7;margin-top:80px;height:500px;}
+*/
+.notice_wrap{background:#f5f5f7;margin-top:0px;height:440px;}
+
+.notice_wrap .notice_box{position:relative;width:978px;margin:0 auto;}
+.notice_box .box{width:489px;float:left;height:215px;background:#fff;}
+.notice_box .box h4{position:relative;width:245px;height:215px;text-align:center;padding:30px 0 0;color:#fff;font-family:nsr;font-size:22px;font-weight:600;}
+.notice_box .box.m1 h4{float:left;background:#ff8c15 url('./../images/main/ico_m1.jpg') no-repeat 50% 85px;}
+.notice_box .box.m2 h4{float:left;background:#8eb220 url('./../images/main/ico_m2.jpg') no-repeat 50% 85px;}
+.notice_box .box.m3 h4{float:right;background:#e7a425 url('./../images/main/ico_m3.jpg') no-repeat 50% 85px;}
+.notice_box .box.m4 h4{float:right;background:#2b93c3 url('./../images/main/ico_m4.jpg') no-repeat 50% 85px;}
+.notice_box .box .list{padding:0px 20px;float:left;width:244px;}
+.notice_box .box .list li{font-size:15px;font-weight:400;padding:15px 0;border-top:1px solid #dadada;}
+.notice_box .box .list li:first-child{border:none;}
+.notice_box .box .list a{display:block;width:100%;height:62px;font-size:14px;overflow:hidden;}
+.notice_box .box.m2 ul{padding:0 20px;float:left;width:244px;}
+.notice_box .box.m2 li{border-top:1px solid #dadada;background: url('./../images/main/ico_public_link2.png') no-repeat 10px 50%;}
+.notice_box .box.m2 li:first-child{border:none;background: url('./../images/main/ico_public_link1.png') no-repeat 14px 50%;}
+/*
+.notice_box .box .list li{font-size:13px;padding:15px 0;border-top:1px solid #dadada;}
+.notice_box .box.m2 a{display:block;padding:40px 0 40px 76px;font-size:17px;font-family:nsr;}
+*/
+.notice_box .box.m2 a{display:block;padding:40px 0 40px 76px;font-size:17px;font-family:nsr;}
+.notice_box .goods{float:left;width:244px;text-align:center;}
+.notice_box .goods a{display:block;padding:19px 32px;font-size:14px;}
+.notice_box .goods a span{display:block;width:135px;height:135px;margin:0 auto;}
+.notice_box .goods a span:after{content:" ";display:inline-block;width:0;height:135px;vertical-align:middle;}
+.notice_box .goods a span img{vertical-align:middle;}
+.notice_box .box h4:after {content:'';clear:both;position:absolute;top:50%;margin-top:-15px;}
+.notice_box .box.m1 h4:after {right:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-right:15px solid #fff;}
+/*
+.notice_box .box.m2 h4:after {right:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-right:15px solid #fff;}
+*/
+.notice_box .box.m2 h4:after {right:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-right:15px solid #fff;}
+.notice_box .box.m3 h4:after {left:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:15px solid #fff;}
+.notice_box .box.m4 h4:after {left:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:15px solid #fff;}
+
+
+
+
+
+/* notice_wrap - 공지사항 */
+.notice_box .box2{width:489px;float:left;height:215px;background:#fff;}
+.notice_box .box2 h4{position:relative;width:245px;height:215px;text-align:center;padding:30px 0 0;color:#fff;font-family:nsr;font-size:22px;font-weight:600;}
+.notice_box .box2.m4 h4{float:right;background:#2b93c3 url('./../images/main/ico_m4.jpg') no-repeat 50% 85px;}
+.notice_box .box2.m4 h4:after {left:0;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:15px solid #fff;}
+.notice_box .box2 .list2{padding:0px 30px;float:left;width:244px;}
+.notice_box .box2 .list2 li{font-size:13px;padding:15px 0;border-top:1px solid #dadada;}
+.notice_box .box2 .list2 li:first-child{border:none;}
+.notice_box .box2 .list2 a{display:block;width:100%;height:25px;font-size:14px;overflow:hidden;}
+
+.notice_box .box .list2{padding:0px 30px;float:left;width:244px;}
+.notice_box .box .list2 li{font-size:13px;padding:15px 0;border-top:1px solid #dadada;}
+.notice_box .box .list2 li:first-child{border:none;}
+
+.notice_box .box .list2 a{display:block;width:100%;height:40px;font-size:14px;overflow:hidden;}

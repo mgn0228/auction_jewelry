@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>본인인증 완료</title>
+</head>
+<body>
+<script type="text/javascript" th:inline="javascript">
+    const status = [[${status}]];
+    const memberInfo = [[${memberInfo}]];
+
+    window.opener.postMessage({
+        status: status,
+        memberInfo: memberInfo
+    }, "*");
+
+    window.close();
+</script>
+</body>
+</html>

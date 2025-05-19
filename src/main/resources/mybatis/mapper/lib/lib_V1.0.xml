@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib_v1.0">
+	
+	<select id="getMenu" parameterType="hashmap" resultType="hashMap">
+
+		SELECT 
+			src.menu_code_group ,src.menu_code ,src.menu_code_value ,src.p_menu_code
+			,src.grptTitle
+			,src.menuDepth
+			,src.menuTitle
+			,src.jsClass
+			,src.menuNav
+			,src.pageTitle
+			,src.pageLinkUrl
+			,src.pageLinkTarget
+			,src.pageLinkTargetTitle
+			,src.pageType
+			,src.pageView
+			,src.pageCls
+			,src.btnAdd
+			,src.btnMod
+			,src.btnDel
+			,src.visible
+			,src.needLogin
+			,src.jscssimport
+			
+		FROM (
+		
+			SELECT
+					mm.menu_code_group ,mm.menu_code ,mm.menu_code_value ,mm.p_menu_code
+					,GROUP_CONCAT(mm.grptTitle SEPARATOR '') grptTitle
+					,GROUP_CONCAT(mm.menuDepth SEPARATOR '') menuDepth
+					,GROUP_CONCAT(mm.menuTitle SEPARATOR '') menuTitle
+					,GROUP_CONCAT(mm.jsClass SEPARATOR '') jsClass
+					,GROUP_CONCAT(mm.menuNav SEPARATOR '') menuNav
+					,GROUP_CONCAT(mm.pageTitle SEPARATOR '') pageTitle
+					,GROUP_CONCAT(mm.pageLinkUrl SEPARATOR '') pageLinkUrl
+					,GROUP_CONCAT(mm.pageLinkTarget SEPARATOR '') pageLinkTarget
+					,GROUP_CONCAT(mm.pageLinkTargetTitle SEPARATOR '') pageLinkTargetTitle
+					,GROUP_CONCAT(mm.pageType SEPARATOR '') pageType
+					,GROUP_CONCAT(mm.pageView SEPARATOR '') pageView
+					,GROUP_CONCAT(mm.pageCls SEPARATOR '') pageCls
+					,GROUP_CONCAT(mm.btnAdd SEPARATOR '') btnAdd
+					,GROUP_CONCAT(mm.btnMod SEPARATOR '') btnMod
+					,GROUP_CONCAT(mm.btnDel SEPARATOR '') btnDel
+					,GROUP_CONCAT(mm.visible SEPARATOR '') visible
+					,GROUP_CONCAT(mm.needLogin SEPARATOR '') needLogin
+					,GROUP_CONCAT(mm.jscssimport SEPARATOR '') jscssimport
+	
+			FROM (
+	
+					SELECT
+							a.MENU_CODE_GROUP					menu_code_group
+							,IFNULL(a.MENU_CODE,'')				menu_code
+							,IFNULL(a.MENU_CODE_VALUE,'')		menu_code_value
+							,LEFT(IFNULL(a.MENU_CODE_VALUE,''),LENGTH(IFNULL(a.MENU_CODE_VALUE,''))-4)				p_menu_code
+							
+							,IF(b.MENU_CODE='grptTitle' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		grptTitle
+							,IF(b.MENU_CODE='menuDepth' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		menuDepth
+							,IF(b.MENU_CODE='menuTitle' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		menuTitle
+							,IF(b.MENU_CODE='jsClass' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		jsClass
+							,IF(b.MENU_CODE='menuNav' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		menuNav
+							,IF(b.MENU_CODE='pageTitle' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageTitle
+							,IF(b.MENU_CODE='pageLinkUrl' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageLinkUrl
+							,IF(b.MENU_CODE='pageLinkTarget' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageLinkTarget
+							,IF(b.MENU_CODE='pageLinkTargetTitle' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageLinkTargetTitle
+							,IF(b.MENU_CODE='pageType' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageType
+							,IF(b.MENU_CODE='pageView' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageView
+							,IF(b.MENU_CODE='pageCls' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		pageCls
+							,IF(b.MENU_CODE='btnAdd' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		btnAdd
+							,IF(b.MENU_CODE='btnMod' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		btnMod
+							,IF(b.MENU_CODE='btnDel' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		btnDel
+							,IF(b.MENU_CODE='visible' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		visible
+							,IF(b.MENU_CODE='needLogin' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		needLogin
+							,IF(b.MENU_CODE='importJsCss' AND b.MENU_CODE_VALUE IS NOT NULL, b.MENU_CODE_VALUE,'')		jscssimport
+	
+								
+					FROM ${dbNm}.INFO_MENU AS a
+					LEFT OUTER JOIN ${dbNm}.INFO_MENU b ON b.MENU_CODE_GROUP = a.MENU_CODE_GROUP
+								AND IFNULL(b.DEL_YN,'') = 'N' 
+								AND a.MENU_GID = b.MENU_GID AND a.COM_CD=b.COM_CD
+								AND b.MENU_CODE IN ('grptTitle','menuDepth','menuTitle','jsClass','menuNav','pageTitle','pageLinkUrl'
+									,'pageLinkTarget','pageLinkTargetTitle'	,'pageType','pageView','pageCls'
+									,'btnAdd','btnMod','btnDel','visible','needLogin','importJsCss')
+	
+	 				WHERE a.MENU_CODE = 'code'	AND (a.MENU_GID = #{gid} OR a.MENU_GID =  'common')	
+	 					 AND IF(a.COM_CD = 'COMMON',#{defaultComCd},a.COM_CD) = #{comCd}
+	 					AND CAST(#{lvl} AS SIGNED) >= a.MENU_LVL AND IFNULL(a.DEL_YN,'') = 'N' 
+	 				
+			) mm
+	
+			GROUP BY mm.menu_code_group ,mm.menu_code ,mm.menu_code_value ,mm.p_menu_code
+
+		) src
+		
+		ORDER BY src.menu_code_value ASC;
+
+	</select>
+	
+	
+	<select id="getContentInfo" parameterType="hashmap" resultType="hashMap">
+		SELECT
+			a.NO								no
+			,IFNULL(a.PID,'')					pid
+			,IFNULL(a.PROC_INIT,'')				pidProcInit
+			,IFNULL(b.PROP_CD,'')				propCd
+			,IFNULL(b.PROP_CD,'')				propCd
+			,IFNULL(b.PROP_VAL,'')				propVal
+			,IFNULL(b.PROP_VAL_SEQ,'')			propValSeq
+		FROM ${dbNm}.CONTENT_PAGES a
+		LEFT OUTER JOIN ${dbNm}.CONTENT_PAGES_PROPS b ON a.NO=b.ROW_NO
+		WHERE a.PID=#{pid} AND (a.GID = #{gid} OR a.GID='common')
+			AND IF(a.GID='common', #{comCd}, IF(a.COM_CD = 'COMMON',#{defaultComCd},a.COM_CD)) = #{comCd} 
+		ORDER BY b.PROP_CD, b.PROP_VAL_SEQ
+	</select>
+	
+	
+	
+	<select id="getDBSchema" parameterType="hashmap" resultType="hashMap">
+		SELECT
+				a.NO												no
+				,IFNULL(a.GID,'')									gid
+				,IFNULL(a.PID,'')									pid
+				,IFNULL(a.PID_API,'')								pidApi
+				,IFNULL(a.LVL,'')									lvl
+				,IFNULL(a.QRY_TYPE,'')								qryType
+				,IFNULL(a.QRY_GROUP,'')								qryGroup
+				,IFNULL(a.QRY_DIRECT,'')							qryDirect
+				,IFNULL(a.DB_NM,'')									dbNm
+				,IFNULL(a.TBL_NM,'')								tblNm
+				,IFNULL(a.TBL_ALIAS,'')								tblAlias
+				,IFNULL(a.TBL_WHERE,'')								tblWhere
+				,IFNULL(a.TBL_GROUP,'')								tblGroupBy
+				,IFNULL(a.TBL_ORDER,'')								tblOrder
+				,IFNULL(a.TBL_OUTERWHERE,'')						tblOuterWhere
+				,IFNULL(a.TBL_OUTERGROUPBY,'')						tblOterGroupBy
+				,IFNULL(a.TBL_OUTERORDERBY,'')						tblOterOrderBy
+				
+				,IFNULL(a.SEQ,0)									tblSeq
+				,IFNULL(a.MEMO,'')									tblMemo
+				,IFNULL(a.DEL_YN,'')								delYn
+				,IFNULL(a.REG_ID,'')								regId
+				,IFNULL(a.MOD_ID,'')								modId
+				,IF(IFNULL(a.REG_DT,'') = '','',DATE_FORMAT(a.REG_DT,'%Y-%m-%d %H:%i:%s'))		regDt
+				,IF(IFNULL(a.MOD_DT,'') = '','',DATE_FORMAT(a.MOD_DT,'%Y-%m-%d %H:%i:%s'))		modDt
+		
+		
+				,IFNULL(b.FD_NM,'')									fdNm
+				,IFNULL(b.FD_ALIAS_NM,'')							fdAliasNm
+				,IFNULL(b.FD_DATA_TYPE,'')							fdDataType
+				,IFNULL(b.FD_EXTRA,'')								fdExtra
+				,IFNULL(b.FD_DEFAULT_SAVE,'')						fdDefaultSaveValue
+				,IFNULL(b.FD_DEFAULT_LIST,'')						fdDefaultList
+				,IFNULL(b.FD_AUTOCODE,'')							fdAutoCode
+				,IFNULL(b.FD_IS_NEWROW,'N')							fdIsNewRow
+				,IFNULL(b.FD_IS_ENCRYPT,'N')						fdIsEncrypt
+				,IFNULL(b.FD_IS_TABLE,'N')							fdIsTable
+				,IFNULL(b.FD_IS_FORM,'N')							fdIsForm
+				,IFNULL(b.FD_IS_SEARCH,'N')							fdIsSearch
+				,IFNULL(b.FD_WIDTH,'1')								fdWidth
+				,IFNULL(b.FD_TAG_TYPE,'text')						fdTagType
+				,IFNULL(b.FD_TAG_GROUP,'')							fdTagGroup
+				,IFNULL(b.FD_LABEL,'')								fdLabel
+				,IFNULL(b.FD_PLACEHOLDER,'')						fdPlaceHolder
+				,IFNULL(b.FD_LIST,'')								fdList
+				,IFNULL(b.FD_LIST_PID,'')							fdListPid
+				,IFNULL(b.FD_MODAL_PID,'')							fdModalPid
+				,IFNULL(b.FD_MODAL_PID_PARAMFD,'')							fdModalPidParams
+				,IFNULL(b.FD_MODAL_PID_TARGETFD,'')							fdModalPidTargets
+				,IFNULL(b.FD_MODAL_PID_RESULTFD,'')							fdModalPidResults
+				,IFNULL(b.FD_MODAL_PID_OPTION,'')							fdModalPidOptions
+				,IFNULL(b.FD_REGEX,'')								fdRegex
+				,IFNULL(b.FD_MIN,0)								fdMin
+				,IFNULL(b.FD_MAX,0)								fdMax
+				,IFNULL(b.FD_MAX_LEN,0)							fdMaxLen
+				,IFNULL(b.FD_VISIBLE,'Y')							fdVisible
+				,IFNULL(b.FD_REQUIRED,'N')							fdRequired
+				,IFNULL(b.FD_CHKDUP,'N')								fdChkDup
+				,IFNULL(b.FD_NO_SELECT,'N')							fdNoSelect
+				,IFNULL(b.FD_NO_UPDATE,'N')							fdNoUpdate
+				,IF(IFNULL(b.FD_DISABLED,'N')='Y','true','false')	fdDisabled
+				,IFNULL(b.FD_NO_SAVE_BLANK,'N')						fdNoSaveBlank
+				,IFNULL(b.SEQ,9999)									fdSeq
+				,IFNULL(b.MEMO,'')									fdMemo
+				,IFNULL(b.DEL_YN,'')								fdDelYn
+				,IFNULL(b.REG_ID,'')								fdRegId
+				,IFNULL(b.MOD_ID,'')								fdModId
+				,IF(IFNULL(b.REG_DT,'') = '','',DATE_FORMAT(b.REG_DT,'%Y-%m-%d %H:%i:%s'))		fdRegDt
+				,IF(IFNULL(b.MOD_DT,'') = '','',DATE_FORMAT(b.MOD_DT,'%Y-%m-%d %H:%i:%s'))		fdModDt
+		
+		FROM ${dbNm}.INFO_DATABASE a
+		LEFT OUTER JOIN ${dbNm}.INFO_TABLE_FIELDS b ON a.PID=b.PID AND a.GID=b.GID AND a.COM_CD=b.COM_CD
+						AND a.PID_API=b.PID_API AND a.SEQ=b.DB_SEQ AND a.QRY_GROUP=b.QRY_GROUP
+		WHERE (a.GID=#{gid} OR a.GID = 'common') AND a.PID=#{pid} AND a.PID_API=#{apiType}
+				AND IF(a.GID='common', #{comCd}, IF(a.COM_CD = 'COMMON',#{defaultComCd},a.COM_CD)) = #{comCd}
+				AND CAST(#{lvl} AS SIGNED) >= a.LVL
+				AND IFNULL(a.DEL_YN,'') = 'N' AND IFNULL(b.DEL_YN,'') = 'N'
+		ORDER BY a.QRY_GROUP, a.SEQ ASC , b.SEQ ASC
+		
+	</select>
+	
+	
+	
+	
+	<select id="getAccessAuthority" parameterType="hashmap" resultType="hashMap">
+		SELECT
+			a.NO								no
+			,IFNULL(a.MB_GROUP,'')				gid
+			,IFNULL(a.PID,'')					pid
+			,IFNULL(a.AVAIL_CREAT,'N')			availCreate
+			,IFNULL(a.AVAIL_UPDATE,'N')			availUpdate
+			,IFNULL(a.AVAIL_DELETE,'N')			availDelete
+			,IFNULL(a.AVAIL_READ,'Y')			availRead
+		FROM ${dbNm}.INFO_MENU_ACCESS_CRUD a
+		WHERE a.PID=#{pid} AND a.MB_GROUP=#{gid} 
+			AND IF(a.COM_CD = 'COMMON',#{comCd},a.COM_CD) = #{comCd}
+			AND IFNULL(a.DEL_YN,'') = 'N'
+	</select>
+	
+	
+	<select id="commonSql" parameterType="hashmap" resultType="hashMap">
+		${sql}
+	</select>
+	
+	<insert id="commonSqlInsert" parameterType="hashmap">
+		${sql}
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="commonSqlUpdate" parameterType="hashmap">
+		${sql}
+	</update>
+	
+	<delete id="commonSqlDelete" parameterType="hashmap">
+		${sql}
+	</delete>
+	
+	<insert id="inserUploadFile" parameterType="hashmap">
+		INSERT INTO ${dbNm}.${tblNm} (
+			comCD ,fn_imgcls ,fn_org ,fn_saved ,fn_savedFolder ,fn_target ,fn_ext ,fn_key
+			,DEL_YN ,REG_ID ,MOD_ID ,REG_DT ,MOD_DT
+		) VALUES(
+			#{cid} ,#{pid} ,#{fnOrg} ,#{fnSaved} ,#{destFolder} ,#{target} ,#{ext} ,#{fnKey}
+			,'N' ,#{lid} ,#{lid} ,NOW() ,NOW()
+		)
+		
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateUploadFileKey" parameterType="hashMap">
+		UPDATE ${dbNm}.${tblNm} SET
+			fn_key = CONCAT(fn_savedFolder,'/',fn_saved)
+		WHERE no=#{no}
+	</update>
+	
+	<select id="getUploadFileKey" parameterType="hashMap" resultType="string">
+		SELECT fn_key
+		FROM ${dbNm}.${tblNm}
+		WHERE no=#{no}
+	</select>
+	
+	<select id="getUploadFileInfoByFnKey" parameterType="hashMap" resultType="hashMap">
+		SELECT fn_key, fn_saved, fn_savedFolder, fn_target, fn_ext
+		FROM ${dbNm}.${tblNm}
+		WHERE fn_key=#{fnkey}
+	</select>
+	
+	
+</mapper>
+

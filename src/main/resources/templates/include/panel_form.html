@@ -1,0 +1,54 @@
+
+
+<th:block th:fragment="formpanel">
+	
+	<!-- Panel Form Type 1 -->
+	<div class="box box-default form-panel" frmid="form-panel">
+		<div class="box-header with-border">
+			<h3 class="box-title">상세정보</h3>
+				<div class="btn-group">
+			<th:block th:if="${#lists.size(accessAuth) > 0}">
+				<th:block th:if="${accessAuth[0].availCreate.toString().equals('Y')}">
+					<button type="button" class="btn btn-primary btn-add">추가</button>
+				</th:block>
+				
+				<th:block th:if="${accessAuth[0].availCreate.toString().equals('Y') or accessAuth[0].availUpdate.toString().equals('Y')}">
+					<button type="button" class="btn btn-warning btn-save">저장</button>
+				</th:block>
+				<th:block th:if="${accessAuth[0].availDelete.toString().equals('Y')}">
+					<button type="button" class="btn btn-danger btn-delete">삭제</button>
+				</th:block>
+			</th:block>
+			<th:block th:if="${#lists.size(accessAuth) == 0}">
+					<button type="button" class="btn btn-primary btn-add">추가</button>
+					<button type="button" class="btn btn-warning btn-save">저장</button>
+					<button type="button" class="btn btn-danger btn-delete">삭제</button>
+			</th:block>
+				</div>
+			
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	<!--			
+				<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+	-->
+			</div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<form id="form-panel" action="POST" >
+			<div class="row" >
+				
+					<div th:replace="~{include/panel_form_item::formpanelItems}"></div>
+				
+			</div>
+			<!-- /.row -->
+			
+			</form>
+			
+		</div>
+		
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+	
+</th:block>

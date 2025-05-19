@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>동산공매절차 - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">동산공매절차</h3>
+			<p class="step_box2">
+				<span class="txt">물품조회</span> <span class="next">다음</span>
+				<span class="txt">공고확인</span> <span class="next">다음</span>
+				<span class="txt">입찰신청</span> <span class="next">다음</span>
+				<span class="txt">결과조회</span> <span class="next">다음</span>
+				<span class="txt">잔금납부</span> <span class="next">다음</span>
+				<span class="txt">물품수령</span>
+
+			</p>
+<!--
+			<h4 class="tit_ty10"><strong>1</strong> 물품조회</h4>
+			<p class="txt_ty2">물품조회는 <span class="col_blue">공매공고</span>와 <span class="col_blue">공매물건</span>에서 조회할 수 있습니다.</p>
+			<h5 class="tit_ty9 mt30">공매공고</h5>
+			<ul class="list_ty4">
+				<li>오토마트와 계약된 공매기관들의 목록으로 지역별로 기관을 기준으로 검색이 가능합니다.</li>
+				<li>공매기관의 목록에서 공매가 진행중이거나 금일 발표 또는 발표가 완료된 기관을 기준으로 검색할 수 있습니다.</li>
+				<li>입찰한 기관을 알고 있다면 기관별 검색을 통해 검색하는 것이 편리합니다.</li>
+			</ul>
+			<h5 class="tit_ty9 mt30">공매물건</h5>
+			<ul class="list_ty4">
+				<li>공매 차량을 각 조건을 설정하여 검색할 수 있습니다.</li>
+				<li>검색조건 : 진행기관, 카테고리, 물건명 등 </li>
+				<li>조회된 물품명을 클릭해서 상세정보를 확인할 수 있습니다.</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>2</strong> 공고확인</h4>
+
+			<h4 class="tit_ty10"><strong>3</strong> 입찰신청</h4>
+
+			<h4 class="tit_ty10"><strong>4</strong> 결과조회</h4>
+
+			<h4 class="tit_ty10"><strong>5</strong> 잔금납부</h4>
+
+			<h4 class="tit_ty10"><strong>6</strong> 물품수령</h4>
+-->
+
+
+
+			<h4 class="tit_ty10"><strong>1</strong> 물품조회</h4>
+			<p class="txt_ty2">차량검색은 <span class="col_blue">기관별검색</span> 또는 <span class="col_blue">공매차량검색</span>으로 검색할 수 있습니다.</p>
+			<h5 class="tit_ty9 mt30">기간별 검색</h5>
+			<ul class="list_ty4">
+				<li>오토마트와 계약된 공매기관들의 목록으로 지역별로 기관을 기준으로 검색이 가능합니다.</li>
+				<li>공매기관의 목록에서 공매가 진행중이거나 금일 발표 또는 발표가 완료된 기관을 기준으로 검색할 수 있습니다.</li>
+				<li>입찰한 기관을 알고 있다면 기관별 검색을 통해 검색하는 것이 편리합니다.</li>
+				<li>공매 기관을 클릭시 해당 기관의 공고문으로 접속됩니다.</li>
+			</ul>
+			<h5 class="tit_ty9 mt30">공매물건 검색</h5>
+			<ul class="list_ty4">
+				<li>공매 차량을 각 조건을 설정하여 검색할 수 있습니다.</li>
+				<li>검색조건 : 진행기관, 보관소, 차량명, 차량번호, 예정가 범위, 모델연도, 변속기, 연료</li>
+				<li>조회된 차량번호를 클릭해서 각 차량의 상세정보를 확인할 수 있습니다.</li>
+				<li>보관소 명칭을 클릭하면 보관소 위치 및 약도를 확인할 수 있습니다.</li>
+				<li>원하는 차량을 검색한 후, 해당 차량의 입찰 버튼을 클릭하면 입찰 공고문으로 접속됩니다.</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>2</strong> 공고확인</h4>
+			<ul class="list_ty4">
+				<li>매각기관에서 정한 공매 공고의 일정 및 입찰방법과 유의사항 등을 반드시 확인하고 숙지합니다.</li>
+				<li class="col_blue">공고문 상에는 공매 진행과정 및 절차, 그리고 낙찰후 처리과정에 대한 내용이 모두 기재되어 있습니다.</li>
+				<li>특히 입찰에 참여하는 방법 및 주의사항등의 전반적인 안내 사항을 주의있게 숙지바랍니다.</li>
+				<li>공고 중간에는 입찰보증금 관련 내용과 공고 하단에는 매각기관의 연락처가 기재되어 있으니 참조바랍니다.</li>
+				<li>공고문은 오토마트 및 해당 진행 기관의 게시판등에 기재하여 공지합니다.</li>
+			</ul>
+			<ul class="list_ty5 mt30">
+				<li>해당 매각기관의 매각공고를 접수받아 공고문을 게재합니다.</li>
+				<li class="col_green">입찰하실 분은 공고문을 반드시 먼저 읽어보신 후 입찰에 참여하셔야 합니다.</li>
+				<li>문의사항 및 궁금한 사항은 매각기관의 담당자에게(공고문 하단 연락처) 문의하시기 바랍니다.</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>3</strong> 물건조회</h4>
+			<ul class="list_ty4">
+				<li>매각대상 차량의 기본 정보 및 보관장소에 대한 정보를 제공합니다.</li>
+				<li>차량 기본정보는 차량명, 모델연도, 주행거리, 연료, 변속기, 색상, 매각예정가격 등과 사진(기본 2~3장)을 제공합니다.</li>
+				<li>오토마트 보관소에 입고되어 있는 차량은 차량점검서를 제공합니다.(기본 참고자료로만 사용하십시오.)<br/>
+					주의 : 차량점검서는 참고자료로만 사용해야 하며 차량은 보관소로 직접 방문하여 확인하셔야 합니다.</li>
+				<li>보관장소는 약도와 함께 연락처를 표시하여 입찰자들이 쉽게 찾아갈 수 있도록 제공하고 있습니다.</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>4</strong> 입찰신청</h4>
+			<ul class="list_ty4">
+				<li>입찰하실 분은 입찰신청에서 입찰이 가능합니다.(입찰보증금 및 입찰금액 설정하여 등록)</li>
+				<li>입찰신청을 할 때에는 먼저 [유의사항 동의하기]에서 모든 사항을 반드시 읽고 동의를 해야 입찰이 가능합니다.</li>
+				<li>유의사항에 모두 동의한 다음에는 입찰신청자 구분에서 [개인/법인/매매상사] 별로 선택해야 합니다.
+					<p class="col_blue">입찰신청자 구분이란 명의이전을 받을 대상을 의미하며, 이때 선택한 입찰자 구분으로만 명의이전이 가능합니다.</p>
+				</li>
+				<li>입찰신청시에 개인은 주민등록번호, 법인은 법인등록번호, 매매상사의 경우는 대표자 주민번호를 입력해야 하며, 다음 비밀번호를 설정하여 각 공고 기간내에 1차량에 
+				1번만 입찰이 가능합니다. <br />
+				(이때 <span class="col_blue">비밀번호는 회원 로그인 비밀번호와는 전혀 상관없으며, 각각의 공고마다 독립적으로 설정</span>할 수 있습니다.)
+				</li>
+				<li>입찰신청에서 입력하는 내용으로 입찰자정보 + 입찰차량정보 + 보증금반환정보의 내용을 선택 또는 입력하게 되며, 입찰신청의 방법은 아래와 같이 신규 등록과 
+				추가(수정) 등록의 방식으로 입찰할 수 있습니다.
+					<ol>
+						<li>1) 해당 공고에 처음 입찰을 하는 경우
+							<p>- 입찰신청자 구분에서 [개인/법입/매매상사]의 선택을 정확히 한 후, 입찰자 정보를 입력하고 차량을 선택합니다. </p>
+							<p>- 입찰할 대상차량의 입찰보증금과 입찰금액을 기입합니다.(이때 입찰금액은 [입찰참여] 메뉴에서도 등록 가능)</p>
+							<p>- 보증금 환불 정보는 유찰될 경우 환불받을 계좌정보를 입력합니다.</p>
+							<p>- 하단의 [입찰신청] 버튼을 클릭하여 입찰을 완료합니다.</p>
+						</li>
+						<li>2) 특정 공고에 입찰한 후에 다시 추가로 입찰하거나 금액 이외의 정보를 수정할 경우
+							<p>- 기입찰건의 입찰보증금과 입찰금액은 수정이 불가하며, 이외의 기타 정보(인적사항)는 직접 수정이 가능합니다.</p>
+							<p>- 기타 정보는 입찰한 공고의 입찰신청으로 재접속하면 수정이 가능합니다.(마감시간 이전에 접속 가능)</p>
+							<p>- 입찰할 매각대상 차량의 추가 입찰이 가능합니다.</p>
+							<p>- 단, 가상계좌를 사용하는 기관의 공매는 추가 입찰이 안되는 경우도 있으므로 유의사항을 필히 읽어보셔야 합니다.</p>
+						</li>
+					</ol>
+				</li>
+			</ul>
+			<ul class="list_ty5 mt25">
+				<li class="col_green">동산공매 입찰은 오토마트 회원 가입과는 전혀 상관없이 입찰할 수 있습니다.(비회원 입찰가능)
+				<li class="col_red">입찰금액을 한 번 등록한 후에는 입찰보증금 및 입찰금액의 금액 변경이 절대 불가하므로 꼭 유의하십시오.<br/>
+					(가상계좌를 사용하는 기관의 경우에는 보증금을 입금하였거나 입찰금액을 등록한 후에는 금액 변경 불가)</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>5</strong> 입찰참여</h4>
+			<ul class="list_ty4">
+				<li>입찰참여는 입찰금액을 등록하는 화면이며, 입찰신청에서 입찰보증금만 등록했을 경우 별도록 입찰금액을 등록할 수 있습니다.</li>
+				<li>입찰금액은 입찰신청에서도 등록할 수 있지만, 신청기곤과 참여기간이 다른 경우에 본 메뉴를 주로 사용합니다.</li>
+				<li>입찰참여는 입찰신청에서 입찰보증금만 등록한 차량에 대해서만 입찰금액을 등록할 수 있습니다.</li>
+				<li>입찰금액을 입력하고 등록(저장)해야 입찰이 완료됩니다.(차량별로 설정한 입찰보증금의 10배 한도내에서 각각 입력 가능)</li>
+				<li class="col_red">입찰금액을 등록한 후에는 입찰보증금 및 입찰금액에 대한 [수정/취소/삭제]등이 불가합니다.</li>
+			</ul>
+
+			<h4 class="tit_ty10"><strong>6</strong> 결과조회</h4>
+			<ul class="list_ty4">
+				<li>공매를 진행한 각각의 기관의 진행했던 공매결과를 조회할 수 있으며, 이전의 공매결과도 조회가 가능합니다.</li>
+				<li>공매결과에 대한 표시는 다음과 같습니다.
+					<ol>
+						<li>1) 낙찰된 경우 : 낙찰자의 주민번호 및 성명 (표시의 예 : XXXXXX-XXXX345 홍X동)</li>
+						<li>2) 유찰된 경우 : 유찰사유 (표시의 예 : 입찰자 없음)</li>
+					</ol>
+				</li>
+				<li>마감이 지난 공매 결과자료는 결과조회 화면에서 [년도별/공고번호]를 선택하여 조회가 가능합니다.)</li>
+				<li>낙찰 차량의 인수는 공고문에 기술된 인수절차에 의하며 인수절차는 다음의 2가지 경우가 주로 사용됩니다.
+					<ol>
+						<li><span class="col_blue">1) 잔금 입금후 인수</span> : 잔금만 입금하면 차량은 인수할 수 있습니다. </li>
+						<li><span class="col_blue">2) 잔금 입금하고 소유권 이전후 인수</span> : 잔금입금하고 소유권 이전까지 완료해야만 차량을 인수할 수 있습니다. </li>
+					</ol>
+				</li>
+				<li>차량 인수시 필요 서류(해당 공매진행기관에서 기타 추가서류 요청한 경우 추가로 필요함)
+					<ol>
+						<li>1) 낙찰자 본인의 경우 : 신분증, 등록증(이전후 인수인 경우)</li>
+						<li>2) 낙찰자 본인이 아닌 경우 : 신분증, 인감증명서, 위임장(위임장은 별도 규정 양식 없음), 등록증(이전후 인수인 경우)<br />
+							<a href="#" class="btn_ty10 mt10" title="다운받기">위임장(Excel)</a>
+						</li>
+					</ol>
+				</li>
+			</ul>
+			
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+
+</div>
+</body>
+</html>

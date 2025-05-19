@@ -1,0 +1,92 @@
+/*!
+monitoring_demo_argos css
+*/
+
+
+.panel_monitoring .event-info {
+	min-height: 570px;
+}
+
+.panel_monitoring .event-info .event-list {
+	height: 570px;
+	overflow-y: hidden;
+}
+
+.event-list ul {
+	height: 570px;
+	overflow-y: auto;
+}
+
+.event-list li {
+	cursor: pointer;
+}
+
+.div-image {
+	width: 400px;
+	height: 400px;
+	bbackground-color: #eeeeee;
+	margin: 0 auto;
+}
+
+.progressbar {
+	margin-top: 10px;
+	height: 20px;
+	width: 100%;
+	background-color: #3c8dbc;
+	border-radius: 5px;
+	color: white;
+	font-weight: 800;
+	text-align: center;
+	bottom: 0px;
+	position: absolute;
+}
+
+.audioControl {
+	text-align: center;
+	width: 100%;
+}
+
+.viewtitle {
+	height: 29px;
+}
+
+.imgsnd {
+	height: 509px;
+}
+
+
+@keyframes emergency-ani {
+	0% { transform:scale(1.0,1.0)}
+	50% { transform:scale(1.5,1.5)}
+	100% { transform: scale(1.0,1.0)}
+}
+
+
+.object-status-signal {
+	text-align: center;
+	padding: 20px;
+}
+
+.signal-icon.normal {
+	font-size: 2em;
+	color: #0058ff;
+}
+.signal-icon.warning {
+	font-size: 2em;
+	color: #ffb300;
+	animation: emergency-ani 1s infinite;
+}
+.signal-icon.emergency {
+	font-size: 4em;
+	color: #ff0000;
+	animation: emergency-ani 1s infinite;
+}
+
+.panel_realtime_timeline .box-body {
+	text-align: center;
+}
+.panel_realtime_timeline canvas {
+	display: inline-block !important;
+}
+
+

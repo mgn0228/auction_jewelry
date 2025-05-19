@@ -1,0 +1,117 @@
+
+
+<th:block th:fragment="commonModal">
+	
+		
+			<!-- Modal -->
+			<div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="commonModalTitle"
+				aria-hidden="true" targetfd="">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="commonModalTitle"></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<table id="datatableModal" class="table table-bordered table-striped">
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary btn-ok" >OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.example-modal -->
+
+
+</th:block>
+
+
+<th:block th:fragment="commonModal_Frm_Table_Main">
+	
+	<th:block th:if="${getTblIsFormMain == 'Y' or getTblIsFormMain == 'y'}">
+		<form id="form-commonModalTblMain" action="POST" >		
+			<!-- Modal -->
+			<div class="modal fade form-panel" id="commonModalTblMain" tabindex="-1" role="dialog" aria-labelledby="commonModalTitleTblMain"
+				aria-hidden="true" targetfd="">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="commonModalTitleTblMain"></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body row">
+							
+							<div th:replace="~{include/panel_form_modal_item::formModalItems(${mainContentSchema})}"></div>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<th:block th:if="${#lists.size(accessAuth) > 0}">
+			<th:block th:if="${accessAuth[0].availCreate.toString().equals('Y') or accessAuth[0].availUpdate.toString().equals('Y')}">
+							<button type="button" class="btn btn-primary btn-save">Save</button>
+			</th:block>
+		</th:block>
+		<th:block th:if="${#lists.size(accessAuth) == 0}">
+							<button type="button" class="btn btn-primary btn-save">Save</button>
+		</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.example-modal -->
+		</form>
+	</th:block>
+
+</th:block>
+
+
+<th:block th:fragment="commonModal_Frm_Table_Sub">
+	<th:block th:if="${(getTblIsFormSub=='Y' or getTblIsFormSub=='y')}">
+		<form id="form-commonModalTblSub" action="POST" >		
+			<!-- Modal -->
+			<div class="modal fade form-panel-sub" id="commonModalTblSub" tabindex="-1" role="dialog" aria-labelledby="commonModalTitleTblSub"
+				aria-hidden="true" targetfd="">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="commonModalTitleTblSub"></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body row">
+							
+							<div th:replace="~{include/panel_form_modal_item::formModalItems(${pSubContentSchema})}"></div>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<th:block th:if="${#lists.size(accessAuthSub) > 0}">
+			<th:block th:if="${accessAuthSub[0].availCreate.toString().equals('Y') or accessAuthSub[0].availUpdate.toString().equals('Y')}">
+							<button type="button" class="btn btn-primary btn-save">Save</button>
+			</th:block>
+		</th:block>
+		<th:block th:if="${#lists.size(accessAuthSub) == 0}">
+							<button type="button" class="btn btn-primary btn-save">Save</button>
+		</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.example-modal -->
+		</form>
+	</th:block>
+
+
+</th:block>
+
+
+
+

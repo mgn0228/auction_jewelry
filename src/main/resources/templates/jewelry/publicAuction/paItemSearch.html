@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>공매물건 - PUBLIC ACTION</title>
+	<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+	<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+	<script>
+		const mbId = "[[${mbId != null}]]" ? "[[${mbId}]]" : '';
+	</script>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+		<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+		<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">검색조건</h3>
+			<div class="search_box7">
+				<form action="/paItemSearch">
+					<fieldset>
+						<legend>검색</legend>
+						<div class="box" style="width:22%;">
+							<label for="search_t1">진행상태
+								<select name="statusCode" class="select2" id="search_t1" style="width:70%;">
+									<option value="">전체</option>
+									<th:block th:each="item : ${getPaStatusList}">
+										<option th:value="${item.statusCd}" th:text="${item.statusNm}"></option>
+									</th:block>
+								</select>
+							</label>
+						</div>
+						<div class="box" style="width:23%;">
+							<label for="search_t2">진행기관
+								<select name="placeCode" class="select2" id="search_t2" style="width:70%;">
+									<option value="">전체</option>
+									<th:block th:each="item : ${getPaPlaceList}">
+										<option th:value="${item.placeCd}" th:text="${item.placeNm}"></option>
+									</th:block>
+								</select>
+							</label>
+						</div>
+						<div class="box" style="width:23%;">
+							<label for="search_t3">카테고리
+								<select name="categoryCode" class="select2" id="search_t3" style="width:70%;">
+									<option value="">전체</option>
+									<th:block th:each="item : ${getPaCategoryList}">
+										<option th:value="${item.categoryCd1}" th:text="${item.categoryNm1}"></option>
+									</th:block>
+								</select>
+							</label>
+						</div>
+						<div class="box" style="width:22%;">
+							<label for="search_t2">물품명
+								<input name="itemName" id="carmodel" class="itemName" type="text"
+									   title="물품명" maxlength="20" placeholder="물품명 입력" style="width:120px;" />
+							</label>
+						</div>
+
+						<button type="submit" class="btn_search">검색</button>
+					</fieldset>
+				</form>
+			</div>
+
+			<!--<h3 class="tit_ty1">공매물건목록</h3>
+			<p class="txt_result">조회결과(총 <span class="col_org">30</span>건)</p>
+			<div class="btn_right2">
+				<label for="inquiry_t1">조회건수</label>
+				<select id="inquiry_t1" style="width:100px;" class="sel_ty1">
+					<option value="">10건씩</option>
+					<option value="">20건씩</option>
+				</select>
+			</div>
+			<table class="tbl_list1" id="jq_section1">
+				<caption>조회목록에 대한 사진, 진행기관, 공고번호, 카테고리, 물품명, 입찰신청기간, 매각발표일, 보관장소, 예정가, 입찰을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:4.0%">
+					<col style="width:5.0%">
+					<col style="width:4.0%">
+					<col style="width:5.0%">
+					<col style="width:10.0%">
+					<col style="width:6.0%">
+					<col style="width:6.0%">
+					<col style="width:7.0%">
+					<col style="width:5%">
+				</colgroup>
+				<thead>
+					<tr height="50px">
+						<th scope="col">No </th>
+						<th scope="col">사진 </th>
+						<th scope="col">시군 </th>
+						<th scope="col">품목 </th>
+						<th scope="col">물품코드<br />물품명 </th>
+						<th scope="col">입찰마감일<br>(마감일시) </th>
+						<th scope="col">매각예정가<br>공매보증금 </th>
+						<th scope="col">관심물건 </th>
+						<th scope="col">즉시입찰 </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td> 시흥 </td>
+						<td> 귀금속 </td>
+						<td><a href="#" class="link_ty1">KS1010<br /> 금14K</a></td>
+						<td>2025-03-25<br>(14:00)</td>
+						<td>200,000원<br>20,000원</td>
+						<td>
+							<button type="button" class="btn_ty2">등록</button>
+						</td>
+						<td>
+							<button type="button" class="btn_ty2">입찰</button>
+						</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td><img src="../../images/temp/goods_3.jpg" alt=""/></td>
+						<td> 시흥 </td>
+						<td> 가방 </td>
+						<td><a href="#" class="link_ty1">KS1010<br />페레가모 가방</a></td>
+						<td>2025-03-25<br>(14:00)</td>
+						<td>200,000원<br>20,000원</td>
+						<td>
+							<button type="button" class="btn_ty2">등록</button>
+						</td>
+						<td>
+							<button type="button" class="btn_ty2">입찰</button>
+						</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td> 시흥 </td>
+						<td> 귀금속 </td>
+						<td><a href="#" class="link_ty1">KS1010<br />금14K</a></td>
+						<td>2025-03-25<br>(14:00)</td>
+						<td>200,000원<br>20,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty2 txt_center" title="입찰금액" value="입찰완료" disabled /></td>
+
+						<td>
+							<button type="button" class="btn_ty7">완료</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="paging">
+				<a href="/" class="first">첫 페이지</a>
+				<a href="/" class="prev">이전 페이지</a>
+				<strong>1</strong>
+				<a href="/">2</a>
+				<a href="/">3</a>
+				<a href="/">4</a>
+				<a href="/">5</a>
+				<a href="/">6</a>
+				<a href="/">7</a>
+				<a href="/">8</a>
+				<a href="/">9</a>
+				<a href="/">10</a>
+				<a href="/" class="next">다음 페이지</a>
+				<a href="/" class="last">마지막 페이지</a>
+			</div>-->
+
+			<h3 class="tit_ty1">공매물건목록</h3>
+			<p class="txt_result">조회결과(총
+				<span class="col_org total_search_count"
+					th:text="${#lists.isEmpty(getPaItemList) ? 0 : (getPaItemList[0].totalcnt ?: 0)}">0</span>건)
+			</p>
+			<div class="btn_right2">
+				<label for="items_per_page">조회건수</label>
+				<select id="items_per_page" style="width:100px;" class="sel_ty1">
+					<option selected value="1">1건씩</option>
+					<option value="5">5건씩</option>
+					<option value="10">10건씩</option>
+					<option value="20">20건씩</option>
+				</select>
+			</div>
+
+			<table class="tbl_list1" id="jq_section1">
+				<caption>조회목록에 대한 표</caption>
+				<colgroup>
+					<col style="width:4.0%">
+					<col style="width:5.0%">
+					<col style="width:4.0%">
+					<col style="width:5.0%">
+					<col style="width:10.0%">
+					<col style="width:6.0%">
+					<col style="width:6.0%">
+					<col style="width:7.0%">
+					<col style="width:5%">
+				</colgroup>
+				<thead>
+				<tr height="50px">
+					<th scope="col">No</th>
+					<th scope="col">사진</th>
+					<th scope="col">시군</th>
+					<th scope="col">품목</th>
+					<th scope="col">물품코드<br />물품명</th>
+					<th scope="col">입찰마감일<br>(마감일시)</th>
+					<th scope="col">매각예정가<br>공매보증금</th>
+					<th scope="col">관심물건</th>
+					<th scope="col">즉시입찰</th>
+				</tr>
+				</thead>
+				<tbody>
+				<th:block th:each="item , itemstatus : ${getPaItemList}">
+					<tr th:attr="data-no=${item.no}">
+						<td th:text="${item.curStNo + itemstatus.index}">1</td>
+						<td><img th:src="@{'/images/item/' + ${item.imageKey} + '.jpg'}" alt="" /></td>
+						<td th:text="${item.placeNm}">시군</td>
+						<td th:text="${item.categoryNm1}">품목</td>
+						<td>
+							<a th:href="@{'/paItemDetail?itemNo=' + ${item.no}}" class="link_ty1">
+								<span th:text="${item.itemCd}">코드</span><br/>
+								<span th:text="${item.itemNm}">물품명</span>
+							</a>
+						</td>
+						<td th:text="${item.bidEndDt}">2025-03-25<br/>(14:00)</td>
+						<td>
+							<span th:text="${#numbers.formatInteger(item.salePrice, 3, 'COMMA') + '원'}">200,000원</span><br/>
+							<span th:text="${#numbers.formatInteger(item.salePrice/10, 3, 'COMMA') + '원'}">20,000원</span>
+						</td>
+						<td>
+							<button type="button" class="btn_ty2 btn_add_wish">등록</button>
+						</td>
+						<td>
+							<button type="button" class="btn_ty2 do_bid_btn"
+									th:attr="data-pblno=${item.pblNo}">입찰
+							</button>
+						</td>
+					</tr>
+				</th:block>
+				</tbody>
+			</table>
+
+			<!-- 페이징 영역 -->
+			<div class="paging">
+				<th:block th:if="${#arrays.length(getPaItemList) > 0}">
+
+					<th:block th:if="${getPaItemList[0].curPgGrp > 1}">
+						<a onclick="movePage(1);" class="first">첫 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemList[0].curPgGrp > 1}">
+						<a class="first">첫 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getPaItemList[0].pgNo > 1}">
+						<a th:onclick="|movePage(${getPaItemList[0].pgNo-1});|" class="prev">이전 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemList[0].curPgGrp > 1}">
+						<a class="prev">이전 페이지</a>
+					</th:block>
+
+					<th:block th:each="idx : ${#numbers.sequence(1,10)}">
+
+						<th:block th:if="${getPaItemList[0].curStPg+idx-1 <= getPaItemList[0].totalpg}">
+							<th:block th:if="${getPaItemList[0].curStPg+idx-1 == getPaItemList[0].pgNo}">
+								<strong th:text="${getPaItemList[0].curStPg+idx-1}" class="curPgNo">1</strong>
+							</th:block>
+							<th:block th:unless="${getPaItemList[0].curStPg+idx-1 == getPaItemList[0].pgNo}">
+								<a th:onclick="|movePage(${getPaItemList[0].curStPg+idx-1});|" th:text="${getPaItemList[0].curStPg+idx-1}">2</a>
+							</th:block>
+						</th:block>
+
+					</th:block>
+
+
+					<th:block th:if="${getPaItemList[0].pgNo < getPaItemList[0].totalpg}">
+						<a th:onclick="|movePage(${getPaItemList[0].pgNo+1});|" class="next">다음 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemList[0].pgNo < getPaItemList[0].totalpg}">
+						<a class="next">다음 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getPaItemList[0].curPgGrp < getPaItemList[0].totalPgGrp}">
+						<a th:onclick="|movePage(${getPaItemList[0].curStPg + 10});|" class="last">마지막 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemList[0].curPgGrp < getPaItemList[0].totalPgGrp}">
+						<a class="last">마지막 페이지</a>
+					</th:block>
+
+				</th:block>
+			</div>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+
+
+<!--
+	<div class="fullscreen2"></div>
+	<div id="layer_pop2" class="layer_pop2" >
+		<h1 class="tit">공고문</h1>
+		<div class="layer_cnt">
+			공고내용111
+		</div>
+		<div class="layer_close">
+			<button type="button" class="layer_close_btn" id="btnClose">닫기</button>
+		</div>
+	</div>
+
+	<div class="fullscreen3"></div>
+	<div id="layer_pop3" class="layer_pop3" >
+		<h1 class="tit">공고문</h1>
+		<div class="layer_cnt">
+			공고내용111
+		</div>
+		<div class="layer_close">
+			<button type="button" class="layer_close_btn" id="btnClose">닫기</button>
+		</div>
+	</div>
+-->
+
+</div>
+</body>
+</html>

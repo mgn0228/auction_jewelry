@@ -1,0 +1,32 @@
+
+	
+<th:block th:fragment="navlocation">
+		<div class="visual sub1">
+			<div class="title">
+				<h3 th:text="${menuNav}"></h3>
+				<p class="location">
+					<span class="home">홈</span>
+					<span class="arrow">&gt;</span>
+					<span th:text="${menuNav}"></span>
+					<span class="arrow">&gt;</span>
+					<span th:text="${cm?.menuTitle}"></span>
+				</p>
+			</div>
+		</div>
+	
+</th:block>
+
+	
+<th:block th:fragment="navlocation_onedepth">
+		<div class="visual sub1">
+			<div class="title">
+				<h3 th:text="${menuNav}"></h3>
+				<p class="location">
+					<span class="home">홈</span>
+					<span class="arrow">&gt;</span>
+					<span th:text="${cm?.menuTitle}"></span>
+				</p>
+			</div>
+		</div>
+	
+</th:block>

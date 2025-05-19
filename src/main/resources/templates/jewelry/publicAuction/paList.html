@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>공고내역 - PUBLIC ACTION</title>
+    <th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+    <th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+    <a href="#gnb">주메뉴 바로가기</a>
+    <a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+    <header id="header">
+        <h1 class="logo"><a href="/">AUTOMART</a></h1>
+        <th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+        <div id="gnb_bg"></div>
+    </header>
+    <!-- //header -->
+    <hr/>
+
+    <article id="container" class="container">
+        <th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation_onedepth}"></th:block>
+
+        <section id="contents" class="contents">
+            <h3 class="tit_ty1">검색조건</h3>
+            <form action="/paList">
+                <fieldset>
+                    <ul class="tab_ty1 num6">
+                        <!--
+                        <li><a href="#">진행예정</a></li>
+                        <li class="on"><a href="#">진행중</a></li>
+                        <li><a href="#">마감/대기</a></li>
+                        <li><a href="#">발표완료</a></li>
+                        -->
+                        <li><a href="javascript:void(0);" onclick="changeStatus('Sheduled')">진행예정</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeStatus('Inprogress')">진행중</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeStatus('Waiting')">마감/대기</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeStatus('Finished')">발표완료</a></li>
+                        <li>
+                            <div class="search_box4">
+                                <div class="line">
+                                    <div class="box" style="width:920px;">
+                                        <label for="search_t1">진행기관 &nbsp;
+                                            <select name="placeCode" id="search_t1" style="width:100%;max-width:120px;"
+                                                    class="w2selectbox_select sel" title="진행기관">
+                                                <option value="">전체</option>
+                                                <th:block th:each="item : ${getPaPlaceList}">
+                                                    <option th:value="${item.placeCd}"
+                                                            th:text="${item.placeNm}"></option>
+                                                </th:block>
+                                            </select>
+                                        </label>
+                                        <!--
+                                            //발표완료 탭 선택시.
+                                                                            <label for="search_t1">진행연도 &nbsp;
+                                                                            <select id="search_t1" style="width:100%;max-width:120px;" class="w2selectbox_select sel" title="진행연도">
+                                                                                <option value="2025">2025</option>
+                                                                                <option value="2024">2024</option>
+                                                                            </select>
+                                                                            </label>
+                                            //발표완료 외의 탭 선택시.
+                                                                            <label for="search_t1">진행기관 &nbsp;
+                                                                            <select id="search_t1" style="width:100%;max-width:120px;" class="w2selectbox_select sel" title="진행기관">
+                                                                                <option value="">전체</option>
+                                                                                <option value="">시흥시</option>
+                                                                            </select>
+                                                                            </label>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                        <div class="search_box5">
+                            <button type="submit" class="btn_search">검색</button>
+                        </div>
+
+                    </ul>
+                </fieldset>
+
+                <input type="hidden" name="statusCode" id="statusCodeHidden" value="Inprogress">
+            </form>
+
+            <!--<p class="txt_result">조회결과(총 <span class="col_org">19</span>건)</p>-->
+            <p class="txt_result">조회결과(총 <span class="col_org total_search_count">0</span>건)</p>
+            <div class="btn_right2">
+                <label for="items_per_page">조회건수</label>
+                <select id="items_per_page" style="width:100px;" class="sel_ty1">
+                    <option selected value="1">1건씩</option>
+                    <option value="5">5건씩</option>
+                    <option value="10">10건씩</option>
+                    <option value="20">20건씩</option>
+                </select>
+            </div>
+
+            <table class="tbl_list1" id="jq_section1">
+                <caption>공고내역에 대한 번호별, 진행기관, 공고번호, 입찰신청기간 ~ 물품확인기간, 매각개찰일 매각결정일, 물건수, 공고안내, 상세물건, 상태를 나타낸 표</caption>
+                <colgroup>
+                    <col style="width:6.8%">
+                    <col style="width:12.6%">
+                    <col style="width:11.2%">
+                    <col style="">
+                    <col style="width:10.9%">
+                    <col style="width:10.9%">
+                    <col style="width:9.0%">
+                    <col style="width:11.2%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">진행기관</th>
+                    <th scope="col">공고번호</th>
+                    <th scope="col">입찰신청기간</th>
+                    <th scope="col">입찰마감일</th>
+                    <th scope="col">매각결정일</th>
+                    <th scope="col">물건수</th>
+                    <th scope="col">상태</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--<tr>
+                    <td>1</td>
+                    <td>시흥시</td>
+                    <td>2017-201</td>
+                    <td>2017-08-01~2017-08-10</td>
+                    <td>2017-08-11</td>
+                    <td>2017-08-12</td>
+                    <td>12개</td>
+                    <td>
+                        <button type="button" class="btn_ty3">진행예정</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>시흥시</td>
+                    <td>2017-201</td>
+                    <td>2017-08-01~2017-08-10</td>
+                    <td>2017-08-11</td>
+                    <td>2017-08-12</td>
+                    <td>2개</td>
+                    <td>
+                        <button type="button" class="btn_ty3">진행중</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>시흥시</td>
+                    <td>2017-201</td>
+                    <td>2017-08-01~2017-08-10</td>
+                    <td>2017-08-11</td>
+                    <td>2017-08-12</td>
+                    <td>27개</td>
+                    <td><button type="button" class="btn_ty3">마감/대기</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>시흥시</td>
+                    <td>2017-201</td>
+                    <td>2017-08-01~2017-08-10</td>
+                    <td>2017-08-11</td>
+                    <td>2017-08-12</td>
+                    <td>1개</td>
+                    <td><button type="button" class="btn_ty3">발표완료</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>시흥시</td>
+                    <td>2017-201</td>
+                    <td>2017-08-01~2017-08-10</td>
+                    <td>2017-08-11</td>
+                    <td>2017-08-12</td>
+                    <td>2개</td>
+                    <td>
+                        <button type="button" class="btn_ty3">진행중</button>
+                    </td>
+                </tr>-->
+                <!--
+                <th:block th:each="item , itemstatus : ${getPaList}">
+                    <tr>
+                        <td th:text="${item.curStNo + itemstatus.index}"></td>
+                        <td th:text="${item.placeNm}"></td>
+                        <td th:text="${item.pblNumber}"></td>
+                        <td>2017-08-01~2017-08-10</td>
+                        <td>2017-08-11</td>
+                        <td>2017-08-12</td>
+                        <td th:text="${item.itemCount + '개'}"></td>
+                        <td>
+                            <button type="button" class="btn_ty3" th:text="${item.paStatusNm}"></button>
+                        </td>
+                    </tr>
+                </th:block>
+                -->
+                </tbody>
+            </table>
+            <!-- 페이징 영역 -->
+            <div class="paging">
+                <th:block th:if="${#arrays.length(getPaList) > 0}">
+
+                    <!-- << 첫 페이지 -->
+                    <a th:if="${getPaList[0].curPgGrp > 1}"
+                       th:onclick="|movePage(1);|"
+                       class="first">첫 페이지</a>
+                    <a th:unless="${getPaList[0].curPgGrp > 1}" class="first">첫 페이지</a>
+
+                    <!-- < 이전 그룹의 첫 페이지 -->
+                    <a th:if="${getPaList[0].curPgGrp > 1}"
+                       th:onclick="|movePage(${getPaList[0].curStPg - 10});|"
+                       class="prev">이전 페이지</a>
+                    <a th:unless="${getPaList[0].curPgGrp > 1}" class="prev">이전 페이지</a>
+
+                    <!-- 페이지 번호들 -->
+                    <th:block th:each="idx : ${#numbers.sequence(1, 10)}">
+                        <th:block th:if="${getPaList[0].curStPg + idx - 1 <= getPaList[0].totalpg}">
+                            <th:block th:if="${getPaList[0].curStPg + idx - 1 == getPaList[0].pgNo}">
+                                <strong th:text="${getPaList[0].curStPg + idx - 1}" class="curPgNo">1</strong>
+                            </th:block>
+                            <th:block th:unless="${getPaList[0].curStPg + idx - 1 == getPaList[0].pgNo}">
+                                <a th:onclick="|movePage(${getPaList[0].curStPg + idx - 1});|"
+                                   th:text="${getPaList[0].curStPg + idx - 1}">2</a>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+
+                    <!-- > 다음 그룹의 첫 페이지 -->
+                    <a th:if="${getPaList[0].curPgGrp < getPaList[0].totalPgGrp}"
+                       th:onclick="|movePage(${getPaList[0].curStPg + 10});|"
+                       class="next">다음 페이지</a>
+                    <a th:unless="${getPaList[0].curPgGrp < getPaList[0].totalPgGrp}" class="next">다음 페이지</a>
+
+                    <!-- >> 마지막 그룹의 첫 페이지 -->
+                    <a th:if="${getPaList[0].curPgGrp < getPaList[0].totalPgGrp}"
+                       th:onclick="|movePage(${(getPaList[0].totalPgGrp - 1) * 10 + 1});|"
+                       class="last">마지막 페이지</a>
+                    <a th:unless="${getPaList[0].curPgGrp < getPaList[0].totalPgGrp}" class="last">마지막 페이지</a>
+
+                </th:block>
+            </div>
+        </section>
+    </article>
+    <!-- //container -->
+    <hr/>
+
+
+    <th:block th:replace="~{jewelry_include/footer_public_1::footer}"></th:block>
+
+</div>
+</body>
+</html>

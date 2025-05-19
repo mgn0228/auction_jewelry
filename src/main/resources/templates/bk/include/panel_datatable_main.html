@@ -1,0 +1,88 @@
+
+
+<th:block th:fragment="datatablepanel">
+	
+	<div class="row datatablepanel">
+	
+	<!-- Panel Datatable Type 1 -->
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">
+					<span th:if="${getTblTitleMain != null}" th:text="${getTblTitleMain}" />
+	<th:block th:if="${getTblIsFormMain == 'Y' or getTblIsFormMain == 'y'}">
+		<th:block th:if="${#lists.size(accessAuth) > 0}">
+					<button type="button" class="btn btn-warning btn-view">상세정보</button>
+			<th:block th:if="${accessAuth[0].availCreate.toString().equals('Y')}">
+					<button type="button" class="btn btn-primary btn-add">추가</button>
+			</th:block>
+			<th:block th:if="${accessAuth[0].availDelete.toString().equals('Y')}">
+					<button type="button" class="btn btn-danger btn-delete">삭제</button>
+			</th:block>
+		</th:block>
+		<th:block th:if="${#lists.size(accessAuth) == 0}">
+					<button type="button" class="btn btn-warning btn-view">상세정보</button>
+					<button type="button" class="btn btn-primary btn-add">추가</button>
+					<button type="button" class="btn btn-danger btn-delete">삭제</button>
+		</th:block>
+	</th:block>
+			
+				</h3>
+				<div class="box-tools pull-right">
+		<!--			
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+					
+					
+					
+					
+					
+		-->
+				</div>
+			</div>
+			<!-- /.box-header -->
+			
+			
+			<div class="box-body">
+	
+	
+					<table id="datatable" class="table table-bordered table-striped" th:attr="isform=${getTblIsFormMain},targetSubTablePid=${getPidsSub}">
+						<thead>
+							<tr>
+	<th:block th:each="item : ${mainContentSchema}">
+		<th:block th:if = "${item.fdIsTable.toString().equals('Y')}">
+								<th th:utext="${item.fdLabel}" th:attr="fn=${item.fdAliasNm}"></th>
+		</th:block>
+	</th:block>
+							</tr>
+						</thead>
+						<tbody>
+	<th:block th:each="row : ${mainContent}">
+							<tr>
+		<th:block th:each="col : ${mainContentSchema}">
+			<th:block th:if = "${col.fdIsTable.toString().equals('Y')}">
+								<td th:utext="${row[col.fdAliasNm]}"></td>
+			</th:block>
+		</th:block>
+							</tr>
+	</th:block>
+							
+							
+						</tbody>
+					</table>
+					
+					
+				
+			</div>
+			<!-- /.box-body -->
+			
+		</div>
+		<!-- /.box -->
+			
+	</div>
+	<!-- /.col-xs-12 -->
+			
+	</div>
+	<!-- /.row -->
+
+</th:block>>

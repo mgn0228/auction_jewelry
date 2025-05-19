@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="home">
+	
+	<select id="getTotalWorker" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												a_no
+			,IFNULL(a.predict_Tm,'')							A_sndTime
+		FROM NSP_${dbNm}. a
+		WHERE a.idx=#{a_no}
+	</select>
+	
+
+	
+	
+</mapper>
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>관심등록물건 - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">관심등록물건</h3>
+			<table class="tbl_list1" id="jq_section1">
+				<caption>관심등록물건에 대한 사진, 카테고리(물품종류), 물품명(물품코드), 예정가, 공고정보(보관장소), 입찰신청기간 물품확인기간, 매각개찰일 매각결정일, 입찰을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:6.0%">
+					<col style="width:9.7%">
+					<col>
+					<col style="width:12%">
+					<col style="width:12%">
+					<col style="width:12%">
+					<col style="width:12%">
+					<col style="width:10.0%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col"><input type="checkbox" title="전체선택" /></th>
+						<th scope="col">사진</th>
+						<th scope="col">카테고리(물품종류)<br/>물품명(물품코드) </th>
+						<th scope="col">매각예정가<br/>공매보증금</th>
+						<th scope="col">진행기관<br/>(공고번호)</th>
+						<th scope="col">입찰시작일<br/>입찰마감일</th>
+						<th scope="col">매각결정일<br/>잔금납부일</th>
+						<th scope="col">입찰</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!--
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+
+						<td><img src="../../images/temp/2020-1_001_01_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_001','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+
+						<td>명품 (가방) 
+							<br/><a href="#" class="link_ty1">페레가모 가방</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+						<td>시흥시 <br/>(2017-201)</td>
+						<td rowspan="1" class="txt_top">2017-08-10 ~ <br/>~ 2017-08-11</td>
+						<td rowspan="1" class="txt_top">2017-08-13<br/>2017-08-14</td>
+						<td rowspan="1" class="txt_top">
+							<button type="button" class="btn_ty2">입찰</button>
+						</td>
+					</tr>
+					-->
+<!-- 2줄 중앙 정렬 -->
+					<!--
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+						<td><img src="../../images/temp/2020-1_001_02_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_002','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+						<td>귀금속 (금) 
+							<br/><a href="#" class="link_ty1">금14K (LA00001)</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+						<td rowspan="2">시흥시 <br/>(2017-201)</td>
+						<td rowspan="2">2017-08-10 ~ <br/>~ 2017-08-11</td>
+						<td rowspan="2">2017-08-13<br/>2017-08-14</td>
+						<td rowspan="2">
+							<button type="button" class="btn_ty2">입찰</button>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+						<td><img src="../../images/temp/2020-1_001_03_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_001','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+						<td>명품(가방) <br/>
+							<a href="#" class="link_ty1">페레가모 가방</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+					</tr>
+					-->
+<!-- 3줄 탑 정렬 -->
+					<!--
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+						<td><img src="../../images/temp/2020-1_001_04_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_001','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+						<td>귀금속 (금) 
+							<br/><a href="#" class="link_ty1">금14K (LA00001)</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+						<td rowspan="3" class="txt_top">시흥시 <br/>(2017-201)</td>
+						<td rowspan="3" class="txt_top">2017-08-10 ~ <br/>~ 2017-08-11</td>
+						<td rowspan="3" class="txt_top">2017-08-13<br/>2017-08-14</td>
+						<td rowspan="3" class="txt_top">
+							<button type="button" class="btn_ty2">입찰</button>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+						<td><img src="../../images/temp/2020-1_001_05_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_001','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+						<td>명품(가방) <br/>
+							<a href="#" class="link_ty1">페레가모 가방</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" title="선택" /></td>
+						<td><img src="../../images/temp/2020-1_001_06_t.jpg" class="cursoron" alt="" width="70px" 
+							onclick="showModalCar('2020-1_001','1 파텍필립','유의사항(비고) : 중량 : 83.28g, 귀금속순도 : 약 18K, 시계밴드 길이 수선 필요')" /></td>
+						<td>귀금속(금) <br/>
+							<a href="#" class="link_ty1">금14K</a> </td>
+						<td class="txt_right2">200,000원
+							<br/>20,000원 </td>
+					</tr>
+					-->
+					<!--
+					<th:block th:each="item , itemstatus : ${getMyWishItemList}">
+						<tr th:attr="data-no=${item.no}">
+							<td><input type="checkbox" title="선택" /></td>
+							<td><img th:src="@{'/images/item/' + ${item.imageKey} + '.jpg'}" alt="" /></td>
+							<td>
+								<span th:text="${item.categoryNm1}"></span><br/>
+								<a th:href="@{'/paItemDetail?itemNo=' + ${item.itemNo}}" class="link_ty1">
+									<span th:text="${item.itemNm}">물품명</span>
+								</a>
+							</td>
+							<td>
+								<span th:text="${#numbers.formatInteger(item.salePrice, 3, 'COMMA') + '원'}">200,000원</span><br/>
+								<span th:text="${#numbers.formatInteger(item.salePrice/10, 3, 'COMMA') + '원'}">20,000원</span>
+							</td>
+							<td>
+								<span th:text="${item.placeNm}"></span><br/>
+								<span th:text="${item.pblNumber}"></span>
+							</td>
+							<td rowspan="1" class="txt_top">2017-08-10 ~ <br/>~ 2017-08-11</td>
+							<td rowspan="1" class="txt_top">2017-08-13<br/>2017-08-14</td>
+							<td rowspan="1" class="txt_top">
+								<button type="button" class="btn_ty2">입찰</button>
+							</td>
+						</tr>
+					</th:block>
+					-->
+					<th:block th:each="item , itemstatus : ${getMyWishItemList}">
+						<th:block th:with="
+										noList=${#strings.arraySplit(item.no, '||')}
+										,imageKeyList=${#strings.arraySplit(item.imageKey, '||')}
+										,categoryNm1List=${#strings.arraySplit(item.categoryNm1, '||')}
+										,itemNoList=${#strings.arraySplit(item.itemNo, '||')}
+										,itemNmList=${#strings.arraySplit(item.itemNm, '||')}
+										,salePriceList=${#strings.arraySplit(item.salePrice, '||')}
+										,placeNmList=${#strings.arraySplit(item.placeNm, '||')}">
+						<th:block th:each="i : ${#numbers.sequence(0, item.itemCount-1)}">
+							<tr th:attr="data-no=${noList[i]}">
+								<td><input type="checkbox" title="선택" /></td>
+								<td><img th:src="@{'/images/item/' + ${imageKeyList[i]} + '.jpg'}" alt="" /></td>
+								<td>
+									<span th:text="${categoryNm1List[i]}"></span><br/>
+									<a th:href="@{'/paItemDetail?itemNo=' + ${itemNoList[i]}}" class="link_ty1">
+										<span th:text="${itemNmList[i]}">물품명</span>
+									</a>
+								</td>
+								<td>
+									<span th:text="${#numbers.formatInteger(salePriceList[i], 3, 'COMMA') + '원'}"></span>
+									<span th:text="${#numbers.formatInteger(salePriceList[i], 3, 'COMMA') + '원'}"></span>
+								</td>
+								<td th:if="${i == 0}" th:rowspan="${item.itemCount}">
+									<span th:text="${placeNmList[0]}"></span><br/>
+									<span th:text="${item.pblNumber}"></span>
+								</td>
+								<td th:if="${i == 0}" th:rowspan="${item.itemCount}">
+									<span th:utext="${#temporals.format(item.bidStartDt, 'yyyy.MM.dd')} + '<br/>~'
+									 + ${#temporals.format(item.bidEndDt, 'yyyy.MM.dd')}">2017-08-10<br/>~ 2017-08-11</span>
+								</td>
+								<td th:if="${i == 0}" th:rowspan="${item.itemCount}">
+									<span th:text="${#temporals.format(item.fixingDt, 'yyyy.MM.dd')}">2017-08-13</span>
+									<br/>2017-08-14
+								</td>
+								<td th:if="${i == 0}" th:rowspan="${item.itemCount}">
+									<button type="button" class="btn_ty2 do_bid_btn"
+											th:attr="data-pblno=${item.pblNo}">입찰</button>
+								</td>
+							</tr>
+						</th:block>
+						</th:block>
+					</th:block>
+				</tbody>
+			</table>
+			<p class="txt_del">선택한 물품을 삭제합니다 <button type="submit" class="btn_del ml4 btn_del_wish">삭제</button></p>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+</div>
+
+
+<div class="fullscreen"></div>
+
+<!-- 사진뷰어 main -->
+<div class="modal_layer_photo">
+	<div id="layer_img_pop" class="layer_pop" >
+		<h1 class="tit" id="smstitle">물건 사진 보기</h1>
+		<div class="layer_cnt" id="imgDiv">
+		    <img class="modal-content" id="picimg" width="640" height="427" onClick="closeModal()" src="./../../images/img_goods.jpg" >
+		</div>
+		<div id="area2">
+		</div>
+		<div class="layer_close">
+			<button type="button" class="layer_close_btn" id="btnClose" onClick="closeModal()">닫기</button>
+		</div>
+	</div>
+</div>
+<!-- 사진뷰어 sub -->
+<div style="display:none;">
+	<div class="layer_list" id="photoImg_src">
+		<ul class="car_photo_btn">
+			<li class='up'><a id="thumnail_01"><img onmouseover="javascript:car_swapPicture('../../images/temp/2020-1_001_01.jpg', '1');" src="../../images/temp/2020-1_001_01_t.jpg" style="cursor: hand" width="60" height="46" /></a></li>
+			<li class='up'><a id="thumnail_02"><img onmouseover="javascript:car_swapPicture('../../images/temp/2020-1_001_02.jpg', '2');" src="../../images/temp/2020-1_001_02_t.jpg" style="cursor: hand" width="60" height="46" /></a></li>
+			<li class='up'><a id="thumnail_03"><img onmouseover="javascript:car_swapPicture('../../images/temp/2020-1_001_03.jpg', '3');" src="../../images/temp/2020-1_001_03_t.jpg" style="cursor: hand" width="60" height="46" /></a></li>
+			<li class='up'><a id="thumnail_04"><img onmouseover="javascript:car_swapPicture('../../images/temp/2020-1_001_04.jpg', '4');" src="../../images/temp/2020-1_001_04_t.jpg" style="cursor: hand" width="60" height="46" /></a></li>
+			<li class='up'><a id="thumnail_05"><img onmouseover="javascript:car_swapPicture('../../images/temp/2020-1_001_05.jpg', '5');" src="../../images/temp/2020-1_001_05_t.jpg" style="cursor: hand" width="60" height="46" /></a></li>
+		</ul>
+		<ul class="car_photo_desc">
+			<li class='up'>{MPL_MaveDesc} </li>
+		</ul>
+	</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+
+	function showModalCar(argImg, argTitle, argDesc){
+        var listSrcData = $("#photoImg_src").html(); // DIV를 그려줄 UI객체
+		$("#area2").html("");
+		var newSrc = listSrcData;
+		newSrc = argImg;
+		newSrc = argDesc;
+		$("#area2").append(newSrc);
+		//	console.log(newSrc);
+		$("#smstitle").html(argTitle);
+		$('#picimg').attr('src','/Movimages/2020/' + argImg + '_01.jpg');
+		$(".fullscreen").fadeIn(200);
+		$("#layer_img_pop").fadeIn(200);
+	}
+	function closePop(cookiename, expiredate) {	// 오늘하루 쿠키 팝업 닫기 
+		setCookie( cookiename, "done" , expiredate); 	//쿠키 이름 정의한 후, 그 값을 "done"으로 설정하고, 제한일 수 설정. - 무조건 1일 1회 보여주기로 체크박스 없앰.
+		$(".layer_pop").fadeOut(200);
+		$(".fullscreen").fadeOut(200);
+	}
+	function car_swapPicture( argImg, argidx ) {
+		nowPicSeq = argidx; // 현재 seq 셋팅
+		$("#thumnail_" + nowPicSeq).addClass("on");
+		$("#imgDiv").find("img").attr("src", argImg);
+	}
+	function closeModal() {
+		$(".layer_pop").fadeOut(200);
+		$(".fullscreen").fadeOut(200);
+	}
+</script>
+
+</html>

@@ -1,0 +1,45 @@
+/*!
+common datatable css
+*/
+
+
+.datatablepanel > div
+,.datatablepanelSub > div {
+	max-height: 70vh;
+	/*height: 70vh;*/
+	overflow: auto;
+}
+
+.datatablepanel .box-body
+,.datatablepanelSub .box-body {
+	max-height: 60vh;
+    overflow: auto;
+}
+
+.datatablepanel .dataTable tbody tr td
+,.datatablepanelSub .dataTable tbody tr td {
+	cursor: pointer;
+}
+
+
+.datatablepanel .dataTable tbody tr.selected td
+,.datatablepanelSub .dataTable tbody tr.selected td {
+	background-color: #c1e0ff;
+}
+
+.datatablepanel > div > div.box
+,.datatablepanelSub > div > div.box {
+	/*overflow: auto;*/
+}
+
+
+.table>tbody>tr>td
+, .table>tbody>tr>th
+, .table>tfoot>tr>td
+, .table>tfoot>tr>th
+, .table>thead>tr>td
+, .table>thead>tr>th {
+    padding: 4px !important;
+}    
+    
+    

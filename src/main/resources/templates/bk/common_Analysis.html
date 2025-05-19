@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script th:src="'/js/content/'+${pid}+'/'+${pid}+'.js'"></script>
+	<link rel="stylesheet" th:href="'/css/content/'+${pid}+'/'+${pid}+'.css'">
+	
+	<script>
+		$(document).ready(function () {
+			init();
+			_utilSearch.initCustomType2(_searchPanelCls,_utilDatatable, searchSuccess);
+		});
+	</script>
+	
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section>
+			
+			
+			<!-- Main content -->
+			<section class="content">
+				
+				<!-- Search Panel -->
+				<div th:replace="~{include/panel_search::searchpanel}"></div>
+
+				<!-- Monitoring Panel -->
+				<div class="row panel_analy">
+					<div class="col-md-6 div_chartA1">
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group viewtitle chartA1"></div>
+								<div class="form-group">
+									<div id="chart_Area_1_info"></div>
+									<canvas id="chart_Area_1" class="chartArea">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+					
+					<div class="col-md-6 div_chartA2">
+					
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group viewtitle chartA2"></div>
+								<div class="form-group ">
+									<div id="chart_Area_2_info"></div>
+									<canvas id="chart_Area_2" class="chartArea">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+					
+					<div class="col-md-6 div_chartA3">
+					
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group viewtitle chartA3"></div>
+								<div class="form-group ">
+									<div id="chart_Area_3_info"></div>
+									<canvas id="chart_Area_3" class="chartArea">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+					
+					<div class="col-md-6 div_chartA4">
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group viewtitle chartA4"></div>
+								<div class="form-group ">
+									<div id="chart_Area_4_info"></div>
+									<canvas id="chart_Area_4" class="chartArea">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					
+				</div>
+				
+				
+				
+				
+				
+			</section>
+			<!-- /.content -->
+			
+			
+			
+			
+			
+			
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+		
+	</div>
+<!-- ./wrapper -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+<head th:fragment="commonscript">
+	
+ 	<script>
+		
+ 		
+		function logoutprocess () {
+			var data = {};
+			var ret = _utilAjax.sendSyncRet("/account/logout", _utilJson.make(_pid,data));
+			if (ret.result == "OK") {
+				location.replace("/");
+			} else {
+				alert(ret.message);
+			}
+		}
+		
+
+		function init_common() {
+			//Initialize Select2 Elements
+			$(".select2").select2();
+			$("#commonModalTblMain .select2").select2({dropdownParent: $('#commonModalTblMain')});
+			$("#commonModalTblSub .select2").select2({dropdownParent: $('#commonModalTblSub')});
+			
+			//Datemask dd/mm/yyyy
+//			$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+			$(".datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+			//Datemask2 mm/dd/yyyy
+//			$(".datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+			$(".datemask2").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+			//Money Euro
+			$("[data-mask]").inputmask();
+
+			//Date range picker
+			$('.reservation').daterangepicker(
+				{
+					datePicker: true
+					,locale: {
+						format: 'YYYY-MM-DD'
+					}
+				}
+			);
+			//Date range picker with time picker
+//			$('.reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+			$('.reservationtime').daterangepicker(
+				{
+					timePicker: true
+					, timePickerIncrement: 1
+					, locale: {
+						format: 'YYYY-MM-DD HH:mm',
+						separator: " ~ "
+					}
+				}
+			);
+			//Date range as a button
+			$('.daterange-btn').daterangepicker(
+				{
+					ranges: {
+						'Today': [moment(), moment()],
+						'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+						'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+						'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+						'This Month': [moment().startOf('month'), moment().endOf('month')],
+						'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+					},
+					startDate: moment().subtract(29, 'days'),
+					endDate: moment()
+				},
+				function (start, end) {
+//					$('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+					$('.daterange-btn span').html(start.format('YYYY-MM-DD hh:mm:ss') + ' - ' + end.format('YYYY-MM-DD  hh:mm:ss'));
+				}
+			);
+			
+			//Date picker
+			$('.datepicker').datepicker({
+				autoclose: true
+				,format: 'yyyy-mm-dd'
+			});
+			//Date Time picker
+			$('.datetimepicker').datepicker({
+				autoclose: true
+				,format: 'yyyy-mm-dd hh:mm:ss a'
+			});
+
+			//Time picker
+			$('.timepicker').timepicker({
+				autoclose: true
+				,format: 'hh:mm'
+			});
+			
+			$("#summernote").summernote({
+			    height: 300,                 // 에디터 높이
+			    minHeight: null,             // 최소 높이
+			    maxHeight: null,             // 최대 높이
+			    focus: true,                 // 에디터 로딩 후 포커스 설정
+			    lang: 'ko-KR',               // 한글 설정
+			    placeholder: '내용을 입력하세요', // 플레이스홀더 설정
+			    callbacks: {
+					onImageUpload : function(files) {
+						uploadSummernoteImageFile(files[0],this);
+					},
+				}
+			});
+
+			
+/*
+			
+			$('#summernote').summernote({
+			    height: 300,                 // 에디터 높이
+			    minHeight: null,             // 최소 높이
+			    maxHeight: null,             // 최대 높이
+			    focus: true,                 // 에디터 로딩 후 포커스 설정
+			    lang: 'ko-KR',               // 한글 설정
+			    placeholder: '내용을 입력하세요', // 플레이스홀더 설정
+			    callbacks: {
+					onImageUpload : function(files) {
+						uploadSummernoteImageFile(files[0],this);
+					},
+				}
+			});
+			
+*/			
+			
+			
+/*			
+			
+			//iCheck for checkbox and radio inputs
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass: 'iradio_minimal-blue'
+			});
+			//Red color scheme for iCheck
+			$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+				checkboxClass: 'icheckbox_minimal-red',
+				radioClass: 'iradio_minimal-red'
+			});
+			//Flat red color scheme for iCheck
+			$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+				checkboxClass: 'icheckbox_flat-green',
+				radioClass: 'iradio_flat-green'
+			});
+			
+*/			
+			
+			//Colorpicker
+			$(".colorpicker").colorpicker();
+			//color picker with addon
+//			$(".my-colorpicker2").colorpicker();
+			
+/*			
+			//Timepicker
+			$(".timepicker").timepicker({
+				showInputs: false
+			});
+*/
+			_utilModal.setEventListner("#commonModal");
+			
+		
+			$('.modal-dialog').draggable({
+				handle: ".modal-header"
+			});
+			
+			
+		}
+		
+		
+		function selListActionAdd(obj) {
+			var panelcls = $(obj).closest(_searchPanelCls);
+			if (panelcls == null || panelcls==undefined || panelcls.length == 0) {
+				panelcls = $(obj).closest(_formPanelCls);
+				if (panelcls == null || panelcls==undefined || panelcls.length == 0) {
+					if (_formPanelSubCls != undefined) {
+						panelcls = _formPanelSubCls;
+					} else {
+						panelcls = _formPanelCls;
+					}
+				} else {
+					panelcls = _formPanelCls;
+				}
+			} else {
+				panelcls = _searchPanelCls;
+			}
+//			$("#commonModal #commonModalTitle").text("");
+			$("#commonModal").attr("panelCls",panelcls);
+			private_function("itemActionAdd",obj);
+		}
+		
+		
+		function selListActionDel(obj) {
+//			private_function("itemActionDel",obj);
+			
+			if (private_function("itemActionDel",obj) != true) {
+				var list = null;
+				if ($(obj).closest("label").siblings().length == 1) {
+					list = $(obj).closest("label").siblings();
+				} else if ($(obj).closest("label").siblings().length > 1) {
+					list = $(obj).closest("label").siblings()[0];
+				}
+				if (list == null) return;
+				
+				var tagName = $(list).prop("tagName").toUpperCase();
+//				var multiple = $(panelCls).find(".form-control[name="+targetFdary[k]+"]").hasClass("multiple");
+				if (tagName == "SELECT") {
+					$(list).find("option:selected").remove();
+				} else {
+					$(list).val("");
+				}
+				
+			}
+		}
+		
+		function selListActionDown(obj) {
+			var listobj = $(obj).closest("label").next();
+			var optlen = $(listobj).find("option").length;
+			var idx= $(listobj).find("option").index($(listobj).find("option:selected"));
+			if (idx < optlen-1) {
+				$(listobj).find("option:eq("+idx+")").before($(listobj).find("option:eq("+(idx+1)+")"))
+			}
+		}
+		
+		function selListActionUp(obj) {
+			var listobj = $(obj).closest("label").next();
+			var optlen = $(listobj).find("option").length;
+			var idx= $(listobj).find("option").index($(listobj).find("option:selected"));
+			if (idx > 0) {
+				$(listobj).find("option:eq("+idx+")").after($(listobj).find("option:eq("+(idx-1)+")"))
+			}
+		}
+		
+		function selectAllModal(obj) {
+			var cs = $(obj).prop("checked");
+			var modal = $(obj).closest(".modal");
+			if (cs == true) {
+				$(modal).find("input[type=checkbox].selecttr").prop("checked",true);
+				$(modal).find(".datatr").addClass("selected");
+			} else {
+				$(modal).find("input[type=checkbox].selecttr").prop("checked",false);
+				$(modal).find(".datatr").removeClass("selected");
+			}
+		}
+		
+		
+		
+		function selListAddText(obj) {
+			var textobj = $(obj).closest("label").find(".addtext");
+			if ($(textobj).length > 0) {
+				var inputtext = $(textobj).val().trim();
+				var inputlabel = inputtext;
+				var fdnm = $(textobj).prop("name");
+				fdnm = fdnm.replace("_addtext","");
+				
+				var next = $(textobj).next();
+				if ($(next).hasClass("addtext") || $(next).hasClass("addselect")) {
+					inputtext += "*_*"+$(next).val();
+					if ($(next).hasClass("addselect")) {
+						inputlabel += "/"+$(next).find("option:selected").text();
+					} else {
+						inputlabel += "/"+$(next).val();
+					}
+				}
+				
+				if (inputtext != "") {
+					var html = "<option value='"+inputtext+"'>"+inputlabel+"</option>";
+					$(obj).closest(".form-group").find(".form-control[name="+fdnm+"]").append(html);
+				}
+			}
+			private_function("itemActionAddText",obj);
+		}
+		
+		
+		function selListDelText(obj) {
+			
+			var textobj = $(obj).closest("label").find(".addtext");
+			if ($(textobj).length > 0) {
+				var fdnm = $(textobj).prop("name");
+				fdnm = fdnm.replace("_addtext","");
+				$(obj).closest(".form-group").find(".form-control[name="+fdnm+"] option:selected").remove();
+				
+			}
+			private_function("itemActionDelText",obj);
+			
+		}
+		
+		
+		function fileDownLoad(obj) {
+			var target = $(obj).attr("targetname");
+			if (target == undefined || target == null || target == "") return;
+			var fnkey = $(obj).closest(".form-group").find(".form-control[name="+target+"]").attr("fileinfo");
+			if (fnkey == undefined || fnkey == null || fnkey == "") return;
+			window.open("/download/"+fnkey,"_blank");
+		}
+		
+		function modal_selectAll(obj) {
+			var checked = $(obj).prop("checked");
+			$(obj).closest("table").find("tbody input[name=selecttr]").removeClass("selected");
+			$(obj).closest("table").find("tbody tr").removeClass("selected");
+			if (checked == true) {
+				$(obj).closest("table").find("tbody input[name=selecttr]").prop("checked",true);
+				$(obj).closest("table").find("tbody tr").addClass("selected");
+			} else {
+				$(obj).closest("table").find("tbody input[name=selecttr]").prop("checked",false);
+			}
+		}
+		
+		function uploadSummernoteImageFile(file, editor) {
+			var data = {};
+			var formData = new FormData();
+			data.file = file;
+			formData.append("file", file);
+			formData.append("key", new Blob([ JSON.stringify(data)], {type : "application/json"}));
+			_utilAjax.summernoteImgUplaod("/summernoteImgInsert", formData, insertSuccess);
+		}
+		
+		function insertSuccess(res) {
+			console.log(res);
+			$("#summernote").summernote('insertImage', "/download/"+res.file);
+		}
+		
+	</script>
+	
+	
+</head>

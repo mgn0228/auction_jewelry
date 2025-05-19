@@ -1,0 +1,12 @@
+
+<th:block th:fragment="custom_js_css">
+
+<th:block th:if = "${cm.jscssimport == 'Y'}">
+	<script th:utext="${getPublicJs}">
+	</script>
+	
+	<style type="text/css" th:utext="${getPageCss}">
+	</style>
+</th:block>
+	
+</th:block>

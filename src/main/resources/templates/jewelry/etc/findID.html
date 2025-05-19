@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>아이디 찾기 - PUBLIC ACTION</title>
+    <th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+    <th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+
+    <th:block th:if="${cm.jscssimport == 'Y'}">
+        <script th:src="'/js/content/etc/'+${pid}+'.js?v=1.0.0'"></script>
+    </th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+    <a href="#gnb">주메뉴 바로가기</a>
+    <a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+    <header id="header">
+        <h1 class="logo"><a href="/">AUTOMART</a></h1>
+        <th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+        <div id="gnb_bg"></div>
+    </header>
+    <!-- //header -->
+    <hr/>
+
+    <article id="container" class="container">
+        <th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation_onedepth}"></th:block>
+
+        <section id="contents" class="contents">
+            <h4 class="tit_ty1">아이디 찾기</h4>
+            <ul class="idpw_tab">
+                <li class="active"><a href="#">아이디 찾기</a></li>
+                <li><a href="/findPwd">비밀번호 찾기</a></li>
+            </ul>
+
+            <fieldset class="id_box2">
+                <legend>아이디 찾기</legend>
+
+                <strong>회원정보로 찾기</strong>
+                <p><strong class="txt_must">*</strong> 회원가입시 등록된 정보를 조회하여 등록된 휴대폰번호로 전송합니다.</p>
+                <table class="tbl_data7">
+                    <colgroup>
+                        <col style="width:35%">
+                        <col style="width:65%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th scope="row"> 이름</th>
+                        <td>
+                            <input type="text" id="name" title="이름" class="inp_ty2" style="width:228px;" value=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> 휴대폰번호</th>
+                        <td>
+                            <input type="text" id="phone1" title="휴대폰번호 앞자리" class="inp_ty2" style="width:58px;" value="010"
+                                   maxlength="3" placeholder="010"/>
+                            <span class="mr4 ml4">-</span>
+                            <input type="text" id="phone2" title="휴대폰번호 가운데자리" class="inp_ty2" style="width:58px;" value=""
+                                   maxlength="4"/>
+                            <span class="mr4 ml4">-</span>
+                            <input type="text" id="phone3" title="휴대폰번호 끝자리" class="inp_ty2" style="width:58px;" value=""
+                                   maxlength="4"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="mt28 btn_center">
+                    <button type="button" class="btn_ty4 mr8" onclick="checkIDExist()">확인</button>
+                </div>
+
+            </fieldset>
+            <!--
+                        <p class="id_box">
+                            <strong>본인인증으로 찾기</strong>
+                            <span>본인 명의의 휴대폰 번호로 인증할 수 있습니다.<br /><br />
+                            </span>
+                            <a href="#" class="btn btn_ty4">휴대폰 본인인증</a>
+                        </p>
+            -->
+
+        </section>
+    </article>
+    <!-- //container -->
+    <hr/>
+
+    <th:block th:replace="~{jewelry_include/footer_public_1::footer}"></th:block>
+</div>
+
+</div>
+</body>
+</html>

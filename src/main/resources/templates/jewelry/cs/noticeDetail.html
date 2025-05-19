@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>공지사항 - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">공지사항</h3>
+			<th:block th:if="${#arrays.length(getNoticeDetail) > 0 and getNoticeDetail[0].position == 'c'}">
+				<table class="tbl_view">
+					<caption>공지사항에 대한 제목, 내용을 나타낸 표</caption>
+					<colgroup>
+						<col style="width:76%">
+						<col style="width:24%">
+					</colgroup>
+					<thead>
+					<tr>
+						<th scope="col" th:utext="${getNoticeDetail[0].title}">경기도청 압류 동산 공매 공고 공지 </th>
+						<td><span class="bar__" th:utext="${getNoticeDetail[0].regDt}">2020.10.24 </span> </td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td colspan="2" class="view" th:utext="${getNoticeDetail[0].content}">
+							경기도청에서 진행하는 공매공고 내용 안내
+							<br/>
+							<br/> 등록할 내용은 경기도청 홈페이지에서 배너 클릭시 팝업창의 내용이면 될 것 같습니다.
+							<br/>
+						</td>
+					</tr>
+					<!--
+                        //게시물이 없을 경우
+                                        <tr>
+                                            <td class="nodata" colspan="4">등록된 게시물이 없습니다.</td>
+                                        </tr>
+                    -->
+					</tbody>
+
+				</table>
+			</th:block>
+			<th:block th:if="${#arrays.length(getNoticeDetail) > 0 and getNoticeDetail[1].position == 'c'}">
+				<table class="tbl_view">
+					<caption>공지사항에 대한 제목, 내용을 나타낸 표</caption>
+					<colgroup>
+						<col style="width:76%">
+						<col style="width:24%">
+					</colgroup>
+					<thead>
+					<tr>
+						<th scope="col" th:utext="${getNoticeDetail[1].title}">경기도청 압류 동산 공매 공고 공지 </th>
+						<td><span class="bar__" th:utext="${getNoticeDetail[1].regDt}">2020.10.24 </span> </td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td colspan="2" class="view" th:utext="${getNoticeDetail[1].content}">
+							경기도청에서 진행하는 공매공고 내용 안내
+							<br/>
+							<br/> 등록할 내용은 경기도청 홈페이지에서 배너 클릭시 팝업창의 내용이면 될 것 같습니다.
+							<br/>
+						</td>
+					</tr>
+					<!--
+                        //게시물이 없을 경우
+                                        <tr>
+                                            <td class="nodata" colspan="4">등록된 게시물이 없습니다.</td>
+                                        </tr>
+                    -->
+					</tbody>
+
+				</table>
+			</th:block>
+			<div class="notice_page">
+				<th:block th:each="item : ${getNoticeDetail}">
+					<!-- 이전글 -->
+					<p class="prev" th:if="${item.position == 'p'}">
+						<strong>이전글</strong>
+						<span><a th:href="@{'/noticeDetail?no=' + ${item.no}}"
+				   			th:text="${item.title}">이전글이 없습니다.</a>
+						</span>
+					</p>
+					<!-- 다음글 -->
+					<p class="next" th:if="${item.position == 'n'}">
+						<strong>다음글</strong>
+						<span><a th:href="@{'/noticeDetail?no=' + ${item.no}}"
+				   			th:text="${item.title}">다음글이 없습니다.</a>
+						</span>
+					</p>
+				</th:block>
+			</div>
+			<div class="btn_center">
+				<button type="button" class="btn_ty4" onclick="location.href='/notice'">목록</button>
+			</div>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+	
+	
+</div>
+</body>
+</html>

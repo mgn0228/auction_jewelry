@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+
+/* 나눔스퀘어 */
+@font-face {
+	font-family: 'nsr';
+	src: url('/jewelry/font/NanumSquareR.eot');
+	src: url('/jewelry/font/NanumSquareR.eot?#iefix') format('embedded-opentype'), 
+		 url('/jewelry/font/NanumSquareR.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'nsr';
+	src: url('/jewelry/font/NanumSquareB.eot');
+	src: url('/jewelry/font/NanumSquareB.eot?#iefix') format('embedded-opentype'), 
+		 url('/jewelry/font/NanumSquareB.woff') format('woff');
+	font-weight:600;
+	font-style: normal;
+}
+
+/* 나눔 바른고딕 */
+@font-face {
+	font-family: 'nbg';	
+	src: url('/jewelry/font/NanumBarunGothic.eot');
+	src: url('/jewelry/font/NanumBarunGothic.eot?#iefix') format('embedded-opentype'), 
+		 url('/jewelry/font/NanumBarunGothic.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* 나눔 고딕  */
+@font-face {
+	font-family: 'ng',
+	local("NanumGothic"), local("나눔고딕");   /* 컴퓨터에 나눔고딕이 깔려 있으면 이를 사용*/
+	src: url('/jewelry/font/NanumGothic.eot');
+	src: url('/jewelry/font/NanumGothic.eot?#iefix') format('embedded-opentype'), 
+		 url('/jewelry/font/NanumGothic.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>입찰신청 - PUBLIC ACTION</title>
+	<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+	<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+	<script>
+		const mbId = "[[${mbId != null}]]" ? "[[${mbId}]]" : '';
+	</script>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+		<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+		<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">공매정보</h3>
+			<ul class="data_list2 num4">
+				<li>
+					<strong>진행기관 : </strong>
+					<span th:text="${getPaItemBidList[0].placeNm}">시흥시</span>
+				</li>
+				<li>
+					<strong>공고번호 :</strong>
+					<span class="pbl_no_info"
+						  th:attr="data-pblno=${getPaItemBidList[0].pblNo}"
+						  th:text="${getPaItemBidList[0].pblNumber}">2017-141</span>
+				</li>
+				<li>
+					<strong>입찰마감일 :</strong>
+					<span th:text="${#temporals.format(getPaItemBidList[0].bidEndDt, 'yyyy-MM-dd HH:mm')}">2017-09-20 14:00</span>
+				</li>
+				<li>
+					<strong>매각결정일 :</strong>
+					<span th:text="${#temporals.format(getPaItemBidList[0].fixingDt, 'yyyy-MM-dd HH:mm')}">2017-09-20 14:00</span>
+				</li>
+				<!--
+                                <li><strong>진행기관 : </strong> 시흥시 </li>
+                                <li><strong>입찰신청기간 :</strong> 2017-09-10 ~ 2017-09-10</li>
+                                <li><strong>입찰마감일 :</strong> 2017-09-20 14:00</li>
+                                <li><strong>공고번호 :</strong> 2017-141</li>
+                                <li><strong>물건확인기간 :</strong> 2017-09-10 ~ 2017-09-10 </li>
+                                <li><strong>매각결정일 : </strong> 2017-09-20 14:00</li>
+                -->
+			</ul>
+			<div class="btn_right mt20"><button type="button" class="btn_ty2" id="btnPop">공고문 보기</button></div><!-- id="btnPop" 클릭시 팝업 생성 -->
+
+			<h3 class="tit_ty4">유의사항 동의</h3>
+			<div class="data_box2" style="height:202px;">
+				<p>제1장 총칙</p>
+				<p>제1조 목적</p>
+				<p>이 약관은 퍼블릭옥션(전자거래 사업자)가 운영하는 인터넷 사이버 몰(이하 "몰" 이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에
+					있어 사이버 몰과 이용자의 권리·의무 및 책임사항을퍼블릭옥션(전자거래 사업자)가 운영하는 인터넷 사이버 몰(이하 "몰" 이라 한다)에서 제공하는 인터넷 관련
+					서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규이용자의 권리·의무 및 책임사항을퍼블릭옥션(전자거래 사업자)
+					이 약관은 퍼블릭옥션(전자거래 사업자)가 운영하는 인터넷 사이버 몰(이하 "몰" 이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에
+					있어 사이버 몰과 이용자의 권리·의무 및 책임사항을퍼블릭옥션(전자거래 사업자)가 운영하는 인터넷 사이버 몰(이하 "몰" 이라 한다)에서 제공하는 인터넷 관련
+					서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규이용자의 권리·의무 및 책임사항을퍼블릭옥션(전자거래 사업자)</p>
+			</div>
+			<div class="agree_box">
+				<input type="checkbox" id="agree_t1" /> <label for="agree_t1">동의함</label>
+			</div>
+
+			<!--<table class="tbl_list1 mt20" >
+				<caption>입찰신청에 대한 순번, 사진, 카테고리(물품종류), 물품명(물품코드),예정가, 공매보증금, 입찰금액, 삭제을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:6.0%">
+					<col style="width:8%">
+					<col style="width:13%">
+					<col style="width:17%">
+					<col style="width:13.5%">
+					<col style="width:13.5%">
+					<col style="width:15.6%">
+					<col style="width:10.8%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">사진</th>
+						<th scope="col">카테고리<br/>(물품종류)</th>
+						<th scope="col">물품명<br/>(물품코드)</th>
+						<th scope="col">매각예정가</th>
+						<th scope="col">공매보증금</th>
+						<th scope="col">입찰금액</th>
+						<th scope="col">입찰현황</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td>귀금속<br/>(금)</td>
+						<td><a href="#" class="link_ty1">금14K</a></td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty21 txt_right" title="입찰금액" value="200,000" />원</td>
+						<td>신규</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td>귀금속<br/>(금)</td>
+						<td><a href="#" class="link_ty1">금14K</a></td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty21 txt_right" title="입찰금액" value="200,000" />원</td>
+						<td>신규</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td>귀금속<br/>(금)</td>
+						<td><a href="#" class="link_ty1">금14K</a></td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty21 txt_right" title="입찰금액" value="200,000" />원</td>
+						<td><button type="button" class="btn_ty1">입찰 신청</button></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td><img src="../../images/temp/goods_2.jpg" alt=""/></td>
+						<td>귀금속<br/>(금)</td>
+						<td><a href="#" class="link_ty1">금14K</a></td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty21 txt_right" title="입찰금액" value="200,000" />원</td>
+						<td><button type="button" class="btn_ty7">수정/포기</button></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td><img src="../../images/temp/goods_3.jpg" alt=""/></td>
+						<td>명품<br/>(가방)</td>
+						<td>페라가모 가방</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2">200,000원</td>
+						<td class="txt_right2"><input type="text" class="inp_ty21 txt_right" title="입찰금액" value="200,000" disabled="disabled" />원</td>
+						<td><button type="button" class="btn_ty61">매각 보류</button></td>
+					</tr>
+				</tbody>
+			</table>-->
+
+			<!--250410추가(procGetPaItemBidList)-->
+			<table class="tbl_list1">
+				<caption>입찰신청에 대한 순번, 사진, 카테고리(물품종류), 물품명(물품코드),예정가, 공매보증금, 입찰금액, 삭제을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:6.0%">
+					<col style="width:8%">
+					<col style="width:13%">
+					<col style="width:17%">
+					<col style="width:13.5%">
+					<col style="width:13.5%">
+					<col style="width:15.6%">
+					<col style="width:10.8%">
+				</colgroup>
+				<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">사진</th>
+					<th scope="col">카테고리<br/>(물품종류)</th>
+					<th scope="col">물품명<br/>(물품코드)</th>
+					<th scope="col">매각예정가</th>
+					<th scope="col">공매보증금</th>
+					<th scope="col">입찰금액</th>
+					<th scope="col">입찰현황</th>
+				</tr>
+				</thead>
+				<tbody>
+				<th:block th:each="item , itemstatus : ${getPaItemBidList}">
+					<tr th:attr="data-no=${item.no}">
+						<td th:text="${item.curStNo + itemstatus.index}">1</td>
+						<td><img th:src="@{'/images/item/' + ${item.imageKey} + '.jpg'}" alt="" /></td>
+						<td th:text="${item.categoryNm1}">귀금속</td>
+						<td>
+							<a th:href="@{'/paItemDetail?itemNo=' + ${item.no}}" class="link_ty1">
+								<span th:text="${item.itemNm}">물품명</span><br/>
+								<span th:text="${item.itemCd}">코드</span>
+							</a>
+						</td>
+						<td class="txt_right2"
+							th:text="${#numbers.formatInteger(item.salePrice, 3, 'COMMA') + '원'}">200,000원</td>
+						<td class="txt_right2"
+							th:text="${#numbers.formatInteger(item.salePrice/10, 3, 'COMMA') + '원'}">200,000원</td>
+						<th:block th:if="${item.bidStatus == 'NEW'}">
+							<td class="txt_right2">
+								<input type="text" class="inp_ty21 txt_right" title="입찰금액" th:value="${item.bid}" />원
+								<input type='hidden' class='bid_no' th:value="${item.bidNo}"/>
+							</td>
+							<td>
+								<button type="button" class="btn_ty7 btn_bid_update">수정</button>
+								<button type="button" class="btn_ty2 btn_bid_delete">포기</button>
+							</td>
+						</th:block>
+						<th:block th:if="${item.bidStatus == null or #strings.trim(item.bidStatus) == ''}">
+							<td class="txt_right2">
+								<input type="text" class="inp_ty21 txt_right" title="입찰금액" />원
+							</td>
+							<td><button type="button" class="btn_ty1 btn_bid_apply">입찰 신청</button></td>
+						</th:block>
+					</tr>
+				</th:block>
+				</tbody>
+			</table>
+			<div class="paging">
+				<th:block th:if="${#arrays.length(getPaItemBidList) > 0}">
+
+					<th:block th:if="${getPaItemBidList[0].curPgGrp > 1}">
+						<a onclick="movePage(1);" class="first">첫 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemBidList[0].curPgGrp > 1}">
+						<a class="first">첫 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getPaItemBidList[0].pgNo > 1}">
+						<a th:onclick="|movePage(${getPaItemBidList[0].pgNo-1});|" class="prev">이전 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemBidList[0].curPgGrp > 1}">
+						<a class="prev">이전 페이지</a>
+					</th:block>
+
+					<th:block th:each="idx : ${#numbers.sequence(1,10)}">
+
+						<th:block th:if="${getPaItemBidList[0].curStPg+idx-1 <= getPaItemBidList[0].totalpg}">
+							<th:block th:if="${getPaItemBidList[0].curStPg+idx-1 == getPaItemBidList[0].pgNo}">
+								<strong th:text="${getPaItemBidList[0].curStPg+idx-1}" class="curPgNo">1</strong>
+							</th:block>
+							<th:block th:unless="${getPaItemBidList[0].curStPg+idx-1 == getPaItemBidList[0].pgNo}">
+								<a th:onclick="|movePage(${getPaItemBidList[0].curStPg+idx-1});|" th:text="${getPaItemBidList[0].curStPg+idx-1}">2</a>
+							</th:block>
+						</th:block>
+
+					</th:block>
+
+
+					<th:block th:if="${getPaItemBidList[0].pgNo < getPaItemBidList[0].totalpg}">
+						<a th:onclick="|movePage(${getPaItemBidList[0].pgNo+1});|" class="next">다음 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemBidList[0].pgNo < getPaItemBidList[0].totalpg}">
+						<a class="next">다음 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getPaItemBidList[0].curPgGrp < getPaItemBidList[0].totalPgGrp}">
+						<a th:onclick="movePage(${getPaItemBidList[0].totalpg});" class="last">마지막 페이지</a>
+					</th:block>
+					<th:block th:unless="${getPaItemBidList[0].curPgGrp < getPaItemBidList[0].totalPgGrp}">
+						<a class="last">마지막 페이지</a>
+					</th:block>
+
+				</th:block>
+			</div>
+
+			<h4 class="tit_ty5">최종합계</h4>
+			<table class="tbl_data4" >
+				<caption>최종합계에 대한 예정가, 납부할 공매보증금, 입찰금액을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:33%">
+					<col style="width:34%">
+					<col style="width:33%">
+				</colgroup>
+				<thead>
+				<tr>
+					<th scope="col">예정가</th>
+					<th scope="col">납부할 공매보증금</th>
+					<th scope="col">입찰금액</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td class="val_total_sale_price"><strong>1,000,000</strong>원</td>
+					<td class="val_total_fee"><strong>100,000</strong>원</td>
+					<td class="val_total_bid"><strong>1,000,000</strong>원</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<div class="bidding_box">
+				<div class="account_box">
+					<dl>
+						<dt>공매보증금 납부계좌</dt>
+						<dd class="colw1 col_org bank_info_or_not">
+							<!--
+							우리은행 111-22-33333
+							-->
+							입찰후 입금이 가능합니다. 입찰내역서에서 확인하세요.
+						</dd>
+						<dt>공매보증금 환불계좌</dt>
+						<dd class="colw2">
+							<div><label for="bank_t1">환불은행 :</label>
+								<select id="bank_t1" class="sel_ty2" style="width:258px">
+									<option value="">계좌선택</option>
+									<option value="NH" th:selected="${getPaItemBidList[0]['refundBankCd']} == 'NH'">농협</option>
+									<option value="SH" th:selected="${getPaItemBidList[0]['refundBankCd']} == 'SH'">신한</option>
+									<option value="KB" th:selected="${getPaItemBidList[0]['refundBankCd']} == 'KB'">국민</option>
+								</select>
+							</div>
+							<div><label for="bank_t2">환불계좌 :  </label>
+								<input type="text" id="bank_t2" class="inp_ty3" style="width:258px"
+									   th:value="${getPaItemBidList[0]['refundAccount']}"/>
+							</div>
+							<div><label for="bank_t3">예금주 : </label>
+								<input type="text" id="bank_t3" class="inp_ty3" style="width:258px"
+									   th:value="${getPaItemBidList[0]['depositor']}"/>
+							</div>
+						</dd>
+						<dd class="colw3">
+							<button type="button" class="btn_ty41">예금주 확인</button>
+						</dd>
+					</dl>
+					<h5  class="tit_ty5">* 입찰 안내  </h5>
+					<ul>
+						<li>- 안내사항이 들어 갈 수 있도록</li>
+						<li>- 안내사항 ~~~ </li>
+						<li>- 유의사항 ~~~ </li>
+					</ul>
+				</div>
+				<div class="price_box">
+					<p class="txt1">* 본인은 위 공고번호에 해당하는 기관의 공고문의
+						내용과 입찰유의사항을 모두 확인, 승낙하고
+						공매의 일반경쟁입찰에 참가신청을 합니다.</p>
+					<p class="txt2" th:utext="${'입찰자 : ' + getPaItemBidList[0].mbNm + '<br/>(연락처 : ' +
+					 				getPaItemBidList[0].mbHp.substring(0,3) + '-'
+									+ getPaItemBidList[0].mbHp.substring(3,7) + '-'
+									+ getPaItemBidList[0].mbHp.substring(7,11) + ')'}">입찰자 : 홍길동<br/>
+						(연락처 : 010-0000-0000)</p>
+				</div>
+			</div>
+
+			<!--
+                        <div class="bidding_box">
+                            <div class="account_box3">
+                                <dl>
+                                    <dt>공매보증금 납부계좌</dt>
+                                    <dd class="colw1 col_org">
+                                        우리은행 111-22-33333
+                                    </dd>
+                                    <dt>공매보증금 환불계좌</dt>
+                                    <dd class="colw1">
+                                        <div><label for="bank_t1">환불은행 :</label>
+                                            <select id="bank_t1" class="sel_ty2" style="width:258px">
+                                                <option value="1">계좌선택</option>
+                                                <option value="2">농협</option>
+                                            </select>
+                                        </div>
+                                        <div><label for="bank_t2">환불계좌 :  </label>
+                                            <input type="text" id="bank_t2" class="inp_ty3" style="width:258px" />
+                                        </div>
+                                        <div><label for="bank_t3">예금주 : </label>
+                                            <input type="text" id="bank_t3" class="inp_ty3" style="width:258px" />
+                                        </div>
+                                    </dd>
+                                    <dd class="colw2">
+                                        <button type="button" class="btn_ty41">예금주 확인</button>
+                                    </dd>
+                                </dl>
+                                <h5  class="tit_ty5">* 입찰 안내  </h5>
+                                <ul>
+                                    <li>- 안내사항이 들어 갈 수 있도록</li>
+                                    <li>- 안내사항 ~~~ </li>
+                                    <li>- 유의사항 ~~~ </li>
+                                </ul>
+                            </div>
+                            <div class="price_box">
+                                <p class="txt1">* 본인은 위 공고번호에 해당하는 기관의 공고문의
+                                내용과 입찰유의사항을 모두 확인, 승낙하고
+                                공매의 일반경쟁입찰에 참가신청을 합니다.</p>
+                                <p class="txt2">입찰자 : 홍길동<br/>
+                                (연락처 : 010-0000-0000)</p>
+                            </div>
+                        </div>
+
+                        <div class="bidding_box">
+                            <div class="account_box">
+                                <dl>
+                                    <dt>공매보증금 납부계좌</dt>
+                                    <dd class="col_org">우리은행 111-22-33333</dd>
+                                    <dt>공매보증금 환불계좌</dt>
+                                    <dd>
+                                        <div><label for="bank_t1">환불은행 :</label>
+                                            <select id="bank_t1" class="sel_ty2" style="width:258px">
+                                                <option value="1">1</option>
+                                                <option value="2">1</option>
+                                            </select>
+                                        </div>
+                                        <div><label for="bank_t2">환불계좌 :  </label>
+                                            <input type="text" id="bank_t2" class="inp_ty3" style="width:258px" />
+                                        </div>
+                                        <div><label for="bank_t3">예금주 : </label>
+                                            <input type="text" id="bank_t3" class="inp_ty3" style="width:258px" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <h5  class="tit_ty5">* 입찰 안내  </h5>
+                                <ul>
+                                    <li>- 안내사항이 들어 갈 수 있도록</li>
+                                    <li>- 안내사항이 들어 갈 수 있도록</li>
+                                    <li>- 안내사항이 들어 갈 수 있도록</li>
+                                </ul>
+                            </div>
+                            <div class="price_box">
+                                <p class="price">
+                                    <strong>입찰금액</strong>
+                                    <em>1,000,000</em>원
+                                </p>
+                                <p class="txt1">* 본인은 위 공고번호에 해당하는 기관의 공고문의
+                                내용과 입찰유의사항을 모두 확인, 승낙하고
+                                공매의 일반경쟁입찰에 참가신청을 합니다.</p>
+                                <p class="txt2">입찰자 : 홍길동<br/>
+                                (연락처 : 010-0000-0000)</p>
+                            </div>
+                        </div>
+            -->
+			<!--<div class="btn_center"><button type="submit" class="btn_ty4">입찰</button></div>-->
+			<div class="btn_center"><button class="btn_ty4 btn_do_bid">입찰</button></div>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+<div class="fullscreen"></div>
+<div id="layer_pop" class="layer_pop" >
+	<h1 class="tit">공고문</h1>
+	<div class="layer_cnt">
+		공고내용
+	</div>
+	<div class="layer_close">
+		<button type="button" class="layer_close_btn" id="btnClose">닫기</button>
+	</div>
+</div>
+</div>
+</body>
+</html>

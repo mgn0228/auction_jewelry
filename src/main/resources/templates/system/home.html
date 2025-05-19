@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script src="/js/content/account/login.js"></script>
+	<link rel="stylesheet" href="/css/content/account/login.css">	
+	<script src="/js/content/system/home.js"></script>
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+	
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section> <!-- Content Header (Page header) -->
+			
+			<!-- Main content -->
+			<section class="content">
+				
+				
+				
+				
+			</section> <!-- Main content -->
+			
+			
+			
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+		
+	</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

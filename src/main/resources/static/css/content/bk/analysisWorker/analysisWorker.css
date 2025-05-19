@@ -1,0 +1,21 @@
+/*!
+analysisWorkArea/analysisWorkArea css
+*/
+
+
+.chartArea {
+	min-height: 500px;
+	height: 40vh;
+	min-height: 200px;
+	max-height: 400px;
+	width: 100%;
+}
+
+.viewtitle {
+	text-align: center;
+}
+
+.div_chartA3
+,.div_chartA4 {
+	ddisplay: none;
+}

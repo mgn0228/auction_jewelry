@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_common::commonscript}"></div>
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script>
+		
+		function private_function(pos, arg) {
+			
+		}
+		
+
+		function success(data) {
+			if (data == null || data == undefined) return;
+			if (data.result == "OK") {
+				_utilForm.formClear(".form-panel");
+				$(".btn-search").trigger("click");
+		//		location.reload();
+			} else if (data.result == "Fail") {
+				alert (data.message);
+			}
+		}
+		
+		function fail(e) {
+			console.log(e);
+		}
+		
+		$(document).ready(function () {
+			init();
+		});
+	</script>
+	
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section>
+			
+			
+			<!-- Main content -->
+			<section class="content">
+				
+				<!-- Search Panel -->
+				<div th:replace="~{include/panel_search::searchpanel}"></div>
+				
+				<!-- Datatable Panel -->
+				<div th:replace="~{include/panel_datatable::datatablepanel}"></div>
+
+				<!-- Form Panel -->
+				<div th:replace="~{include/panel_form::formpanel}"></div>
+				
+				
+				
+			</section>
+			<!-- /.content -->
+		
+		
+			<div th:replace="~{include/panel_common_modal::commonModal}"></div>
+		
+		
+		
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+		
+		
+		
+	</div>
+<!-- ./wrapper -->
+
+
+
+</body>
+</html>

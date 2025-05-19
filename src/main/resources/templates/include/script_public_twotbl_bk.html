@@ -1,0 +1,679 @@
+
+<head th:fragment="head">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title th:text="${serviceName}"></title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	
+	<link rel="icon" href="/img/common/favicon.png">
+	<link rel="favicon" href="/img/common/favicon.png">
+	
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/dist/AdminLTE.min.css">
+	<link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="/vendor/iCheck/flat/blue.css">
+	<link rel="stylesheet" href="/vendor/iCheck/all.css">
+	<!-- Morris chart -->
+	<link rel="stylesheet" href="/vendor/morris/morris.css">
+
+	<!-- jvectormap -->
+	<link rel="stylesheet" href="/vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="/vendor/datepicker/datepicker3.css">
+
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="/vendor/daterangepicker/daterangepicker.css">
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet" href="/vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	
+	
+	<!-- Bootstrap Color Picker -->
+	<link rel="stylesheet" href="/vendor/colorpicker/bootstrap-colorpicker.min.css">
+	<!-- Bootstrap time Picker -->
+	<link rel="stylesheet" href="/vendor/timepicker/bootstrap-timepicker.min.css">
+	
+	<!-- Select2 -->
+	<link rel="stylesheet" href="/vendor/select2/select2.min.css">
+	
+	<!-- DataTables -->
+	<link rel="stylesheet" href="/vendor/datatables/dataTables.bootstrap.css">
+	
+	<!-- Bootstrap Color Picker -->
+	<link rel="stylesheet" href="/vendor/colorpicker/bootstrap-colorpicker.min.css">
+	
+
+	<!-- jQuery 2.2.3 -->
+	<script src="/vendor/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+		
+	<!-- Morris.js charts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="/vendor/morris/morris.min.js"></script>
+	<!-- Sparkline -->
+	<script src="/vendor/sparkline/jquery.sparkline.min.js"></script>
+	<!-- jvectormap -->
+	<script src="/vendor/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="/vendor/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<!-- jQuery Knob Chart -->
+	<script src="/vendor/knob/jquery.knob.js"></script>
+	<!-- daterangepicker -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+	<!-- datepicker -->
+	<script src="/vendor/datepicker/bootstrap-datepicker.js"></script>
+	<!-- Bootstrap WYSIHTML5 -->
+	<script src="/vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+	<!-- Slimscroll -->
+	<script src="/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="/vendor/fastclick/fastclick.js"></script>
+	<!-- Select2 -->
+	<script src="/vendor/select2/select2.full.min.js"></script>
+	<!-- InputMask -->
+	<script src="/vendor/input-mask/jquery.inputmask.js"></script>
+	<script src="/vendor/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="/vendor/input-mask/jquery.inputmask.extensions.js"></script>
+	<!-- bootstrap color picker -->
+	<script src="/vendor/colorpicker/bootstrap-colorpicker.min.js"></script>
+	<!-- bootstrap time picker -->
+	<script src="/vendor/timepicker/bootstrap-timepicker.min.js"></script>
+	<!-- iCheck 1.0.1 -->
+	<script src="/vendor/iCheck/icheck.min.js"></script>
+	<!-- FastClick -->
+	<script src="/vendor/fastclick/fastclick.js"></script>
+	
+	<!-- DataTables -->
+	<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="/vendor/datatables/dataTables.bootstrap.min.js"></script>
+	
+	<!-- AdminLTE App -->
+	<script src="/dist/js/app.min.js"></script>
+	
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!--
+	<script src="/dist/js/pages/dashboard.js"></script>
+-->
+	<!-- AdminLTE for demo purposes -->
+<!--
+	<script src="/dist/js/demo.js"></script>
+-->	
+	
+	<!-- Chart JS -->
+	<!--script src="/vendor/chartjs/Chart.min.js"></script-->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/chart.js"></script -->
+	<script src="/vendor/chart.js/Chart.js"></script>
+	<script src="/vendor/chart.js/chartjs-plugin-datalabels.min.js"></script>
+	
+
+	
+	
+	
+	<!-- iCheck 
+	<script src="/vendor/iCheck/icheck.min.js"></script>
+	-->
+	
+
+	
+	
+	
+	
+	<!-- common -->
+	<link rel="stylesheet" href="/css/common/common.css">
+<!--
+	<link rel="stylesheet" href="/css/common/cm.datatable.css">
+-->
+	<link rel="stylesheet" href="/css/common/cm.datatable4_8.css">
+	<link rel="stylesheet" href="/css/common/cm.search.css">
+	<link rel="stylesheet" href="/css/common/cm.form.css">
+	<link rel="stylesheet" href="/css/common/cm.modal.css">
+	
+	
+	<script src="/js/common/cm.ajaxUtil.js"></script>
+	<script src="/js/common/cm.jsonUtil.js"></script>
+	<script src="/js/common/cm.formModalUtil.js"></script>
+	<script src="/js/common/cm.searchUtil2Table.js"></script>
+	<script src="/js/common/cm.datatableUtil4_8.js"></script>
+	<script src="/js/common/cm.menuUtil.js"></script>
+	<script src="/js/common/cm.stringUtil.js"></script>
+	<script src="/js/common/cm.chart.chartJs.js"></script>
+	<script src="/js/common/cm.kakaoMapUtil.js"></script>
+	<script src="/js/common/cm.modalUtil.js"></script>
+	<script src="/js/common/cm.excelUtil.js"></script>
+	
+	<!--script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6ebecd8b1d915b6c4811fb223015925&libraries=services"></script-->
+	
+	
+	
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>s
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+ 	<script th:inline="javascript">
+		var _pid = [[${pid}]];
+		var _utilAjax = new cm_ajaxUtil();
+		var _utilJson = new cm_jsonUtil();
+		var _utilForm = new cm_formModalUtil();
+		var _utilFormSub = new cm_formModalUtil();
+		var _utilSearch = new cm_searchUtil();
+
+		var _utilDatatable = new cm_datatableUtil();
+		var _utilDatatableSub = new cm_datatableUtil();
+
+		var _utilMenu = new cm_menuUtil();
+		var _utilString = new cm_stringUtil();
+		var _utilModal = new cm_modalUtil();
+		var _datatable = null;
+		var _datatableSub = null;
+		var _searchPanelCls = ".search-panel";
+		var _formPanelCls = ".form-panel";
+		var _formPanelSubCls = ".form-panel-sub";
+		var _dataTableCls = "#datatable";
+		var _dataTableSubCls = "#datatable_sub";
+		var _datatablePanelCls = ".datatablepanel";
+		var _datatableSubPanelCls = ".datatablepanelSub";
+		
+		var _utilKakaomap = new cm_kakaoMapUtil();
+		var _utilExcel = new cm_excelUtil();
+		
+		
+		var _char_chartJS = new cm_charJSUtil();
+		
+		
+		function logoutprocess () {
+			var data = {};
+			var ret = _utilAjax.sendSyncRet("/account/logout", _utilJson.make(_pid,data));
+			if (ret.result == "OK") {
+				location.replace("/");
+			} else {
+				alert(ret.message);
+			}
+		}
+		
+
+		function init() {
+			//Initialize Select2 Elements
+			$(".select2").select2();
+			//Datemask dd/mm/yyyy
+//			$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+			$(".datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+			//Datemask2 mm/dd/yyyy
+//			$(".datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+			$(".datemask2").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+			//Money Euro
+			$("[data-mask]").inputmask();
+
+			//Date range picker
+			$('.reservation').daterangepicker(
+				{
+					datePicker: true
+					,locale: {
+						format: 'YYYY-MM-DD'
+					}
+				}
+			);
+			//Date range picker with time picker
+//			$('.reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+			$('.reservationtime').daterangepicker(
+				{
+					timePicker: true
+					, timePickerIncrement: 1
+					, locale: {
+						format: 'YYYY-MM-DD HH:mm'
+					}
+				}
+			);
+			//Date range as a button
+			$('.daterange-btn').daterangepicker(
+				{
+					ranges: {
+						'Today': [moment(), moment()],
+						'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+						'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+						'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+						'This Month': [moment().startOf('month'), moment().endOf('month')],
+						'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+					},
+					startDate: moment().subtract(29, 'days'),
+					endDate: moment()
+				},
+				function (start, end) {
+//					$('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+					$('.daterange-btn span').html(start.format('YYYY-MM-DD hh:mm:ss') + ' - ' + end.format('YYYY-MM-DD  hh:mm:ss'));
+				}
+			);
+			
+			//Date picker
+			$('.datepicker').datepicker({
+				autoclose: true
+				,format: 'yyyy-mm-dd'
+			});
+			//Date Time picker
+			$('.datetimepicker').datepicker({
+				autoclose: true
+				,format: 'yyyy-mm-dd hh:mm:ss a'
+			});
+
+			//Time picker
+			$('.timepicker').timepicker({
+				autoclose: true
+				,format: 'hh:mm'
+			});
+
+			
+			
+			
+/*			
+			
+			//iCheck for checkbox and radio inputs
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass: 'iradio_minimal-blue'
+			});
+			//Red color scheme for iCheck
+			$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+				checkboxClass: 'icheckbox_minimal-red',
+				radioClass: 'iradio_minimal-red'
+			});
+			//Flat red color scheme for iCheck
+			$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+				checkboxClass: 'icheckbox_flat-green',
+				radioClass: 'iradio_flat-green'
+			});
+			
+*/			
+			
+			//Colorpicker
+			$(".colorpicker").colorpicker();
+			//color picker with addon
+//			$(".my-colorpicker2").colorpicker();
+			
+/*			
+			//Timepicker
+			$(".timepicker").timepicker({
+				showInputs: false
+			});
+*/
+
+/*
+			$('#datatable').DataTable({
+				"paging": true,
+				"lengthChange": true,
+				"searching": true,
+				"ordering": true,
+				"info": true,
+				"autoWidth": true
+			});
+			
+*/			
+			
+			
+			
+/*			
+			
+			if ($(_dataTableCls).length >= 0) {
+				_datatable = $(_dataTableCls).DataTable({
+					"autoWidth": true
+					,"paging": true
+					,"lengthChange": true
+					,"searching": true
+					,"ordering": true
+					,"info": true
+					,"language": {
+						"info": "Showing page _PAGE_ of _PAGES_"
+						, "infoEmpty": "No entries to show"
+						, "emptyTable": "No data available in table"
+						, "paginate": {
+							"previous": "<"
+							, "next": ">"
+							, "last": ">>"
+							, "first": "<<"
+						}
+						, "lengthMenu": 'Show <select>' +
+							'<option value="10">10</option>' +
+							'<option value="25">25</option>' +
+							'<option value="50">50</option>' +
+							'<option value="100">100</option>' +
+							'<option value="-1">All</option>' +
+							'</select> Entries'
+					}
+					,"drawCallback": function (settings) {
+						
+						
+						_utilForm.init(_formPanelCls,_utilDatatable);
+						_utilSearch.init(_searchPanelCls,_utilDatatable);
+						_utilDatatable.init(_datatablePanelCls);
+						setDataTable();
+						
+						
+					}
+	
+				});
+				
+			}
+			
+			
+			if ($(_dataTableSubCls).length >= 0) {
+				_datatableSub = $(_dataTableSubCls).DataTable({
+					"autoWidth": true
+					,"paging": true
+					,"lengthChange": true
+					,"searching": true
+					,"ordering": true
+					,"info": true
+					,"language": {
+						"info": "Showing page _PAGE_ of _PAGES_"
+						, "infoEmpty": "No entries to show"
+						, "emptyTable": "No data available in table"
+						, "paginate": {
+							"previous": "<"
+							, "next": ">"
+							, "last": ">>"
+							, "first": "<<"
+						}
+						, "lengthMenu": 'Show <select>' +
+							'<option value="10">10</option>' +
+							'<option value="25">25</option>' +
+							'<option value="50">50</option>' +
+							'<option value="100">100</option>' +
+							'<option value="-1">All</option>' +
+							'</select> Entries'
+					}
+					,"drawCallback": function (settings) {
+						_utilForm.init(_formPanelCls,_utilDatatable);
+//						_utilSearch.init(_searchPanelCls,_utilDatatable);
+						_utilDatatable.init(_datatablePanelCls);
+						setDataTable();
+					}
+	
+				});
+				
+			}
+			
+			
+*/			
+			
+			_datatable = resetDataTable(_datatable, _dataTableCls, "", _utilForm, _utilDatatable, _datatablePanelCls, _formPanelCls, "N", [[${getTblIsFormMain}]], "Y");
+			_datatableSub = resetDataTable(_datatableSub, _dataTableSubCls, "", _utilFormSub, _utilDatatableSub, _datatableSubPanelCls, _formPanelSubCls, "N", [[${getTblIsFormSub}]], "N");
+
+			private_function("afterInit",null);
+			
+		}
+		
+		
+		function setDataTable(utilDatatable, datatable, dataTableCls) {
+			setTimeout(function() {
+				utilDatatable.setDataTable(datatable,dataTableCls);
+				//_utilForm.disable(_formPanelCls, true);
+				utilDatatable.resetEvent(utilDatatable);
+			}, 100);
+		}
+		
+		
+		
+		
+		
+		function resetDataTable(datatbl, datatblcls, tblstr_tbody, utilForm, utilDataTable, datapanelCls, formpanelCls, isreset, isforminit, issearchinit) {
+			if ($(datatblcls).length >= 0) {
+				
+				if (datatbl != null) {
+					$(datatblcls).DataTable().destroy();
+					$(datatblcls+" tbody ").empty();
+					$(datatblcls+" tbody ").append(tblstr_tbody);
+				}
+				
+				datatbl = $(datatblcls).DataTable({
+					"autoWidth": true
+					,"paging": true
+					,"lengthChange": true
+					,"searching": true
+					,"ordering": true
+					,"info": true
+					,"language": {
+						"info": "Showing page _PAGE_ of _PAGES_"
+						, "infoEmpty": "No entries to show"
+						, "emptyTable": "No data available in table"
+						, "paginate": {
+							"previous": "<"
+							, "next": ">"
+							, "last": ">>"
+							, "first": "<<"
+						}
+						, "lengthMenu": 'Show <select>' +
+							'<option value="10">10</option>' +
+							'<option value="25">25</option>' +
+							'<option value="50">50</option>' +
+							'<option value="100">100</option>' +
+							'<option value="-1">All</option>' +
+							'</select> Entries'
+					}
+					,"drawCallback": function (settings) {
+						
+						if (isreset == "N") {
+							if (isforminit=="Y") {
+								utilForm.init(formpanelCls,utilDataTable,utilForm);
+							}
+							if (issearchinit == "Y") {
+								_utilSearch.init(_searchPanelCls,utilDataTable);
+							}
+							utilDataTable.init(datapanelCls,datatbl, utilForm);
+						}
+//						setDataTable(utilDataTable, datatbl, datatblcls);
+//						setDataTable();
+					}
+	
+				});
+				
+				setDataTable(utilDataTable, datatbl, datatblcls);
+				
+			}
+			
+			return datatbl;
+			
+		}
+		
+		
+		
+		
+/*		
+		
+		function resetDataTable(tblstr_thead,tblstr_tbody,tblstr_footer) {
+			if ($(_dataTableCls).length >= 0) {
+				
+				$(_dataTableCls).DataTable().destroy();
+				$(_dataTableCls+" tbody ").empty();
+				
+				$(_dataTableCls+" tbody ").append(tblstr_tbody);
+				
+				
+				_datatable = $(_dataTableCls).DataTable({
+					"autoWidth": true
+					,"paging": true
+					,"lengthChange": true
+					,"searching": true
+					,"ordering": true
+					,"info": true
+					,"language": {
+						"info": "Showing page _PAGE_ of _PAGES_"
+						, "infoEmpty": "No entries to show"
+						, "emptyTable": "No data available in table"
+						, "paginate": {
+							"previous": "<"
+							, "next": ">"
+							, "last": ">>"
+							, "first": "<<"
+						}
+						, "lengthMenu": 'Show <select>' +
+							'<option value="10">10</option>' +
+							'<option value="25">25</option>' +
+							'<option value="50">50</option>' +
+							'<option value="100">100</option>' +
+							'<option value="-1">All</option>' +
+							'</select> Entries'
+					}
+					,"drawCallback": function (settings) {
+						setDataTable();
+					}
+	
+				});
+				
+				
+			}
+			
+		}
+		
+		
+*/		
+		
+		function formSet(dt, dblclick) {
+			var i=0;
+			var data = null;
+			var utilForm = dt.utilForm;
+			
+			var targetSubDTPid = $(dt.getTableClass()).attr("targetsubtablepid");
+			if (targetSubDTPid != null && targetSubDTPid != undefined) {
+				data = _utilSearch.getSearchData(_searchPanelCls);
+				var getPid = $(_dataTableSubCls).attr("contentpid");
+				var getParams = $(_dataTableSubCls).attr("param").split(",");
+				
+				var selData = dt.getSelectData();
+				if (selData == null || selData == undefined) {
+					_datatableSub = resetDataTable(_datatableSub, _dataTableSubCls, "", _utilFormSub, _utilDatatableSub, _datatableSubPanelCls, _formPanelSubCls, "Y", [[${getTblIsFormSub}]], "N");
+//					resetDataTableSub("","","");
+				} else {
+					var ths = $(_dataTableCls + " thead th ");
+//					var data = {};
+					for (var i=0;i<getParams.length;i++) {
+						for (var j=0;j<ths.length;j++) {
+							var fn = $(ths[j]).attr("fn");
+							if (fn == getParams[i]) {
+								data[fn] = selData[j];
+								break;
+							}
+						}
+					}
+					_utilAjax.sendAsync("/"+getPid+"/list", _utilJson.make(_pid, data), getSubListSuccess, fail);
+					
+				}
+				
+			}
+			
+			if (utilForm.frmCls == null || utilForm.frmCls == undefined || utilForm.frmCls == "") return;
+			
+			utilForm.formClear(utilForm.frmCls);
+			
+			if (dt.getSelectedIndex() != -1) {
+				private_function("formSetBefore");
+				var param = {};
+				param.pid = _pid;
+				param.key_f = dt.getSelectData()[0];
+				
+				data = utilForm.setFormData(utilForm.frmCls,_utilAjax.sendSyncRet("/"+_pid+"/one" ,_utilJson.make(_pid, param)));
+				
+				if (dblclick == true) {
+//					stdMod();
+				}
+			}
+			private_function("formSetAfter",data);
+//			if (dblclick == false || dblclick == undefined ) utilForm.disable(utilForm.frmCls, true);
+			
+			
+			
+			
+		}
+		
+		
+		function getSubListSuccess(data) {
+			var len = data.length;
+			var cls = _dataTableSubCls;
+			var fdlist = $(cls+" thead tr th");
+			
+			var tblstr_thead = "";
+			
+			var tblstr_tbody = "";
+			for (var i=0;i<data.length;i++) {
+				tblstr_tbody += "<tr>";
+				for (var j=0;j<fdlist.length;j++) {
+					tblstr_tbody += "<td>"+data[i][$(fdlist[j]).attr("fn")] + "</td>";
+				}
+				tblstr_tbody += "</tr>";
+			}
+			tblstr_tbody += "";
+			
+			
+			var tblstr_footer = "";
+//			resetDataTableSub(tblstr_thead,tblstr_tbody,tblstr_footer);
+			_datatableSub = resetDataTable(_datatableSub, _dataTableSubCls, "", _utilFormSub, _utilDatatableSub, _datatableSubPanelCls, _formPanelSubCls, "Y", [[${getTblIsFormSub}]], "N");
+			
+		}
+		
+		
+		function selListActionAdd(obj) {
+			private_function("itemActionAdd",obj);
+//			return _utilModal.getModalList("#commonModal",obj);
+		}
+		
+		
+/*		
+		function selListActionDel(obj) {
+			private_function("itemActionDel",obj);
+//			var tarNm = $(this).attr("areaPointLatLng");
+		}
+*/		
+		
+		
+		function selListActionDel(obj) {
+//			private_function("itemActionDel",obj);
+			
+			if (private_function("itemActionDel",obj) != true) {
+				var list = null;
+				if ($(obj).closest("label").siblings().length == 1) {
+					list = $(obj).closest("label").siblings();
+				} else if ($(obj).closest("label").siblings().length > 1) {
+					list = $(obj).closest("label").siblings()[0];
+				}
+				if (list == null) return;
+				
+				var tagName = $(list).prop("tagName").toUpperCase();
+//				var multiple = $(panelCls).find(".form-control[name="+targetFdary[k]+"]").hasClass("multiple");
+				if (tagName == "SELECT") {
+					$(list).find("option:selected").remove();
+				} else {
+					$(list).val("");
+				}
+				
+			}
+		}
+		function selectAllModal(obj) {
+			var cs = $(obj).prop("checked");
+			var modal = $(obj).closest(".modal");
+			if (cs == true) {
+				$(modal).find("input[type=checkbox].selecttr").prop("checked",true);
+				$(modal).find(".datatr").addClass("selected");
+			} else {
+				$(modal).find("input[type=checkbox].selecttr").prop("checked",false);
+				$(modal).find(".datatr").removeClass("selected");
+			}
+		}
+		
+	</script>
+	
+	
+</head>

@@ -1,0 +1,37 @@
+
+	
+<th:block th:fragment="nav">
+	<div class="util">
+	
+	<th:block th:if="${mbNm != null}">
+		<ul>
+			<li class="name"><strong th:text="${mbNm}"></strong>님 로그인 중입니다.</li>
+			<li><a href="#">관심등록물건</a></li>
+			<li><a href="javascript:logoutprocess();">로그아웃</a></li>
+		</ul>
+	</th:block>
+	<th:block th:unless="${mbNm != null}">
+		<ul>
+			<li><a href="/login">로그인</a></li>
+<!-- 
+			<li><a href="#">기관로그인</a></li>
+-->
+			<li><a href="/agreeTerm">회원가입</a></li>
+			
+		</ul>
+	</th:block>
+	</div>
+		
+	
+	<nav id="gnb">
+		<h2 class="hidden">주메뉴</h2>
+		<ul class="depth1" th:utext="${menus}">
+		
+		</ul>
+		
+		<div class="link">
+			<p><strong>유체동산공매</strong>다양한 공매물건을<br/>편리하게 입찰할 수 있습니다.</p>
+		</div>
+	</nav>
+	
+</th:block>

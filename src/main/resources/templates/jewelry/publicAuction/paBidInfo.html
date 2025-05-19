@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>공매결과조회 - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1"> 공매 정보 </h3>
+			<ul class="data_list2">
+				<!--
+				<li><strong>진행기관 : </strong> 시흥시 (2017-141)</li>
+				<li><strong>물품정보 : </strong> 페리가모 가방 ( 시계/가방 )</li>
+				<li><strong>입찰기간 :</strong> 2017-09-10 ~ 2017-09-10 </li>
+				<li><strong>매각결정일 : </strong> 2017-09-20</li>
+				-->
+				<li>
+					<strong>진행기관 : </strong>
+					<span th:text="${getPaBidInfo[0].placeNm + ' (' + getPaBidInfo[0].pblNumber + ')'}">시흥시 (2017-141)</span>
+				</li>
+				<li>
+					<strong>물품정보 : </strong>
+					<span th:text="${getPaBidInfo[0].itemNm + ' ( ' + getPaBidInfo[0].categoryNm1 + ' )'}">페리가모 가방 ( 시계/가방 )</span>
+				</li>
+				<li>
+					<strong>입찰기간 :</strong>
+					<span th:text="${#temporals.format(getPaBidInfo[0].bidStartDt, 'yyyy-MM-dd')
+									+ ' ~ '
+									+ #temporals.format(getPaBidInfo[0].bidEndDt, 'yyyy-MM-dd')}">2017-09-10 ~ 2017-09-10</span>
+				</li>
+				<li>
+					<strong>매각결정일 : </strong>
+					<span th:text="${#temporals.format(getPaBidInfo[0].fixingDt, 'yyyy-MM-dd')}">2017-09-20</span>
+				</li>
+			</ul>
+			<ul class="list_ty2 mt15">
+				<li>- 입찰목록은 입찰가격 최상위 입찰금액부터 50건까지 공개합니다. </li>
+				<li>- 개인정보보호법에 의해 입찰자 정보는 자릿수로만 표기하며, 입찰가격, 입찰보증금, 입찰일시를 열람할 수 있습니다. </li>
+				<li>- 보증금미납 또는 입찰금액 미등록 건은 입찰에 포함되지 않으므로 결과조회의 입찰건수와 차이가 있을 수 있습니다. </li>
+			</ul>
+
+			<h3 class="tit_ty1"> 입찰 정보 </h3>
+			<table class="tbl_list1 mt30" >
+				<caption>입찰자 목록 조회에 대한 순번, 입찰가격, 공매보증금, 입찰자명, 비고, 입찰일자(시간)을 나타낸 표</caption>
+				<colgroup>
+					<col style="width:8.4%">
+					<col style="width:17%">
+					<col style="width:18%">
+					<col style="width:17.4">
+					<col style="width:17.6%">
+					<col style="width:17.6%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">순번</th>
+						<th scope="col">입찰가격</th>
+						<th scope="col">공매보증금</th>
+						<th scope="col">입찰자명</th>
+						<th scope="col">입찰일자(시간)</th>
+						<th scope="col">비고</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!--
+					<tr>
+						<td>1</td>
+						<td class="txt_right2">700,000원</td>
+						<td class="txt_right2">5,000원</td>
+						<td>xxxxxx</td>
+						<td>2017/09/07(15:40)</td>
+						<td>낙찰</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="txt_right2">600,000원</td>
+						<td class="txt_right2">5,000원</td>
+						<td>xxxxxx</td>
+						<td>2017/09/07(15:40)</td>
+						<td></td>
+					</tr>
+					-->
+				<th:block th:each="item , itemstatus : ${getPaBidInfo}">
+					<tr th:attr="data-no=${item.no}">
+						<td th:text="${itemstatus.index + 1}">2</td>
+						<td th:text="${#numbers.formatInteger(item.bid, 3, 'COMMA') + '원'}" class="txt_right2">600,000원</td>
+						<td th:text="${#numbers.formatInteger((item.bid/10), 3, 'COMMA') + '원'}" class="txt_right2">5,000원</td>
+						<td th:text="${item.regNm}">xxxxxx</td>
+						<td th:text="${#temporals.format(item.modDt, 'yyyy/MM/dd HH:mm')}">2017/09/07(15:40)</td>
+						<td th:if="${itemstatus.index == 0}" th:text="'낙찰'"></td>
+						<td th:unless="${itemstatus.index == 0}"></td>
+						<!--
+						<td th:if="${itemstatus.index == 0 and item.fixingDt != null
+									and item.fixingDt.isBefore(T(java.time.LocalDateTime).now())}"
+							th:text="'낙찰'">
+						</td>
+						<td th:unless="${itemstatus.index == 0 and item.fixingDt != null
+									and item.fixingDt.isBefore(T(java.time.LocalDateTime).now())}">
+						</td>
+						-->
+					</tr>
+				</th:block>
+				</tbody>
+			</table>
+			<div class="btn_center"><button type="button" class="btn_ty4" onclick="history.back();">이전 화면</button></div>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+</div>
+</body>
+</html>

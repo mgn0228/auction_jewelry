@@ -1,0 +1,86 @@
+/*!
+monitoring_echo/monitoring_echo css
+*/
+
+
+.realtime {
+	min-height: 500px;
+	height: 70vh;
+	width: 100%;
+	background-color: #daf8ff;
+}
+
+.layer_generalInfo
+,.layer_workerInfo {
+	position: absolute;
+	right:40px;
+	top: 200px;
+	z-index: 9999;
+	width: 350px;
+}
+.layer_workerInfo {
+	right: 380px;
+}
+
+.layer_generalInfo .box-header
+,.layer_workerInfo .box-header {
+	cursor: grabbing;
+	padding: 5px;
+}
+
+
+.layer_generalInfo .maintitle
+,.layer_workerInfo .maintitle {
+	font-size: 1.3rem;
+}
+    
+.sectorInfo, .sectorInfo .box-title {
+	font-size: 1rem;
+}
+
+
+
+#mapArea {
+	width: 100%;
+	min-height: 500px;
+	height: 70vh;
+}
+
+#imageMap {
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+
+.sectorLayerInfo {
+	position: absolute;
+	background: #fff;
+	border: 1px solid #888;
+	border-radius: 3px;
+	font-size: 12px;
+	top: -5px;
+	left: 15px;
+	padding: 2px;
+}
+
+#modalSectorInfo .modal {
+	z-index: 9999;
+}
+
+#modalSectorInfo .modal .modal-dialog {
+	width: 90%;
+	height: 90%;
+}
+
+#modalSectorInfo .modal .modal-dialog .modal-content {
+	height: 100%;
+}
+
+#workerInfo a {
+	color: red;
+}
+
+

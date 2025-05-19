@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sysCompanyManage">
+	
+	
+	
+	<select id="checkCompanyDB" parameterType="hashMap" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM information_schema.SCHEMATA
+		WHERE SCHEMA_NAME = #{comDbNm}
+	</select>
+	
+	
+	
+	
+	<insert id="createCompanyDB" parameterType="hashMap">
+		CREATE  DATABASE ${comDbNm} CHARACTER SET utf8mb4 collate utf8mb4_general_ci;
+	</insert>
+	
+	
+	
+	
+	<delete id="dropCompanyDB" parameterType="hashMap">
+		DROP DATABASE ${comDbNm} ;
+	</delete>
+	
+	
+	
+	<select id="checkCompanyTable" parameterType="hashMap" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM information_schema.TABLES
+		WHERE TABLE_SCHEMA = #{comDbNm} AND TABLE_NAME = #{comTableNm}
+	</select>
+	
+	
+	<insert id="createCompanyDefaultTable" parameterType="hashMap">
+		CREATE  TABLE ${comDbNm}.${comTableNm} (
+			`NO`  int(11) NOT NULL AUTO_INCREMENT COMMENT '고유번호'
+			,`MEMO`  text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '메모' 
+			,`DEL_YN`  varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '사용중지여부' 
+			,`STATUS`  varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '상태' 
+			,`REG_ID`  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '등록자 ID' 
+			,`MOD_ID`  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '수정자 ID' 
+			,`REG_DT`  datetime NULL DEFAULT NULL COMMENT '등록시간' 
+			,`MOD_DT`  datetime NULL DEFAULT NULL COMMENT '수정시간' 
+			,PRIMARY KEY (`NO`)
+		)
+		ENGINE=${comSysOptTblEngine}
+	</insert>
+	
+		
+	<insert id="dropCompanyTable" parameterType="hashMap">
+		DROP TABLE ${comDbNm}.${comTableNm} 
+	</insert>
+	
+	
+	
+	
+	<select id="checkCompanyTableField" parameterType="hashMap" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM information_schema.COLUMNS
+		WHERE TABLE_SCHEMA = #{comDbNm} AND TABLE_NAME = #{comTableNm} AND COLUMN_NAME = #{colNm}
+	</select>
+	
+	
+		
+	<insert id="createCompanyTableField" parameterType="hashMap">
+		
+		ALTER TABLE ${comDbNm}.${comTableCd} ADD COLUMN ${colNm} 
+
+<if test="colDataType == 'varchar'">
+			VARCHAR(${colMaxLength})
+</if>
+<if test="colDataType == 'int' or colDataType == 'datetime' or colDataType == 'date' or colDataType == 'text'">
+			${colDataType} 
+</if>
+
+<if test="colDefault == ''">
+			DEFAULT NULL
+</if>
+<if test="colDefault != ''">
+			DEFAULT ${colDefault}
+</if>
+			COMMENT '${colComment}'
+
+		
+	</insert>
+	
+	
+		
+	<update id="updateCompanyTableField" parameterType="hashMap">
+		
+		ALTER TABLE ${comDbNm}.${comTableCd} MODIFY COLUMN ${colNm} 
+
+<if test="colDataType == 'varchar'">
+			VARCHAR(${colMaxLength})
+</if>
+<if test="colDataType == 'int' or colDataType == 'datetime' or colDataType == 'date' or colDataType == 'text'">
+			${colDataType} 
+</if>
+
+<if test="colDefault == ''">
+			DEFAULT NULL
+</if>
+<if test="colDefault != ''">
+			DEFAULT ${colDefault}
+</if>
+			COMMENT '${colComment}'
+
+		
+	</update>
+	
+			
+	<delete id="deleteCompanyTableField" parameterType="hashMap">
+		
+		ALTER TABLE ${comDbNm}.${comTableNm} DROP COLUMN ${colNm} 
+		
+	</delete>
+	
+	
+	
+	
+	
+	<select id="checkCompanyContentPID" parameterType="hashMap" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM ${dbNm}.CONTENT_PAGES
+		WHERE IF(COM_CD='COMMON','CM_GUEST',COM_CD) = #{comCd} AND PID = #{comTableNm}
+	</select>
+	
+	
+	
+	
+	<insert id="createCompanyContentPID" parameterType="hashMap">
+		INSERT INTO ${dbNm}.CONTENT_PAGES (
+			COM_CD, GID, PID, STATUS, PROC_INIT, DEL_YN
+		) VALUES (
+			#{comCd}, #{gid}, #{newPid}, 'RQ', 'Y', 'N'
+		)
+	</insert>
+	
+	
+</mapper>
+
+
+
+

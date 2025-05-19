@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script th:src="'/js/content/'+${pid}+'/'+${pid}+'.js'"></script>
+	<link rel="stylesheet" th:href="'/css/content/'+${pid}+'/'+${pid}+'.css'">
+	
+	<script>
+		$(document).ready(function () {
+			init();
+			_utilSearch.initCustom(_searchPanelCls,_utilDatatable, searchSuccess);
+		});
+	</script>
+	
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section>
+			
+			
+			<!-- Main content -->
+			<section class="content">
+				
+				<!-- Search Panel -->
+				<div th:replace="~{include/panel_search::searchpanel}"></div>
+
+				<!-- Monitoring Panel -->
+				<div class="row panel_monitoring">
+					<div class="col-md-7">
+					
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group pull-left viewtitle">영상 정보</div>
+								<div class="form-group pull-right realtime">
+									<label>
+										<input type="checkbox" name="chkplayRealTime" class="minimal"> 실시간
+									</label>
+								</div>
+							</div>
+
+							<div class="box-body imgsnd">
+								<!-- Date dd/mm/yyyy -->
+								<div class="form-group">
+									<div class="input-group div-image">
+										<img src="" class="view-image hidden">
+										<div class="progressbar hidden"></div>
+									</div>
+									<!-- /.input group -->
+								</div>
+								<!-- /.form group -->
+								<div class="form-group">
+									<div class="input-group audioControl" id="audioControl">
+										<audio controls id="sndaudio" src="">
+										</audio>
+										
+<!--										
+										<audio controls id="sndaudio" src="/sound/000000_20230918100006213.wav">
+										</audio>
+										<audio controls id="sndaudio" src="/img/testsnd.wav">
+										</audio>
+-->											
+											
+									</div>
+									<!-- /.input group -->
+								</div>
+								<!-- /.form group -->
+					
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+					
+					
+					
+					<div class="col-md-5 event-info">
+					
+						<div class="box box-danger">
+
+							<div class="box-body event-list">
+								<ul class="list-group list-group-unbordered">
+								</ul>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+					
+					
+				</div>
+				
+				
+				
+				<div class="row panel_statistic">
+					
+					<div class="col-md-6">
+						<!-- DONUT CHART -->
+						<div class="box box-danger">
+							<div class="box-header with-border">
+								<h3 class="box-title">영상분석정보</h3>
+						
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+								</div>
+							</div>
+							<div class="box-body">
+								<canvas id="pieChart_img" style="height:250px"></canvas>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</div>
+					<div class="col-md-6">
+						<!-- DONUT CHART -->
+						<div class="box box-danger">
+							<div class="box-header with-border">
+								<h3 class="box-title">소리분석정보</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+								</div>
+							</div>
+							<div class="box-body">
+								<canvas id="pieChart_snd" style="height:250px"></canvas>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row panel_realtime_timeline">
+					
+					<div class="col-md-12">
+						<!-- DONUT CHART -->
+						<div class="box box-danger">
+							<div class="box-header with-border">
+								<h3 class="box-title">Time Line</h3>
+						
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+								</div>
+							</div>
+							<div class="box-body">
+								<canvas id="timelineChart_event" style="height:250px;max-width:600px;"></canvas>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</div>
+				</div>
+				
+				
+			</section>
+			<!-- /.content -->
+		
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+		
+	</div>
+<!-- ./wrapper -->
+
+
+
+</body>
+</html>

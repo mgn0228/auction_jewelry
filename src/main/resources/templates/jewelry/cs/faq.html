@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>FAQ - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation}"></th:block>
+
+		<section id="contents" class="contents">
+			<h3 class="tit_ty1">FAQ</h3>
+			<fieldset class="search_box2">
+				<legend>검색</legend>
+				<input type="text" title="검색어 입력" class="searchKey" placeholder="검색어 입력">
+				<button type="submit" onclick="movePage(1);">검색</button>
+			</fieldset>
+
+			<table class="tbl_list2">
+				<caption>FAQ에 대한 번호, 제목, 작성일, 조회를 나타낸 표</caption>
+				<colgroup>
+					<col style="width:8.2%">
+					<col style="">
+					<col style="width:16%">
+					<!--
+                                        <col style="width:15%">
+                    -->
+				</colgroup>
+				<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성일</th>
+					<!--
+                                            <th scope="col">조회</th>
+                    -->
+				</tr>
+				</thead>
+				<tbody>
+				<th:block th:each="item , itemstatus : ${getFaqList}">
+					<tr>
+						<td th:utext="${item.curStNo + itemstatus.index}"></td>
+						<td class="txt_left"><a th:href="|/faqDetail?no=${item.no}|" th:utext="${item.title}"></a></td>
+						<td th:utext="${#temporals.format(item.regDt, 'yyyy-MM-dd')}"></td>
+						<!--
+                                                <td>1</td>
+                        -->
+					</tr>
+				</th:block>
+
+				<th:block th:if="${#arrays.length(getFaqList) <= 0}">
+					<tr>
+						<td colspan="3">등록된 게시물이 없습니다.</td>
+						<!--
+                                                    <td>1</td>
+                        -->
+					</tr>
+				</th:block>
+
+				</tbody>
+			</table>
+
+			<div class="paging">
+
+				<th:block th:if="${#arrays.length(getFaqList) > 0}">
+
+					<th:block th:if="${getFaqList[0].curPgGrp > 1}">
+						<a onclick="movePage(1);" class="first">첫 페이지</a>
+					</th:block>
+					<th:block th:unless="${getFaqList[0].curPgGrp > 1}">
+						<a class="first">첫 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getFaqList[0].pgNo > 1}">
+						<a th:onclick="|movePage(${getFaqList[0].pgNo-1});|" class="prev">이전 페이지</a>
+					</th:block>
+					<th:block th:unless="${getFaqList[0].curPgGrp > 1}">
+						<a class="prev">이전 페이지</a>
+					</th:block>
+
+					<th:block th:each="idx : ${#numbers.sequence(1,10)}">
+
+						<th:block th:if="${getFaqList[0].curStPg+idx-1 <= getFaqList[0].totalpg}">
+							<th:block th:if="${getFaqList[0].curStPg+idx-1 == getFaqList[0].pgNo}">
+								<strong th:text="${getFaqList[0].curStPg+idx-1}" class="curPgNo">1</strong>
+							</th:block>
+							<th:block th:unless="${getFaqList[0].curStPg+idx-1 == getFaqList[0].pgNo}">
+								<a th:onclick="|movePage(${getFaqList[0].curStPg+idx-1});|" th:text="${getFaqList[0].curStPg+idx-1}">2</a>
+							</th:block>
+						</th:block>
+
+					</th:block>
+
+
+					<th:block th:if="${getFaqList[0].pgNo < getFaqList[0].totalpg}">
+						<a th:onclick="|movePage(${getFaqList[0].pgNo+1});|" class="next">다음 페이지</a>
+					</th:block>
+					<th:block th:unless="${getFaqList[0].pgNo < getFaqList[0].totalpg}">
+						<a class="next">다음 페이지</a>
+					</th:block>
+
+					<th:block th:if="${getFaqList[0].curPgGrp < getFaqList[0].totalPgGrp}">
+						<a th:onclick="movePage(${getFaqList[0].totalpg});" class="last">마지막 페이지</a>
+					</th:block>
+					<th:block th:unless="${getFaqList[0].curPgGrp < getFaqList[0].totalPgGrp}">
+						<a class="last">마지막 페이지</a>
+					</th:block>
+
+				</th:block>
+			</div>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="account">
+	
+	<select id="login" resultType="hashMap">
+		SELECT 
+			a.NO												no
+			,IFNULL(a.MB_ID,'')								mbId
+			,IFNULL(a.COM_CD,'')							comCd
+			,IFNULL(a.MB_NM,'')								mbNm
+			,IF( IFNULL(a.MB_IMG,'')='','/img/common/defaultUser.png',a.MB_IMG)								mbImg
+			,IFNULL(a.MB_LVL,'')							mbLvl
+			,IFNULL(a.MB_GRP,'')							mbGrp
+			,IFNULL(a.STATUS,'')							mbStatus
+			,IFNULL(a.REG_ID,'')							regId
+			,IFNULL(a.MOD_ID,'')							modId
+			,DATE_FORMAT(a.REG_DT,'%Y-%m-%d')		mbRegDt
+			,DATE_FORMAT(a.REG_DT,'%Y-%m-%d %H:%i:%s')		regDt
+			,DATE_FORMAT(a.MOD_DT,'%Y-%m-%d %H:%i:%s') 		modDt
+			,IFNULL(a.DEL_YN,'')								delYn
+			,IFNULL(b.COM_NM,'')							comNm
+		FROM ${dbNm}.MEMBER a
+		LEFT OUTER JOIN ${dbNm}.COMPANY b ON a.COM_CD=b.COM_CD
+		WHERE (IF(#{comcd}='',#{defaultComCd},#{comcd}) = a.COM_CD) AND (a.MB_ID=#{mbid})
+			AND (a.MB_PWD= HEX(AES_ENCRYPT(#{mbpwd},#{hkey}))) AND (IFNULL(a.DEL_YN,'')='N')
+	</select>
+	
+	
+	<update id="updateMemberInfo4Login" parameterType="hashmap">
+		UPDATE ${dbNm}.MEMBER SET
+			MB_LST_LGN_DT = NOW()
+		WHERE NO=#{no}
+	</update>
+
+	<select id="findID" parameterType="hashMap" resultType="hashMap">
+		SELECT
+		      MB_ID AS mbId
+			, MB_NM AS mbNm
+			, MB_HP AS phone
+		FROM AM_JEWELLERY_SYSTEM.MEMBER
+		WHERE MB_NM = #{name}
+		AND MB_HP = #{phone}
+		AND IS_REGISTERED = 'Y'
+	</select>
+
+	<select id="findPwd" parameterType="hashMap" resultType="hashMap">
+		SELECT
+			  MB_ID AS mbId
+			, MB_NM AS mbNm
+			, MB_HP AS phone
+			, CONVERT(IF(MB_PWD IS NULL,'', AES_DECRYPT(UNHEX(MB_PWD), #{hkey})) USING UTF8) AS password
+		FROM AM_JEWELLERY_SYSTEM.MEMBER
+		WHERE MB_NM = #{name}
+		AND MB_HP = #{phone}
+		AND MB_ID = #{mbId}
+		AND IS_REGISTERED = 'Y'
+	</select>
+
+	<update id="changePwd" parameterType="hashMap">
+		UPDATE AM_JEWELLERY_SYSTEM.MEMBER SET
+			MB_PWD = ${newPwd}
+		  , MB_CHNG_PWD_DT = NOW()
+		WHERE MB_ID = #{mbId}
+	</update>
+
+	<select id="getPwdById" parameterType="hashMap" resultType="string">
+		SELECT
+			CONVERT(IF(MB_PWD IS NULL,'', AES_DECRYPT(UNHEX(MB_PWD), #{hkey})) USING UTF8) AS password
+		FROM AM_JEWELLERY_SYSTEM.MEMBER
+		WHERE MB_ID = #{mbId}
+	</select>
+
+	<delete id="cancelMember" parameterType="string">
+		DELETE FROM AM_JEWELLERY_SYSTEM.MEMBER
+		WHERE MB_ID = #{mbId} and IS_REGISTERED = 'Y'
+	</delete>
+	
+</mapper>
+

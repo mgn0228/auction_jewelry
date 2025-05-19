@@ -1,0 +1,14 @@
+/*!
+workAreaSector/workAreaSector css
+*/
+
+#parentareaMapImage {
+	height: 30vh;
+	min-height: 300px;
+	max-height: 500px;
+}
+
+#mapArea {
+	height: 500px;
+	width: 100%; /*1000px;*/
+}

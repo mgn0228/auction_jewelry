@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>로그인 - PUBLIC ACTION</title>
+<th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+	<script type="text/javascript" src="/js/content/account/login.js"></script>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+<th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation_onedepth}"></th:block>
+
+		<section id="contents" class="contents">
+			<form action="" id="loginForm" frmid="loginForm" class="loginForm" onsubmit="return false;">
+				<fieldset class="login_box">
+					<legend>로그인</legend>
+					<p class="txt1">회원가입자 로그인</p>
+					<input class="form-control" name="mbid" type="text" title="아이디" placeholder="아이디를 입력해주세요" />
+					<input class="form-control" name="mbpwd" type="password" title="비밀번호" placeholder="비밀번호를 입력해주세요" />
+					<input type="checkbox" id="agree_t1"> <label for="agree_t1">아이디 저장</label>
+					<button onclick="javascript:loginprocess();">Login</button>
+				</fieldset>
+<!--
+				<div class="btn_center">
+					<button type="button" class="btn_ty8">아이디/비밀번호 찾기</button>
+					<button type="button" class="btn_ty8">회원가입</button>
+				</div>
+-->
+			</form>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="argosDemo">
+	
+	<select id="getAudioInfoByIdx" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												a_no
+			,IFNULL(a.predict_Tm,'')							A_sndTime
+		FROM ${dbNm}.ARGOS_SOUND a
+		WHERE a.idx=#{a_no}
+	</select>
+	
+	
+	<select id="getArgosPlayList" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												a_no
+			,IFNULL(a.predict_Tm,'')							A_sndTime
+			,IFNULL(a.sound_path,'')							snd
+			
+			,IFNULL(b.idx,0)									t_no
+			,IFNULL(b.predict_Tm,'')							T_sndTime
+			,IFNULL(b.ThermalImage,'')							img
+			
+		FROM ${dbNm}.ARGOS_SOUND a
+		LEFT OUTER JOIN ${dbNm}.ARGOS_THERMAL b ON b.predict_Tm IS NOT NULL AND LEFT(a.predict_Tm,14)= LEFT(b.predict_Tm,14)
+		WHERE a.predict_Tm >= #{tm_st} AND #{tm_end} > a.predict_Tm
+		ORDER BY a.predict_Tm, b.predict_Tm
+	</select>
+	
+	
+	<select id="getArgosPlayListll" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												a_no
+			,IFNULL(a.predict_Tm,'')							A_sndTime
+			,IFNULL(a.sound_path,'')							snd
+			
+			
+			,IFNULL(a.MB_NM,'')								mbNm
+			,IF( IFNULL(a.MB_IMG,'')='','/img/common/defaultUser.png',a.MB_IMG)								mbImg
+			,IFNULL(a.MB_LVL,'')							mbLvl
+			,IFNULL(a.MB_GRP,'')							mbGrp
+			,IFNULL(a.STATUS,'')							mbStatus
+			,IFNULL(a.REG_ID,'')							regId
+			,IFNULL(a.MOD_ID,'')							modId
+			,DATE_FORMAT(a.REG_DT,'%Y-%m-%d %H:%i:%s')		regDt
+			,DATE_FORMAT(a.MOD_DT,'%Y-%m-%d %H:%i:%s') 		modDt
+			,IFNULL(a.DEL_YN,'')								delYn
+		FROM ${dbNm}.ARGOS_SOUND a
+		LEFT OUTER JOIN ${dbNm}.ARGOS_THERMAL b ON b.predict_Tm IS NOT NULL AND LEFT(a.predict_Tm,14)= LEFT(b.predict_Tm,14)
+		WHERE a.idx=#{a_no} AND 
+		
+		
+		(IF(#{comcd}='',#{defaultComCd},#{comcd}) = a.COM_CD) AND (a.MB_ID=#{mbid})
+			AND (a.MB_PWD= HEX(AES_ENCRYPT(#{mbpwd},#{hkey}))) AND (IFNULL(a.DEL_YN,'')='N')
+	</select>
+
+	
+	
+	
+	
+	<select id="getLastData4RealTime" parameterType="hashmap" resultType="hashMap">
+		SELECT IFNULL(MAX(a.idx),-1) idx
+			,(SELECT IFNULL(MAX(idx),-1) FROM ${dbNm}.ARGOS_THERMAL) maxidx
+		FROM ${dbNm}.ARGOS_THERMAL a
+		WHERE DATE_FORMAT(a.predict_tm,'%Y%m%d%H%i%s%f') >= DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 SECOND),'%Y%m%d%H%i%s%f')
+			AND IFNULL(a.predict_tm,'') != '' AND IFNULL(a.playRealtime,'') != 'Y'
+	</select>
+	
+	
+	<select id="getLastData4RealTimeorg" parameterType="hashmap" resultType="hashMap">
+		SELECT MAX(a.idx) idx
+		FROM ${dbNm}.ARGOS_THERMAL a
+		WHERE DATE_FORMAT(a.predict_tm,'%Y%m%d%H%i%s%f') >= DATE_FORMAT(NOW(),'%Y%m%d%H%i%s%f')
+			AND IFNULL(a.predict_tm,'') != '' AND IFNULL(a.playRealtime,'') != 'Y'
+	</select>
+	
+	
+	
+	<select id="getArgosPlayImageByIdx_test" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												idx
+			,IF(a.predict_Tm IS NULL,'', DATE_FORMAT(STR_TO_DATE(a.predict_Tm,'%Y%m%d%H%i%s%f'),'%Y-%m-%d %H:%i:%s'))	T_sndTime
+			,IFNULL(a.ThermalImage,'')							T_img
+			
+			,IFNULL(b.ARGOS_LABEL,'')							predictLabel
+			,IFNULL(b.ARGOS_NAME,'')							predictName
+			,LEFT(a.predict_Tm,14)										T_sndTime_org
+			
+		FROM ${dbNm}.ARGOS_THERMAL a
+		LEFT OUTER JOIN ${dbNm}.ARGOS_INFO b ON b.ARGOS_KIND='2' AND a.predict_idx1=b.ARGOS_LABEL
+		WHERE a.idx = 520098
+	</select>
+	
+	<select id="getArgosPlayImageByIdx" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												idx
+			,IF(a.predict_Tm IS NULL,'', DATE_FORMAT(STR_TO_DATE(a.predict_Tm,'%Y%m%d%H%i%s%f'),'%Y-%m-%d %H:%i:%s'))	T_sndTime
+			,IFNULL(a.ThermalImage,'')							T_img
+			
+			,IFNULL(b.ARGOS_LABEL,'')							predictLabel
+			,IFNULL(b.ARGOS_NAME,'')							predictName
+			,LEFT(a.predict_Tm,14)										T_sndTime_org
+			
+		FROM ${dbNm}.ARGOS_THERMAL a
+		LEFT OUTER JOIN ${dbNm}.ARGOS_INFO b ON b.ARGOS_KIND='2' AND a.predict_idx1=b.ARGOS_LABEL
+		WHERE a.idx = (SELECT MAX(idx) FROM ${dbNm}.ARGOS_THERMAL WHERE idx > #{idx} )
+	</select>
+	
+		
+	
+	<select id="getArgosPlaySoundByTime" parameterType="hashmap" resultType="hashMap">
+		SELECT 
+			a.idx												idx
+			,IFNULL(b.ARGOS_LABEL,'')							predictLabel
+			,IFNULL(b.ARGOS_NAME,'')							predictName
+			,IFNULL(a.predict_Tm,'')							A_sndTime
+			
+		FROM ${dbNm}.ARGOS_SOUND a
+		LEFT OUTER JOIN ${dbNm}.ARGOS_INFO b ON b.ARGOS_KIND='1' AND a.predict_idx1=b.ARGOS_LABEL
+		WHERE LEFT(a.predict_Tm,14) = #{t_sndTime_st} OR LEFT(a.predict_Tm,14) = #{t_sndTime_ed}
+	</select>
+	
+	
+	
+	
+	<update id="updatePlayRealTime" parameterType="hashmap">
+		UPDATE ${dbNm}.ARGOS_THERMAL SET
+			playRealtime = 'Y'
+		WHERE idx = #{idx}
+	</update>
+	
+	
+	
+	<select id="getArgosDecision" parameterType="hashmap" resultType="hashmap">
+		SELECT 
+			a.DecisionLvl												decisionLvl
+			,a.Decision													decision
+		FROM ${dbNm}.ARGOS_EMERGENCY_INFO a
+		WHERE a.T_predictLabel = #{T_predictLabel} AND (a.A_predictLabel = #{A_predictLabel} OR a.A_predictLabel = '-1')
+	</select>
+	
+	
+	
+	<select id="getArgosRealTimeChartByIdx" parameterType="hashmap" resultType="hashMap">
+
+		SELECT 
+			LEFT(CONCAT(src.T_sndTime_org,'00000000'),14)	T_sndTime
+			,MAX(DecisionLvl)				DecisionLvl
+			,GROUP_CONCAT(DISTINCT T_predictName) T_predictName
+			,GROUP_CONCAT(DISTINCT A_predictName) A_predictName
+		FROM (
+		
+				SELECT 
+					a.idx												idx
+					,LEFT(a.predict_Tm,${timeunit})										T_sndTime_org
+					,IFNULL(b.ARGOS_LABEL,'')							T_predictLabel
+					,IFNULL(b.ARGOS_NAME,'')							T_predictName
+					,a.predict_Tm										T_sndTime
+					
+					,c.idx									A_idx
+					,LEFT(c.predict_Tm,${timeunit})										A_sndTime_org
+					,IFNULL(d.ARGOS_LABEL,'')							A_predictLabel
+					,IFNULL(d.ARGOS_NAME,'')							A_predictName
+					,c.predict_Tm										A_sndTime
+					,IFNULL(f.Decision,'normal')		Decision
+					,IFNULL(f.DecisionLvl,1)				DecisionLvl
+		
+				FROM ${dbNm}.ARGOS_THERMAL a
+		 		LEFT OUTER JOIN ${dbNm}.ARGOS_INFO b ON b.ARGOS_KIND='2' AND a.predict_idx1=b.ARGOS_LABEL
+				LEFT OUTER JOIN ${dbNm}.ARGOS_SOUND c ON LEFT(a.predict_Tm,${timeunit}) = LEFT(c.predict_Tm,${timeunit})
+		 		LEFT OUTER JOIN ${dbNm}.ARGOS_INFO d ON d.ARGOS_KIND='1' AND c.predict_idx1=d.ARGOS_LABEL
+		
+				LEFT OUTER JOIN ${dbNm}.ARGOS_EMERGENCY_INFO f ON b.ARGOS_LABEL=f.T_predictLabel AND (d.ARGOS_LABEL=f.A_predictLabel OR f.A_predictLabel='-1')
+				WHERE LEFT(a.predict_tm,${timeunit}) >= #{sndTimeFirst} AND #{sndTimeLast} > LEFT(a.predict_tm,${timeunit})
+		
+		) src
+		WHERE src.DecisionLvl >= 1
+		GROUP BY src.T_sndTime_org
+
+	</select>
+	
+	
+	
+	
+	
+</mapper>
+

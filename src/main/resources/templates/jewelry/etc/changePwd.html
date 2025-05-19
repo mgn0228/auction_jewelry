@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>비밀번호 변경 - PUBLIC ACTION</title>
+    <th:block th:replace="~{jewelry_include/script_public_1::head}"></th:block>
+    <th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+
+    <th:block th:if="${cm.jscssimport == 'Y'}">
+        <script th:src="'/js/content/etc/'+${pid}+'.js?v=1.0.0'"></script>
+    </th:block>
+
+    <script>
+        const mbId = /*[[${mbId}]]*/ "";
+    </script>
+</head>
+
+<body>
+<div id="skipnavi">
+    <a href="#gnb">주메뉴 바로가기</a>
+    <a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+    <header id="header">
+        <h1 class="logo"><a href="#">AUTOMART</a></h1>
+        <h1 class="logo"><a href="/">AUTOMART</a></h1>
+        <th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+        <div id="gnb_bg"></div>
+    </header>
+    <!-- //header -->
+    <hr/>
+
+    <article id="container" class="container">
+        <th:block th:replace="~{jewelry_include/nav_location_public_1::navlocation_onedepth}"></th:block>
+
+        <section id="contents" class="contents">
+            <h4 class="tit_ty1">비밀번호 변경</h4>
+            <fieldset>
+                <legend>비밀번호 변경</legend>
+                <div class="pw_box2">
+                    <p>주기적인(6개월) 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요.</p>
+                    <ol>
+                        <li>1. 8자리 이상 ~ 10자리까지의 문자와 숫자가 서로 1개 이상이 조합되어야 합니다.</li>
+                        <li>2. 아이디와 동일하지 않도록 하며 동일한 문자 또는 숫자는 4번이상 사용할 수 없습니다</li>
+                    </ol>
+                    <input type="text" id="currentPwd" title="현재 비밀번호 입력" placeholder="현재 비밀번호" class="inp_ty4" style="width:345px;"/>
+                    <input type="text" id="newPwd" title="새 비밀번호 입력" placeholder="새 비밀번호" class="inp_ty4 mt10"
+                           style="width:345px;"/>
+                    <input type="text" id="newPwdConfirm" title="새 비밀번호 확인 입력" placeholder="새 비밀번호 확인" class="inp_ty4 mt10"
+                           style="width:345px;"/>
+                </div>
+                <div class="btn_center">
+                    <button type="submit" class="btn_ty4 mr8" onclick="changePwd()">확인</button>
+                    <button type="button" class="btn_ty5" onclick="history.back();">취소</button>
+                </div>
+            </fieldset>
+
+        </section>
+    </article>
+    <!-- //container -->
+    <hr/>
+
+    <th:block th:replace="~{jewelry_include/footer_public_1::footer}"></th:block>
+</div>
+
+</div>
+</body>
+</html>

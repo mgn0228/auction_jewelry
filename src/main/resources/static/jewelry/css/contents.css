@@ -1,0 +1,440 @@
+﻿@charset "utf-8";
+
+.contents{font-family: 'ng';}
+h1,h2,h3,h4,h5,h6{font-family: 'nsr';}
+
+
+/* 타이틀 */
+.tit_ty1{margin:40px 0 13px;font-size:28px;color:#443933;font-weight:600;}
+.tit_ty2{margin:0 0 10px;font-size:28px;color:#003d7e;font-weight:600;}
+.tit_ty2 span{display:block;font-size:16px;color:#666;font-weight:normal;margin-bottom:10px;}
+.tit_ty3{padding:11px 18px 10px;font-size:20px;color:#333;font-weight:600;line-height:28px;border-bottom:1px solid #e5e5e5;}
+.tit_ty4{padding:11px 18px 10px;font-size:20px;color:#333;font-weight:600;line-height:28px;border:1px solid #ccc;border-top:2px solid #ff6600;}
+.tit_ty5{margin:25px 0 5px 3px;font-size:16px;color:#333;font-family:ng;font-weight:600;}
+.tit_ty6{margin:20px 0;padding:0 0 9px 9px;font-size:14px;color:#666;font-family:ng;font-weight:600;border-bottom:1px solid #d2d2d2;color:#6b6b6b;}
+.tit_ty7{padding:30px 0 15px 0;font-size:18px;}
+.tit_ty8{margin:20px 0 10px;padding:0 0 18px;font-size:24px;color:#ff6600;font-weight:600;background: url("/jewelry/images/contents/bg_dotted.gif") repeat-x 0 100%;}
+.tit_ty9{margin:10px 0 18px;font-size:18px;color:#333;font-weight:600;}
+.tit_ty10{margin:38px 0 10px;font-size:24px;font-weight:600;color:#ff6600;line-height:42px;padding:0 0 12px;background: url("../images/contents/bg_dotted.gif") repeat-x 0 100%;}
+.tit_ty10 strong{display:inline-block;width:44px;height:44px;overflow:hidden;color:#fff;background:#ff6600;line-height:46px;font-size:24px;font-weight:600;border-radius:100%;vertical-align:-14px;text-align:center;margin-right:5px;}
+
+.tit_ty41{padding:11px 18px 10px;font-size:20px;color:#333;font-weight:600;line-height:28px;border-top:2px solid #ff6600;}
+
+
+/* txt */
+.txt_ty1{font-size:15px;color:#555;}
+.txt_ty2{font-size:14px;color:#777;}
+
+.txt_result{margin-top:13px;padding-bottom:18px;line-height:1.1;font-size:15px;color:#333;}
+.txt_customer{padding:8px 0 0 28px;background: url("../images/common/bg_customer.gif") no-repeat 0 12px;color:#777;font-size:16px;letter-spacing:-0.5px;}
+.txt_customer strong{color:#1d59b0;font-size:20px;margin-left:8px;font-family:Myriad pro;}
+.txt_info{font-size:14px;color:#777;line-height:1.7;}
+.txt_info strong{display:block;font-size:16px;color:#303030;padding:0 0 10px 29px;background: url("/jewelry/images/common/bg_info.gif") no-repeat 0 3px;}
+.txt_del{font-size:12px;color:#666;padding:11px 0 0 30px;background: url("../images/contents/bg_check.png") no-repeat 16px 17px;}
+.txt_must{display:inline-block;font-size:0;width:10px;height:11px;margin-right:6px;background: url("../images/contents/bg_must.gif") no-repeat 0 0;vertical-align:middle;}
+
+.txt_top{vertical-align:top;padding-top:22px;}
+.txt_right{text-align:right;}
+.txt_right2{margin-top:-32px;text-align:right;padding-right:9px;font-size:15px;color:#333;height:32px;}
+.txt_center{text-align:center;}
+
+
+/* list_ty */
+.list_ty1{background:#fbfbfb;padding:18px 19px;border-bottom:1px solid #e5e5e5;}
+.list_ty1 li{font-size:14px;line-height:1.57;color:#555;}
+
+.list_ty2 li{font-size:15px;line-height:1.6;color:#555;}
+
+.list_ty3 li{position:relative;line-height:1.4;color:#555;padding-left:19px;line-height:30px;font-size:14px;}
+.list_ty3 li:after{content:'';display:block;position:absolute;left:0;top:13px;width:5px;height:5px;background:#c8c3c3}
+.list_ty3 li strong{display:inline-block;width:124px;color:#444;font-weight:normal;}
+
+.list_ty4 li{position:relative;font-size:14px;line-height:1.7;color:#777;padding-left:22px;}
+.list_ty4 li:after{content:'';display:block;position:absolute;left:11px;top:10px;width:3px;height:3px;background:#b1b1b1}
+.list_ty4 li li{padding-left:9px;}
+.list_ty4 li li:after{background:none;}
+.list_ty4 li li p{padding-left:15px;}
+
+.list_ty5 li{position:relative;font-size:14px;line-height:1.7;color:#777;padding-left:46px;background: url("/jewelry/images/contents/ico_info.gif") no-repeat 24px 4px;}
+
+
+/* 게시판 리스트 */
+.tbl_list1{width:100%;line-height:1.6;}
+.tbl_list1 caption{position:static;}
+.tbl_list1 thead th{padding:10px 0;font-size:15px;color:#333333;font-weight:normal;text-align:center;line-height:1.3;border-top:2px solid #ff6600;border-bottom:1px solid #dddddd;background:#fbf9f5;border-right:1px solid #d6d6d6;letter-spacing:-1px;}
+.tbl_list1 thead th:last-child{border-right:none;}
+.tbl_list1 thead .txt_small{font-size:12px;}
+.tbl_list1 tbody td{padding:8px 0 8px;border-bottom:1px solid #d6d6d6;border-right:1px solid #d6d6d6;border-left:1px solid #d6d6d6;text-align:center;font-size:14px;letter-spacing:-0.5px;}
+.tbl_list1 tbody td:last-child{border-right:none;}
+.tbl_list1 tbody td:first-child{border-left:none;}
+.tbl_list1 tbody td.txt_left{padding-left:25px;text-align:left;}
+.tbl_list1 tbody td.txt_right{padding-right:7px;padding-left:7px;text-align:right;}
+.tbl_list1 tbody td.txt_right2{padding-right:20px;padding-left:20px;text-align:right;}
+.tbl_list1 tbody td.txt_top{vertical-align:top;padding-top:22px;}
+.tbl_list1 .nodata{border-bottom:1px solid #bfbcb7;padding:30px 0 30px;font-size:16px;color:#4c4c4c;text-align:center;}
+
+.tbl_list2{width:100%;line-height:1.6;}
+.tbl_list2 caption{position:static;}
+.tbl_list2 thead th{position:relative;padding:12px 0;font-size:15px;color:#333333;font-weight:bold;text-align:center;line-height:1.3;border-top:2px solid #ff6600;border-bottom:1px solid #bfbbb6;letter-spacing:-1px;}
+.tbl_list2 thead th:before{content:'';position:absolute;left:0;top:12px;display:inline-block;width:1px;height:20px;vertical-align:middle;overflow:hidden;font-size:0;background:#ede8e4}
+.tbl_list2 thead th:last-child{border-right:none;}
+.tbl_list2 thead th:first-child:before{display:none;}
+.tbl_list2 tbody td{padding:10px 0;border-bottom:1px solid #ede8e4;text-align:center;font-size:15px;letter-spacing:-0.5px;color:#4c4c4c;}
+.tbl_list2 tbody td:last-child{border-right:none;}
+.tbl_list2 tbody td:first-child{border-left:none;}
+.tbl_list2 tbody td.txt_left{padding-left:40px;text-align:left;}
+.tbl_list2 tbody td.txt_left a:hover{color:#ff6600;}
+.tbl_list2 tbody td.txt_left2{padding-left:27px;text-align:left;}
+.tbl_list2 tbody td.txt_left2 img{vertical-align:middle;}
+.tbl_list2 tbody td.txt_left2.re{padding-left:42px;}
+.tbl_list2 .nodata{border-bottom:1px solid #bfbcb7;padding:30px 0 30px;font-size:16px;color:#4c4c4c;text-align:center;}
+/*.tbl_list2 .nodata{border-bottom:1px solid #bfbcb7;padding:320px 0 100px;font-size:24px;color:#4c4c4c;text-align:center;background:url('/jewelry/images/contents/bg_nodata.gif') no-repeat 50% 105px;}*/
+
+.tbl_data1{width:100%;line-height:1.6;}
+.tbl_data1 caption{position:static;}
+.tbl_data1 th{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#333;padding:15px 0 15px 19px;}
+.tbl_data1 td{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 0 1px 0;font-size:15px;color:#666;padding:15px 0 15px 22px;}
+.tbl_data1.ty2 th{border:1px solid #cccccc;border-top:none;}
+.tbl_data1.ty2 td{border:1px solid #cccccc;border-top:none;}
+
+.tbl_data2{width:100%;line-height:1.6;}
+.tbl_data2 caption{position:static;}
+.tbl_data2 th{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#333;padding:6px 5px;text-align:center;line-height:21px;}
+.tbl_data2 th:last-child{border-right:none;}
+.tbl_data2 td{background:#fff;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#666;padding:6px 5px;;text-align:center;line-height:21px;}
+.tbl_data2 td:last-child{border-right:none;}
+
+.tbl_data3{width:100%;line-height:1.6;}
+.tbl_data3 caption{position:static;}
+.tbl_data3 th{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#333;padding:15px 5px;text-align:center;line-height:21px;}
+.tbl_data3 th:last-child{border-right:none;}
+.tbl_data3 td{background:#fff;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#666;padding:15px 20px;;text-align:center;line-height:21px;}
+.tbl_data3 td:last-child{border-right:none;}
+
+.tbl_data4{width:100%;line-height:1.6;}
+.tbl_data4 caption{position:static;}
+.tbl_data4 thead th{padding:15px 20px;font-size:16px;color:#333333;font-weight:bold;text-align:left;line-height:1.3;border-top:2px solid #000000;border-bottom:1px solid #d6d6d6;background:#f3f3f3;border-right:1px solid #d6d6d6;letter-spacing:-1px;}
+.tbl_data4 thead th:last-child{border-right:none;}
+.tbl_data4 tbody td{padding:15px 20px;border-bottom:1px solid #d6d6d6;border-right:1px solid #d6d6d6;border-left:1px solid #d6d6d6;text-align:right;font-size:16px;font-weight:bold;letter-spacing:-0.5px;color:#333333;}
+.tbl_data4 tbody td:last-child{border-right:none;}
+.tbl_data4 tbody td:first-child{border-left:none;}
+.tbl_data4 tbody td strong{font-size:34px;letter-spacing:-2px;}
+.tbl_data4 thead th:nth-child(2){color:#9c0000;}
+.tbl_data4 tbody td:nth-child(2) strong{color:#9c0000;}
+
+/* 회원가입 */
+.tbl_data5{width:100%;line-height:1.6;}
+.tbl_data5 caption{position:static;}
+.tbl_data5 th{background:#fbfbfb;border:1px solid #ccc;border-top:none;font-size:15px;color:#333;padding:14px 20px 14px 40px;}
+.tbl_data5 td{background:#fbfbfb;border:1px solid #ccc;border-top:none;font-size:13px;color:#555;padding:9px 20px 9px 20px;line-height:1.2;}
+.tbl_data5 .txt_must{margin-left:-20px;}
+.tbl_data5 .txt1{padding:0 0 0 14px;text-indent:-14px;line-height:1.3;}
+.tbl_data5 .bar td{border:none;padding:0;height:21px;background:#fff;border-bottom:1px solid #ccc}
+
+/* 회원가입 - phj */
+.tbl_data5 .txt2{color:#ff6600;line-height:0.5;display:none;}
+
+/* 비번찾기 */
+.tbl_data7{width:95%;line-height:1.6; border:1px solid #e5e5e5;}
+.tbl_data7 caption{position:static;}
+.tbl_data7 th{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#333;padding:6px 5px;text-align:center;line-height:21px;}
+.tbl_data7 th:last-child{border-right:none;}
+.tbl_data7 td{background:#fff;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#666;padding:6px 5px;;text-align:center;line-height:21px;}
+.tbl_data7 td:last-child{border-right:none;}
+
+.tbl_data6{width:100%;line-height:1.6;border-top:2px solid #ff6600;}
+.tbl_data6 caption{position:static;}
+.tbl_data6 th{padding:13px 0 13px 22px;font-size:15px;color:#333333;font-weight:bold;line-height:1.3;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;letter-spacing:-1px;}
+.tbl_data6 td{padding:8px 20px;border-bottom:1px solid #cccccc;text-align:left;font-size:15px;color:#555;letter-spacing:-0.5px;}
+
+/* phj 추가 입찰내역 */
+.tbl_data8{width:100%;line-height:1.6;}
+.tbl_data8 caption{position:static;}
+.tbl_data8 th{background:#fbfbfb;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#333;padding:14px 20px 14px 40px;line-height:21px;}
+.tbl_data8 th:last-child{border-right:none;}
+.tbl_data8 td{background:#fff;border:1px solid #e5e5e5;border-width:0 1px 1px 0;font-size:15px;color:#666;padding:9px 20px 9px 20px;line-height:21px;}
+.tbl_data8 td:last-child{border-right:none;}
+
+
+.tbl_view{width:100%;border-top:2px solid #ff6600;}
+.tbl_view caption{position:static;}
+.tbl_view thead th{padding:13px 13px 10px 9px;font-size:15px;text-align:left;color:#333;}
+.tbl_view thead td{padding:13px 13px 10px 9px;font-size:12px;text-align:right;color:#666;line-height:11px;}
+.tbl_view thead td span{margin-right:14px;}
+.tbl_view thead th:first-child{background:none;}
+.tbl_view thead .bar{display:inline-block;padding:0 14px 0 0;margin-right:12px;border-right:1px solid #7f7f7f;height:11px;vertical-align:top;line-height:11px;}
+.tbl_view tbody td{padding:20px 9px 50px;border-top:1px solid #e1e1e1;line-height:1.6;font-size:15px;vertical-align: top;height:270px;}
+.tbl_view tbody th{padding:12px 20px 50px;font-size:14px;border-top:1px solid #e1e1e1;height:270px;}
+
+.tbl_view2{width:100%;border-top:2px solid #ff6600;border-bottom:1px solid #bfbbb6;}
+.tbl_view2 caption{position:static;}
+.tbl_view2 thead th{padding:13px 10px 12px 10px;font-size:15px;text-align:left;color:#333;border-bottom:1px solid #bfbbb6;line-height:19px;}
+.tbl_view2 thead td{padding:13px 10px 13px 10px;font-size:12px;text-align:left;color:#666;line-height:1.2;}
+.tbl_view2 thead td span{margin-right:14px;}
+.tbl_view2 thead .bar{display:inline-block;padding:0 14px 0 0;margin-right:12px;border-right:1px solid #7f7f7f;height:11px;vertical-align:middle;line-height:11px;}
+.tbl_view2 thead img{margin-right:6px;}
+.tbl_view2 tbody td{padding:11px 10px 11px 20px;border-top:1px solid #bfbbb6;line-height:1.2;font-size:14px;}
+.tbl_view2 tbody th{position:relative;padding:11px 10px 11px 10px;font-size:14px;font-weight:normal;border-top:1px solid #bfbbb6;vertical-align:top;}
+.tbl_view2 tbody th:after{content:'';position:absolute;right:0;top:16px;display:inline-block;width:1px;height:11px;vertical-align:middle;overflow:hidden;font-size:0;background:#7f7f7f;vertical-align:top;}
+.tbl_view2 tbody .view{font-size:15px;line-height:1.5;padding:30px 10px 50px;height:270px;vertical-align:top;}
+
+
+/* 이전글 다음글 */
+.notice_page{border-bottom:1px solid #bfbbb6;}
+.notice_page p{position:relative;overflow:hidden;position:relative;border-top:1px solid #ede8e4;padding:0 0 0 104px;}
+.notice_page strong{position:absolute;left:0;top:0;width:104px;display:block;padding:8px 0 8px 20px;vertical-align:middle;font-size:13px;color:#333;font-weight:normal;}
+.notice_page .prev{background-color:#f9f9f9;}
+.notice_page .prev:after{content:'';position:absolute;left:65px;top:16px;width:0;height:0;border-right:4px solid transparent;border-left:4px solid transparent;border-bottom:5px solid #999999}
+.notice_page .next:after{content:'';position:absolute;left:65px;top:18px;width:0;height:0;border-right:4px solid transparent;border-left:4px solid transparent;border-top:5px solid #999999;}
+.notice_page span{display:block;width:100%;padding:8px 10px;font-size:14px;color:#666;box-sizing: border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.notice_page a{color:#666;}
+
+
+/* detial_box */
+.detial_box{overflow:hidden;padding:37px 0 0;}
+.detial_img{position:relative;width:460px;float:left;padding:4px 0 0;}
+.detial_img ul{position:relative;padding:480px 0 0;height:580px;overflow:hidden;width:470px;}
+/*
+.detial_img ul{position:relative;padding:480px 0 0;height:740px;overflow:hidden;width:470px;}
+*/
+.detial_img li{display:inline-block;float:left;width:94px;height:90px;}
+.detial_img li .effectPic{position:absolute;left:0;top:0;z-index:1;border:1px solid #d2d2d2;width:458px;height:468px;background:#fff url("/jewelry/images/common/bg_noimg.png") no-repeat 50% 50%;overflow:hidden;}
+.detial_img li .effectPic span{display:table-cell;width:458px;height:468px;text-align: center;vertical-align: middle;}
+.detial_img li .simg{display:block;border:1px solid #d2d2d2;width:82px;height:78px;background:#fff url("/jewelry/images/common/bg_img100.png") no-repeat 50% 50%;overflow:hidden;}
+.detial_img li .simg:before{content:'';display:inline-block;width:0;height:41px;}
+.detial_img li .simg img{width:100%;vertical-align:middle}
+.detial_img li.ov .effectPic{z-index:2;}
+
+.detial_data{position:relative;width:480px;float:right;padding:10px 0 0;}
+.detial_data .price{position:relative;font-size:24px;color:#666;}
+.detial_data .price strong{float:left;font-size:20px;color:#cc0000;width:151px;font-weight:600;line-height:72px;}
+.detial_data .price span{font-size:40px;color:#333;font-weight:600;letter-spacing:-3px;}
+.detial_data .time{background:#fafafa;margin-top:15px;height:30px;text-align:right;padding-right:10px;}
+.detial_data .time span{display:inline-block;background: url("/jewelry/images/contents/bg_time.gif") no-repeat 0 50%;padding:0 0 0 19px;line-height:28px;font-size:13px;color:#666;}
+.down_box{overflow:hidden;padding:14px 0 0;}
+.down_box a{display:inline-block;margin-right:34px;font-size:14px;color:#777;}
+.down_box img{margin-right:4px;}
+
+.btn_box{padding:50px 0 0;}
+
+.data_list{overflow:hidden;border-top:1px solid #ebebeb;margin-top:10px;}
+.data_list dt{float:left;width:153px;font-size:16px;font-weight:bold;color:#444;padding-left:2px;line-height:40px;height:41px;border-bottom:1px solid #ebebeb;}
+.data_list dd{float:left;width:327px;font-size:16px;color:#666;line-height:40px;height:41px;border-bottom:1px solid #ebebeb;}
+.data_list dd.list{display:none;width:100%;margin-top:-1px;border:1px solid #ebebeb;border-width:1px 0 1px;height:auto;background:#fafafa;padding:16px 27px 18px;}
+.data_list dd.list li{position:relative;padding:0 0 0 10px;line-height:28px;}
+.data_list dd.list li strong{display:inline-block;width:114px;color:#333;font-weight:normal;}
+.data_list dd.list li:after{content:'';display:block;position:absolute;left:0;top:11px;width:3px;height:3px;background:#1979d7}
+.data_list dd.list.on{display:block;}
+.data_list dt.folder{width:100%;padding:0;}
+.data_list dt.folder a{display:block;color:#444;background: url("/jewelry/images/common/arrow_5.gif") no-repeat 460px 17px;padding-left:2px;}
+.data_list dt.folder a:hover{text-decoration:none;}
+
+/*상세 - 요약부분 height 줄임 phj */
+.data_list dd.list.detail{line-height:25px;}
+
+.data_list2{border:1px solid #cccccc;padding:15px 0 0;overflow:hidden;}
+.data_list2 li{float:left;width:50%;padding:0 0 13px 90px;background: url("/jewelry/images/common/bul_1.gif") no-repeat 80px 10px;font-size:15px;color:#777;font-weight:bold;letter-spacing:-0.4px;}
+.data_list2 strong{color:#333;line-height:25px;}
+.data_list2.num3 li{width:30%;padding:0 0 10px 60px;background-position:50px 10px;}
+.data_list2.num3 li:nth-child(2),.data_list2.num3 li:nth-child(5){width:40%;}
+
+.data_list2.num4 li{width:22%;padding:0 0 10px 60px;background-position:50px 10px;}
+.data_list2.num4 li:nth-child(3),.data_list2.num4 li:nth-child(4){width:28%;}
+
+
+/* data_box */
+.data_box{width:920px;margin:60px auto 0;border:1px solid #e5e5e5;border-top:2px solid #ff6600;border-bottom:none;}
+.data_box2{background:#fbfbfb;border:1px solid #ccc;border-top:none;padding:20px;overflow-y:scroll;font-size:14px;color:#555555;line-height:1.5;}
+.data_box2 li{padding-left:10px;text-indent:-10px;}
+.data_box3{padding:80px 0 70px;border:1px solid #ccc;border-top:2px solid #ff6600;}
+.data_box3 p{font-size:20px;color:#333;line-height:2.5;font-weight:bold;text-align:center;letter-spacing:-1px;}
+.data_box4{padding:45px 0 45px 185px;border:1px solid #ccc;border-top:2px solid #ff6600;}
+.data_box4 p{font-size:16px;color:#333;line-height:1.5;letter-spacing:-0.5px;}
+.data_box4 .txt1{font-size:24px;color:#333;line-height:1.5;font-weight:bold;letter-spacing:-1px;}
+.data_box5{width:900px;margin:40px auto 0;border:1px solid #d6d6d6;padding:30px;}
+
+.data_box6{width:920px;margin:30px auto 0;border:1px solid #e5e5e5;border-top:2px solid #ff6600;border-bottom:none;}
+.data_box7{width:920px;margin:60px auto 0;border-top:2px solid #ff6600;border-bottom:none;}
+
+.data_box21{background:#fbfbfb;border-bottom:1px solid #e5e5e5;border-top:1px solid #e5e5e5;padding:20px;font-size:14px;color:#555555;line-height:1.5;}
+.data_box21 li{padding-left:10px;text-indent:-10px;}
+
+
+
+.agree_box{border:1px solid #ccc;border-top:none;padding:14px 20px;font-size:14px;color:#555555;}
+.agree_box input{vertical-align:middle;margin:0 4px 0 0;}
+.agree_box label{margin:0;}
+.agree_box2{border:1px solid #ccc;border-top:none;padding:14px 20px;font-size:14px;color:#555555;}
+
+
+/* bidding_box */
+.bidding_box{width:100%;margin:24px 0 0;border:5px solid #f3f3f3;overflow:hidden;background:#f3f3f3;}
+/* 
+.bidding_box .account_box{float:left;background:#fff;width:660px;padding:15px 30px 12px;min-height:320px;}
+.bidding_box .account_box dl{border-bottom:1px dashed #d9d9d9;overflow:hidden;padding-bottom:8px;}
+.bidding_box .account_box dt{float:left;width:140px;font-size:14px;color:#666;padding:2px 0 4px;letter-spacing:-0.4px;vertical-align:top;}
+.bidding_box .account_box dd{float:left;width:457px;padding-bottom:6px;vertical-align:top;}
+.bidding_box .account_box dd.col_org{font-size:18px;font-weight:bold;}
+.bidding_box .account_box label{color:#333;display:inline-block;min-width:64px;font-weight:bold;font-size:14px;margin-right:3px;}
+.bidding_box .account_box div{margin-bottom:4px;}
+.bidding_box .account_box li{padding-left:13px;font-size:15px;line-height:1.6;}
+.bidding_box .account_box h5{margin:17px 0 3px;}
+*/
+/* bidding_box - phj */
+.bidding_box .account_box{float:left;background:#fff;width:660px;padding:15px 30px 12px;min-height:320px;}
+.bidding_box .account_box dl{border-bottom:1px dashed #d9d9d9;overflow:hidden;padding-bottom:8px;}
+.bidding_box .account_box dt{float:left;width:140px;font-size:14px;color:#666;padding:2px 0 4px;letter-spacing:-0.4px;vertical-align:top;}
+.bidding_box .account_box dd{float:left;padding-bottom:6px;vertical-align:top;}
+.bidding_box .account_box dd.colw1{width:457px;}
+.bidding_box .account_box dd.colw2{width:360px;}
+.bidding_box .account_box dd.colw3{width:100px;}
+.bidding_box .account_box dd.col_org{font-size:18px;font-weight:bold;}
+.bidding_box .account_box dd.col_red, dd.col_blue, dd.col_green{font-size:16px;font-weight:normal;}
+.bidding_box .account_box label{color:#333;display:inline-block;min-width:64px;font-weight:bold;font-size:14px;margin-right:3px;}
+.bidding_box .account_box div{margin-bottom:4px;}
+.bidding_box .account_box li{padding-left:13px;font-size:15px;line-height:1.6;}
+.bidding_box .account_box h5{margin:17px 0 3px;}
+
+.bidding_box .price_box{float:right;width:330px;padding:15px;}
+.bidding_box .price_box .price{width:280px;margin:0 auto;padding:42px 0 23px;color:#9c0000;font-size:16px;text-align:right;border-bottom:1px dashed #d9d9d9;font-weight:bold;}
+.bidding_box .price_box .price strong{display:block;}
+.bidding_box .price_box .price em{font-size:34px;font-weight:bold;letter-spacing:-2px;}
+.bidding_box .price_box .txt1{padding:15px 0 0 13px;text-indent:-13px;line-height:1.5;font-size:15px;color:#706350;letter-spacing:-0.4px;}
+.bidding_box .price_box .txt2{padding:8px 0 0 13px;line-height:1.5;font-size:20px;color:#333;letter-spacing:-1px;font-weight:bold;}
+
+/* login_box */
+.login_box{position:relative;margin:70px auto 0;width:680px;padding:58px 116px 72px;border:1px solid #706350;}
+.login_box .txt1{font-size:20px;font-weight:bold;letter-spacing:-1px;color:#706350;text-align:center;padding:0 0 38px;}
+.login_box .txt2{font-size:20px;font-weight:bold;letter-spacing:-1px;color:#706350;text-align:center;padding:0 0 38px;margin:0 -25px;}
+.login_box input[type="text"]{display:block;width:344px;min-width:auto;border:1px solid #cccccc;line-height:40px;height:40px;color:#333;font-size:14px;padding:0 4px;vertical-align:middle;border-radius:3px;margin-bottom:10px;}
+.login_box input[type="password"]{display:block;width:344px;min-width:auto;border:1px solid #cccccc;line-height:40px;height:40px;color:#333;font-size:14px;padding:0 4px;vertical-align:middle;border-radius:3px;margin-bottom:10px;}
+.login_box button{display:block;position:absolute;left:471px;top:124px;border:none;background:#f26900;width:92px;height:90px;line-height:90px;text-align:center;color:#fff;font-size:15px;font-weight:bold;}
+.login_box input[type="checkbox"]{margin:0 4px 0 0;vertical-align:middle;}
+.login_box label{font-size:14px;margin:0;}
+
+
+/* step_box */
+.step_box{width:631px;margin:29px auto 38px;background: url("/jewelry/images/contents/bg_join.png") no-repeat 0 0;overflow:hidden;}
+.step_box li{float:left;width:185px;padding:80px 109px 0 0;text-align:center;font-size:15px;color:#706350;}
+.step_box li:last-child{width:76px;padding-right:0;}
+.step_box .on{background: url("/jewelry/images/contents/bg_join.png") no-repeat 0 -110px;color:#ff6600;}
+.step_box li:nth-child(2).on{background-position: -185px -110px;}
+.step_box li:nth-child(3).on{background-position: -370px -110px;}
+.step_box li:nth-child(4).on{background-position: -555px -110px;}
+
+
+/* idpw_tab */
+.idpw_tab{overflow:hidden;padding:0 0 0 1px;margin-top:35px;}
+.idpw_tab li{position:relative;float:left;width:50%;z-index:1;}
+.idpw_tab li a{display:block;margin-left:-1px;border:1px solid #cccccc;border-bottom:1px solid #706350;height:48px;line-height:48px;text-align:center;font-size:16px;color:#333;background:#f8f8f8;}
+.idpw_tab li a{text-decoration:none;}
+.idpw_tab li.active{z-index:2;}
+.idpw_tab li.active a{border:1px solid #706350;border-bottom:1px solid #fff;color:#ff6600;font-weight:bold;background:#fff;}
+
+.id_box{position:relative;border:1px solid #706350;border-width:0 1px 1px 1px;padding:42px 0 0 645px;height:248px;line-height:1.78;font-size:14px;background: url("/jewelry/images/contents/bg_idpw2.png") no-repeat 195px 74px;}
+.id_box strong{display:block;position:absolute;left:161px;top:26px;font-size:20px;color:#706350;line-height:1.2;}
+.id_box span{display:block;margin:0 0 35px -55px;}
+.id_box a{display:inline-block;width:190px;color:#fff;height:44px;line-height:42px;}
+
+.id_box2{position:relative;border:1px solid #706350;border-width:0 1px 1px 1px;padding:42px 0 0 524px;height:330px;line-height:1.78;font-size:14px;background: url("/jewelry/images/contents/bg_idpw2.png") no-repeat 195px 74px;}
+.id_box2 p{font-size:14px;margin-bottom:15px;}
+
+
+.pw_box{position:relative;border:1px solid #706350;border-width:0 1px 1px 1px;padding:42px 0 0 524px;height:330px;line-height:1.78;font-size:14px;background: url("/jewelry/images/contents/bg_pw.png") no-repeat 177px 47px;}
+.pw_box p{font-size:14px;margin-bottom:15px;}
+
+.pw_box2{width:680px;height:362px;margin:45px auto 68px;border:1px solid #706350;padding:45px 0 0;text-align:center;}
+.pw_box2 p{font-weight:bold;font-size:20px;color:#706350;letter-spacing:-1px;}
+.pw_box2 ol{margin:20px 0 50px;}
+.pw_box2 li{color:#555;font-size:13px;padding:0 0 0 52px;text-align:left;}
+
+/* QnA */
+.qna_box{position:relative;border-top:2px solid #ff6600;border-bottom:1px solid #bfbbb6;}
+.qna_box li{position:relative;border-bottom:1px solid #ede8e4;}
+.qna_box li img{position:absolute;left:15px;top:12px;}
+.qna_box li:last-child{border-bottom:none;}
+.qna_box li .txt_q{position:relative;}
+.qna_box li .txt_q a{display:block;padding:10px 55px 12px 59px;color:#333;background:url('/jewelry/images/common/arrow_4.gif') no-repeat 966px 17px;font-size:16px;font-weight:bold;}
+.qna_box li .txt_q a:hover{text-decoration:none;}
+.qna_box li .txt_a{position:relative;margin:5px 0 20px 60px;color:#333;line-height:1.6;background:#f5f4f3;padding:10px 23px;font-size:15px;}
+.qna_box li .txt_a img{left:-45px;}
+.qna_box li.off .txt_a{display:none;}
+
+
+/* detail_tab */
+.detail_tab{position:relative;padding:45px 0 0;margin:0;}
+.detail_tab:after{content:'';display:block;clear:both;}
+.detail_tab > li{float:left;width:168px;position:relative;border:1px solid #d2d2d2;border-bottom:none;margin-right:10px;}
+.detail_tab > li >a{display:inline-block;width:100%;height:62px;line-height:60px;padding:0;margin:0;border-bottom:1px solid #d2d2d2;border-top-left-radius:2px;border-top-right-radius:2px; font-size:18px;color:#666666;background:#f3f2f2;text-align:center;}
+.detail_tab > li.active > a{border-width:0;border-bottom:1px solid #fff;background:#fff;font-weight:bold;}
+.detail_tab > li > a:hover{text-decoration:none;}.detail_tab > ul{position:absolute;width:100%;top:40px;border-bottom:1px solid #60b1b6;background:#fff;}
+.pop_cnt{padding:5px 0 0;}
+
+/* detail_tab_4 */
+.detail_tab_4{position:relative;padding:45px 0 0;margin:0;}
+.detail_tab_4:after{content:'';display:block;clear:both;}
+.detail_tab_4 > li{float:left;width:200px;position:relative;border:1px solid #d2d2d2;border-bottom:none;margin-right:10px;}
+.detail_tab_4 > li >a{display:inline-block;width:100%;height:62px;line-height:60px;padding:0;margin:0;border-bottom:1px solid #d2d2d2;border-top-left-radius:2px;border-top-right-radius:2px; font-size:18px;color:#666666;background:#f3f2f2;text-align:center;}
+.detail_tab_4 > li.active > a{border-width:0;border-bottom:1px solid #fff;background:#fff;font-weight:bold;}
+.detail_tab_4 > li > a:hover{text-decoration:none;}.detail_tab > ul{position:absolute;width:100%;top:40px;border-bottom:1px solid #60b1b6;background:#fff;}
+
+
+/* detail_box */
+.detail_box{overflow:hidden;margin:35px 0 0;border:1px solid #d2d2d2;}
+.detail_box h5{font-size:18px;color:#444;background:#fafafa;border-bottom:1px solid #d2d2d2;padding:0 0 0 49px;height:49px;line-height:48px;}
+.detail_box div.flat_left:first-child{border-right:1px solid #d2d2d2;}
+.detail_box .flat_left ul{padding:22px 54px;}
+.detail_box .list_ty3 li{line-height:36px;}
+.list_ty3 li:after{top:16px;}
+
+
+/* intro_box */
+.intro_box{min-height:414px;margin-top:13px;padding:56px 400px 0 13px;background:url('/jewelry/images/contents/bg_introduction.jpg') no-repeat 100% 0;overflow:hidden;}
+.intro_box dt{float:left;width:99px;padding-bottom:11px;font-size:16px;font-weight:bold;color:#333;}
+.intro_box dd{float:left;width:470px;padding-bottom:11px;font-size:16px;}
+
+
+/* greeting_box */
+.greeting_box{position:relative;height:561px;padding:35px 0 0;background:url('/jewelry/images/contents/bg_greeting.jpg') no-repeat 100% 12px;}
+.greeting_box p{margin-bottom:26px;font-size:16px;line-height:1.86;letter-spacing:-1px;}
+.greeting_box .name{height:45px;}
+.greeting_box .name strong{display:inline-block;margin-left:18px;margin-top:20px;padding-right:158px;background:url('/jewelry/images/contents/bg_sign.jpg') no-repeat 100% 0;font-size:24px;font-weight:600;}
+
+
+/* btn_list */
+.btn_list{padding:5px 0 0;}
+.btn_list li{display:inline-block;width:114px;height:38px;margin:0 6px 10px 0;}
+.btn_list li a{display:inline-block;width:114px;height:38px;line-height:36px;border:1px solid #e2e2e2;border-radius:2px;font-size:16px;color:#333;text-align:center;}
+.btn_list li a:hover, .btn_list li.on a{border-color:#ff6600;color:#fff;background:#ff6600;text-decoration:none;}
+
+
+/* step_box2 */
+.step_box2{margin-top:20px;border:1px solid #b3ab9f;border-radius:10px;background:#fcfcfb;padding:28px 0 0 58px;height:97px;;}
+.step_box2 .txt{display:inline-block;width:114px;height:38px;line-height:36px;background:#eeebe6;border:1px solid #e2e2e2;border-radius:2px;font-size:16px;color:#333;text-align:center;vertical-align:top;}
+.step_box2 .next{display:inline-block;width:32px;height:38px;font-size:0;background:url('/jewelry/images/contents/bg_next.gif') no-repeat 50% 50%;vertical-align:top;}
+
+/* nodata_box */
+.nodata_box{border-top:2px solid #ff6600;border-bottom:1px solid #bfbbb6;padding:360px 0 100px;font-size:24px;color:#4c4c4c;text-align:center;background:url('/jewelry/images/contents/bg_nodata.gif') no-repeat 50% 149px;}
+
+
+/* Photo Detail 물건 전체사진 보기 */
+.pop_wrap_photo {position:relative;margin:0px auto 0;padding:0;width:840px;}
+.car_photo_btn {position:relative;margin:0px auto 0;padding:0;width:640px;/*border:1px solid #d6d6d6;*/}
+.car_photo_btn::after {content:'';clear:both;display:block;}
+.car_photo_btn li {float:left;margin:2px 2px;width:60px;height:48px;vertical-align:top;list-style-type:none;}
+.car_photo_btn li a {display:block;position:relative;background-color:#f3f3f3;border:1px solid #cccccc;border-radius:3px;color:#ccc;}
+.car_photo_btn li a > span {display:table-cell;width:50px;height:38px;font-size:12px;text-align:center;vertical-align:middle;white-space:normal;cursor:pointer;}
+.car_photo_btn li a > span:active {color:#ba0075;}
+.car_photo_btn li.up a {background-color:#fff2fa;border-color:#e1bed3;color:#333;}
+.car_photo_btn li.on {background-color:rgba(0,0,0,0);}
+.car_photo_btn li.on a {margin:0 auto;color:#fff;font-weight:bold;background:#c00d78;border-color:#c00d78}
+
+.car_photo_desc {position:relative;margin:0px auto 0;padding:0;width:640px;/*border:1px solid #d6d6d6;*/}
+.car_photo_desc::after {content:'';clear:both;display:block;}
+.car_photo_desc li {float:left;margin-top:4px;padding:4px;width:640px;height:75px;vertical-align:top;list-style-type:none;color:#dd0033;font-size:15px;font-weight:700;
+	border:1px solid #c00d78;border-radius:3px;white-space:normal;
+	background-color:#eeeeee;border-color:#e1bed3;
+	}
+
+.cursoron {cursor:pointer;}
+.mavedescbigo {color:#dd0033;font-size:12px;}

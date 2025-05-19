@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="niceCert">
+
+    <select id="getMemberInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT *
+        FROM AM_JEWELLERY_SYSTEM.MEMBER
+        WHERE CI = #{ci}
+    </select>
+
+    <insert id="addMemberInfo" parameterType="hashmap">
+        INSERT INTO AM_JEWELLERY_SYSTEM.MEMBER
+            (
+              SESSION_ID
+            , MB_NM
+            , MB_BIRTHDATE
+            , MB_GENDER
+            , CI
+            , DI
+            , MB_HP
+            , REG_DT
+            , COM_CD
+            , MB_LVL
+            )
+        VALUES
+            (
+              #{sessionId}
+            , #{mb_nm}
+            , #{mb_birthdate}
+            , #{mb_gender}
+            , #{ci}
+            , #{di}
+            , #{phone}
+            , NOW()
+            , 'CM_GUEST'
+            , '5'
+            )
+    </insert>
+
+    <select id="getCI" parameterType="string" resultType="string">
+        SELECT CI
+        FROM AM_JEWELLERY_SYSTEM.MEMBER
+        WHERE SESSION_ID = #{sessionId}
+    </select>
+
+    <update id="updateMemberInfo" parameterType="hashmap">
+        UPDATE AM_JEWELLERY_SYSTEM.MEMBER
+        SET
+            IS_REGISTERED = #{register}
+          , MB_ID = #{memberId}
+          , MB_PWD = ${memberPwd}
+          , EMAIL = #{email}
+          , AGREE_SMS = #{agreeSms}
+          , AGREE_EMAIL = #{agreeEmail}
+          , ZIP_CODE = #{zipCode}
+          , ADDRESS = #{address}
+          , ADDRESS_DETAIL = #{addressDetail}
+          , MOD_DT = NOW()
+        WHERE SESSION_ID = #{sessionId} and ci = #{ci}
+    </update>
+
+    <select id="checkDuplicateId" parameterType="hashmap" resultType="int">
+        SELECT count(*)
+        FROM AM_JEWELLERY_SYSTEM.MEMBER
+        WHERE MB_ID = #{memberId}
+    </select>
+
+    <delete id="delTempMember" parameterType="string">
+        DELETE FROM AM_JEWELLERY_SYSTEM.MEMBER
+        WHERE SESSION_ID = #{sessionId} and IS_REGISTERED = 'N'
+    </delete>
+
+    <update id="changeMemberInfo" parameterType="hashmap">
+        UPDATE AM_JEWELLERY_SYSTEM.MEMBER
+        SET
+            MOD_DT = NOW()
+        <if test="phone != null">
+            , MB_HP = #{phone}
+        </if>
+        <if test="newPwd != null">
+            , MB_PWD = ${newPwd}
+        </if>
+        <if test="email != null">
+            , EMAIL = #{email}
+        </if>
+        <if test="agreeSms != null">
+            , AGREE_SMS = #{agreeSms}
+        </if>
+        <if test="agreeEmail != null">
+            , AGREE_EMAIL = #{agreeEmail}
+        </if>
+        <if test="zipCode != null">
+            , ZIP_CODE = #{zipCode}
+        </if>
+        <if test="address != null">
+            , ADDRESS = #{address}
+        </if>
+        <if test="addressDetail != null">
+            , ADDRESS_DETAIL = #{addressDetail}
+        </if>
+        <if test="ci != null">
+            WHERE CI = #{ci}
+        </if>
+        <if test="memberId != null">
+            WHERE MB_ID = #{memberId}
+        </if>
+    </update>
+
+</mapper>

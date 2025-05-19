@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="excel">
+	<insert id="insertOrder" parameterType="java.util.List">
+		INSERT INTO SRVCPF_SYSTEM.AITKD_SHOP_ORDER
+		(
+			ORDER_NO,
+			PAYMENT_METHOD,
+			PAYMENT_AMOUNT,
+			SHIPPING_FEE,
+			REWARD_POINT,
+			TOTAL_AMOUNT,
+			PAYMENT_DT,
+			PERCHASER,
+			STATUS,
+			REG_ID,
+			MOD_ID,
+			REG_DT,
+			MOD_DT
+		)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			'${item.orderNo}',
+			'${item.paymentMethod}',
+			${item.paymentAmount},
+			${item.shippingFee},
+			${item.rewardPoint},
+			${item.totalAmount},
+			'${item.paymentDt}',
+			'${item.perchaser}',
+			'${item.status}',
+			'manager',
+			'manager',
+			NOW(),
+			NOW()
+		)
+		</foreach>
+	</insert>
+	<insert id="insertOrderDetail" parameterType="java.util.List">
+		INSERT INTO SRVCPF_SYSTEM.AITKD_SHOP_ORDER_DETAIL
+		(
+			ORDER_NO,
+			PRODUCT_NM,
+			PRODUCT_PRICE,
+			PRODUCT_QUANTITY,
+			TOTAL_PRICE,
+			PAYMENT_METHOD,
+			PAYMENT_DT,
+			PERCHASER,
+			STATUS,
+			REG_ID,
+			MOD_ID,
+			REG_DT,
+			MOD_DT
+		)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			'${item.orderNo}', 
+			'${item.productNm}', 
+			${item.productPrice}, 
+			${item.productQuantity}, 
+			${item.totalPrice}, 
+			'${item.paymentMethod}', 
+			'${item.paymentDt}', 
+			'${item.perchaser}',
+			'${item.status}',
+			'manager',
+			'manager',
+			NOW(),
+			NOW()
+		)
+		</foreach>
+	</insert>
+</mapper>

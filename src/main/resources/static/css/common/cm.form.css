@@ -1,0 +1,54 @@
+/*!
+common form css
+*/
+
+.form-panel .box-header .btn-group {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.form-panel .box-header .btn-group button {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.form-group {
+	hhheight: 61px;
+}
+
+/*
+.form-panel .formitem_select {
+	height: 74px;
+}
+*/
+.form-panel .form-group label[defrequired="Y"]
+,.form-panel-sub .form-group label[defrequired="Y"] {
+	color: #FF0000;
+}
+
+.form-panel .itemactions
+,.form-panel-sub .itemactions {
+	cursor: pointer;
+}
+
+
+.addtext {
+	display: inline-block;
+	max-width: 200px;
+	width: calc(100% - 100px);
+	margin-left: 5px;
+}
+
+.addselect {
+	display: inline-block;
+	max-width: 100px;
+	width: calc(100% - 150px);
+	margin-left: 5px;
+	font-size:11px;
+}
+
+.addselect + .select2 {
+	width: 100px !important;
+	max-width: 150px !important;
+}
+

@@ -1,0 +1,41 @@
+/*!
+modal css
+*/
+
+
+.common-modal .modal {
+	position: relative;
+	top: auto;
+	bottom: auto;
+	right: auto;
+	left: auto;
+	display: block;
+	z-index: 1;
+	background: transparent !important;
+}
+
+
+#commonModal .checkbox {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.modal-dialog {
+	width: 80%;
+	height: 90%;
+	overflow: auto;
+}
+
+.form-panel .modal-dialog
+,.form-panel-sub .modal-dialog {
+	width: 80%;
+	height: 90%;
+	overflow-y: auto;
+	overflow-x: hidden;
+} 
+#commonModal .modal-body tr.selected{
+	background-color: #f7e1d6;
+}
+
+
+

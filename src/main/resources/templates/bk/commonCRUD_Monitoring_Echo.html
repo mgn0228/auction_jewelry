@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script th:src="'/js/content/'+${pid}+'/'+${pid}+'.js'"></script>
+	<link rel="stylesheet" th:href="'/css/content/'+${pid}+'/'+${pid}+'.css'">
+	
+	<script>
+		$(document).ready(function () {
+			init();
+			_utilSearch.initCustom(_searchPanelCls,_utilDatatable, searchSuccess);
+		});
+	</script>
+	
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section>
+			
+			
+			<!-- Main content -->
+			<section class="content">
+				
+				<!-- Search Panel -->
+				<div th:replace="~{include/panel_search::searchpanel}"></div>
+
+				<!-- Monitoring Panel -->
+				<div class="row panel_monitoring">
+					<div class="col-md-12">
+					
+						<div class="box box-danger">
+							<div class="box-header">
+								<!-- checkbox -->
+								<div class="form-group pull-left viewtitle"></div>
+								<div class="form-group pull-right realtime">
+									<div id="mapArea" class="">
+										
+									</div>
+									<div id="imageMap" class="hidden">
+										
+									</div>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					
+					</div>
+				</div>
+				
+				
+				
+				<div class="col-md-3 layer_generalInfo">
+					<div class="box box-warning">
+						<div class="box-header with-border">
+							<h5 class="box-title maintitle">일반정보</h5>
+				
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+							</div>
+							<!-- /.box-tools -->
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body mainbox" >
+							<div class="sectorList">
+								<div class="sectorInfo" id="sectorInfo">
+								</div>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				
+				
+				
+				<div class="col-md-3 layer_workerInfo">
+					<div class="box box-warning">
+						<div class="box-header with-border">
+							<h5 class="box-title maintitle">작업자정보</h5>
+				
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+							</div>
+							<!-- /.box-tools -->
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body mainbox" >
+							<div class="workerList">
+								<div class="workerInfo" id="workerInfo">
+								</div>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				
+				
+				
+			</section>
+			<!-- /.content -->
+			
+			
+			
+			
+			
+			
+			
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+			<div class="example-modal modalSectorInfo" id="modalSectorInfo">
+				<div class="modal"> <!-- modal-primary modal-info modal-warning modal-success modal-danger -->
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"></h4>
+							</div>
+							<div class="modal-body infoContent">
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!-- /.example-modal -->
+		
+	</div>
+<!-- ./wrapper -->
+
+
+
+</body>
+</html>

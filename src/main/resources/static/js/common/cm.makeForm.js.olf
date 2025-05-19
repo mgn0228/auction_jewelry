@@ -1,0 +1,1931 @@
+
+
+
+class cm_makeForm {
+	formItem;
+	dialog;
+	
+	constructor () {
+		this.formItem = null;
+		this.dialog = null;
+	}
+	
+	setFormFDList (fdlist){
+		this.formItem = fdlist;
+	}
+	
+	makeSelectOptStr (optlst, defval, deflabel){
+		var ret = "";
+		if (defval != null && defval != undefined) {
+			ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+		}
+		for(var i=0;i<optlst.length;i++) {
+			ret += "<option value=\""+optlst[i].value+"\" lbl=\""+optlst[i].label+"\">"+optlst[i].label+"</option>";
+		}
+		return ret;
+	}
+	
+	makeSimpleSelectOptStr (val, label){
+		var ret = "";
+		ret += "<option value=\""+val+"\" lbl=\""+label+"\">"+label+"</option>";
+		return ret;
+	}
+	
+	makeOptionString (formid, controlname, defval, deflabel, optlst){
+		var ret = "";
+		if (defval != null && defval != undefined) {
+			ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+		}
+		for(var i=0;i<optlst.length;i++) {
+			ret += "<option value=\""+optlst[i].value+"\" lbl=\""+optlst[i].label+"\">"+optlst[i].label+"</option>";
+		}
+		
+		$(formid+" .form-control[name="+controlname+"]").html(ret);
+	
+	}
+	
+	makeOptionStringCustom (formid, controlname, defval, deflabel, optlst, valfd, labfd){
+		var ret = "";
+		if (defval != null && defval != undefined) {
+			ret += "<option value=\""+defval+"\">"+deflabel+"</option>";
+		}
+		for(var i=0;i<optlst.length;i++) {
+			ret += "<option value=\""+optlst[i][valfd]+"\" lbl=\""+optlst[i][labfd]+"\">"+optlst[i][labfd]+"</option>";
+		}
+		
+		$(formid+" .form-control[name="+controlname+"]").html(ret);
+	
+	}
+	
+	makeOptionNumberString (formid, controlname, defval, deflabel, stno, endno){
+		var ret = "";
+		if (defval != null && defval != undefined) {
+			ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+		}
+		for(var i=stno;i<=endno;i++) {
+			ret += "<option value=\""+i+"\" lbl=\""+i+"\">"+i+"</option>";
+		}
+		
+		$(formid+" .form-control[name="+controlname+"]").html(ret);
+	
+	}
+	
+	clearOption (formid, controlname, defval, deflabel){
+		$(formid+" .form-control[name="+controlname+"]").empty();
+		var ret = "";
+		if (defval != null && defval != undefined) {
+			ret += "<option value=\""+defval+"\">"+deflabel+"</option>";
+		}
+		$(formid+" .form-control[name="+controlname+"]").html(ret);
+	
+	}
+	
+	
+	
+	
+	setFormData (formType ,cls ,data){
+		if (data == undefined || data == null) {
+			cm_makeForm.prototype.formClear(formType ,cls);
+		}
+		var items = this.formItem;
+		for (var i=0;i<items.length;i++) {
+			$(cls+" .form-control[name="+items[i].frmColNm+"]").val(data[items[i].frmColNm]);
+		}
+		var props = data["props"];
+		if (props==null) return data;
+		
+		var imgfile_id = [];
+		
+		for (var i=0;i<props.length;i++) {
+			var prop = props[i];
+			var tag = prop.propTag;
+			var propcd = prop.propCd;
+			var propVal = prop.propVal;
+			var propLbl = prop.propLbl;
+			
+			if (tag=="checkbox" || tag=="radio") {
+				if (propVal == undefined || propVal == null || propVal.trim() == "") continue;
+				$(cls+" .form-control[name="+propcd+"][value='"+propVal+"']").prop("checked",true);
+			} else if (tag=="text_selectMulti" || tag=="twotext_selectMulti" || tag=="threetext_selectMulti" || tag=="threetextselect_selectMulti" || tag=="textselect_selectMulti" || tag=="texttextselect_selectMulti" || tag=="selectMulti") {
+				
+				var opt = "<option value=\""+propVal+"\" lbl=\""+propLbl+"\">"+propLbl+"</option>";
+				$(cls+" .form-control[name="+propcd+"]").append(opt);
+				var cnt = parseInt($(cls+" .multiformgroup .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt"));
+				cnt++;
+				$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt",cnt);
+				$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").html(cnt+"개");			
+				
+				
+			} else if (tag=="search_selectMulti") {
+				
+				var opt = "<option value=\""+propVal+"\" lbl=\""+propLbl+"\">"+propLbl+"</option>";
+				$(cls+" .form-control[name="+propcd+"]").append(opt);
+				var cnt = parseInt($(cls+" .multiformgroup .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt"));
+				cnt++;
+				$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt",cnt);
+				$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").html(cnt+"개");			
+			} else if (tag=="file_img") {
+				var isChecked=false;
+				for (var kk=imgfile_id.length-1;kk>=0;kk--) {
+					if (imgfile_id[kk] == propcd) isChecked = true;
+				}
+				if (isChecked==false) imgfile_id.push(propcd);
+			} else if (tag=="file_attach") {
+				$(cls+" .form-control[name="+propcd+"]").attr("linksrc",propVal);
+				$(cls+" .form-control[name="+propcd+"]").attr("value",propVal);
+			} else {
+				$(cls+" .form-control[name="+propcd+"]").val(propVal);
+			}
+		}
+		
+		if (imgfile_id.length > 0) {
+			
+				for (var j=0;j<imgfile_id.length;j++) {
+					var key = imgfile_id[j];
+					var preloaddata = [];
+					for (var i=0,idx=1;i<props.length;i++) {
+						if (props[i].propCd == key) {
+							
+							var onedata = {};
+							onedata.id=idx;
+							onedata.src=props[i].propVal;
+							idx++;
+							preloaddata.push(onedata);
+						}
+					}
+					var maxfile = parseInt($("#"+key).attr("frmmax"));
+					$("#"+key).empty();
+					if (preloaddata.length > 0) {
+						$("#"+key).imageUploader({
+							preloaded: preloaddata,
+							imagesInputName:key,
+							maxFiles: maxfile,
+							extensions: ['.jpg', '.jpeg', '.png'],
+							mimes: ['image/jpeg', 'image/png']
+						});
+					} else {
+						$("#"+key).imageUploader({
+							imagesInputName:key,
+							maxFiles: maxfile,
+							extensions: ['.jpg', '.jpeg', '.png'],
+							mimes: ['image/jpeg', 'image/png']
+						});
+					}
+				}
+				
+				for (var j=0;j<imgfile_id.length;j++) {
+					var fnkeys = "";
+					$("#"+imgfile_id[j]+" .uploaded-image img").each(function () {
+						var src = $(this).attr("src");
+						src = src.replace(/\//gi,"");
+						src = src.replace(/\./gi,"");
+						$(this).attr("fnkey",src);
+						if (fnkeys != "") fnkeys += ",";
+						fnkeys += src;
+	//					var src = $(this).prop("src");
+	//					var srcattr = $(this).attr("src");
+	//					_ajaxUtil.getByteArrayImgSync(src ,_jsonUtil.make(_pid, {}), "#"+imgfile_id[j], "#"+imgfile_id[j]+" .uploaded-image img[src='"+srcattr+"']");
+					});
+					$("#"+imgfile_id[j]).attr("fnkeys",fnkeys);
+				}
+				
+		}
+		
+		
+		
+		$(_formId + " .form-control.multiselect.props").each( function(index, item) {
+			var type = $(item).attr("multiselecttype");
+			if (type == "tt" || type == "ts" || type == "tts" || type == "ttt" || type == "ttts") {
+				var tarfd = $(item).attr("targetfd");
+				var tarfds = tarfd.split(",");
+				for(var i=0;i<tarfds.length;i++) {
+					$(_formId + " .form-control.multiselect.props[name="+tarfds[i]+"]").empty();
+				}
+				
+			}
+		});
+		
+		
+		
+		return data;
+	}
+	
+	
+	getFormData (formType ,cls) {
+		
+		var val="";
+		var items = this.formItem;
+		var data={};
+		for (var i=0;i<items.length;i++) {
+			var obj = $(cls+" .form-control[name="+items[i].frmColNm+"]");
+			if ($(obj).hasClass("multiselect") == true) {
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					if (j>0) val += ",";
+					val += $(obj).find("option").val().trim();
+				}
+			} else {
+				var selval = $(obj).val();
+				if (selval == undefined || selval == null) selval = "";
+				data[items[i].frmColNm] = selval.trim();
+			}
+		}
+		
+		
+		data.props=[];
+		var propitems = $(cls+" .form-control.props");
+		
+		for (var i=0;i<propitems.length;i++) {
+			var obj = $(propitems)[i];
+			if ($(obj).hasClass("multiselect") == true) {
+				var multiselecttype = $(obj).attr("multiselecttype");
+				if (multiselecttype == "tt" || multiselecttype == "ts" || multiselecttype == "tts" || multiselecttype == "ttt" || multiselecttype == "ttts") {
+					var target = $(obj).attr("targetfd");
+					var targets = target.split(",");
+					for (var k=0;k<targets.length;k++) {
+						$(cls+" .form-control[name="+targets[k]+"]").empty();
+					}
+					
+					for (var j=0;j<$(obj).find("option").length;j++) {
+						var val = $(obj).find("option:eq("+j+")").val().trim();
+						var vals = val.split("/");
+						var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+						if (lbl == undefined || lbl == null) lbl = val;
+						else lbl = lbl.trim();
+						var lbls = lbl.split("/");
+						
+						var cnt = parseInt($(obj).attr("txtcnt"));
+						for (var k=0;k<targets.length;k++) {
+							var tval = vals[k].trim();
+							var tlbl = lbls[k];
+							if (tlbl == undefined || tlbl == null) tlbl = tval;
+							var optstr = "<option value=\""+tval+"\" lbl=\""+tlbl+"\">"+tlbl+"</option>";
+							$(cls+" .form-control[name="+targets[k]+"]").append(optstr);
+						}
+					}
+				}
+			}
+		}
+		
+		for (var i=0;i<propitems.length;i++) {
+			var obj = $(propitems)[i];
+			if ($(obj).hasClass("multiselect") == true) {
+				var multiselecttype = $(obj).attr("multiselecttype");
+					for (var j=0;j<$(obj).find("option").length;j++) {
+						var oneprop = {};
+						var val = $(obj).find("option:eq("+j+")").val().trim();
+						var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+						if (lbl == undefined || lbl == null) lbl = val;
+						oneprop.propCd = $(obj).prop("name");
+						oneprop.propVal = val;
+						oneprop.propLbl = lbl;
+						
+						data.props.push(oneprop);
+					}
+			} else if ($(obj).prop("type") == "checkbox" || $(obj).prop("type") == "radio") {
+				if ($(obj).prop("checked") == true) {
+					val = $(obj).val().trim();
+					var oneprop = {};
+					oneprop.propCd = $(obj).prop("name");
+					oneprop.propVal = val;
+					oneprop.propLbl = $(obj).attr("lbl");
+					data.props.push(oneprop);
+				}
+			} else {
+				val = $(obj).val();
+				if (val == null || val == undefined) val="";
+				val = val.trim();
+				var oneprop = {};
+				oneprop.propCd = $(obj).prop("name");
+				oneprop.propVal = val;
+				
+				if ($(obj).prop('tagName').toString().toLowerCase() == "select") {
+					oneprop.propLbl = $(obj).find(" option:selected").attr("lbl");
+				}
+				data.props.push(oneprop);
+			}
+			
+		}
+		
+		
+		$(cls+" div.fileImg").each(function (idx,obj){
+			var fileimgname = $(obj).attr("name");
+			var fnkey_org = $(obj).attr("fnkeys");
+			if (fnkey_org != undefined && fnkey_org != null) {
+				var fnkeys_org = fnkey_org.split(",");
+				var fnvals = "";
+				for (var i=0;i<fnkeys_org.length;i++) {
+					if (fnkeys_org[i] == "") continue;
+					if ($(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").length>0){
+						var srcfnkey = $(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").attr("src");
+						if (fnvals != "") fnvals += ",";
+						fnvals += srcfnkey;
+					}
+				}
+				data[fileimgname+"_exist"]=fnvals;
+			}
+		});
+		
+		
+		return data;
+	}
+	
+	
+	
+	getFormDataByCustom (cls ,formItem) {
+		
+		var val="";
+		var items = formItem;
+		var data={};
+		for (var i=0;i<items.length;i++) {
+			var obj = $(cls+" .form-control[name="+items[i]+"]");
+			if ($(obj).hasClass("multiselect") == true) {
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					if (j>0) val += ",";
+					val += $(obj).find("option").val().trim();
+				}
+			} else {
+				var selval = $(obj).val();
+				if (selval == undefined || selval == null) selval = "";
+				data[items[i]] = selval.trim();
+			}
+		}
+		
+		
+		data.props=[];
+		var propitems = $(cls+" .form-control.props");
+		
+		for (var i=0;i<propitems.length;i++) {
+			var obj = $(propitems)[i];
+			if ($(obj).hasClass("multiselect") == true) {
+				var multiselecttype = $(obj).attr("multiselecttype");
+				if (multiselecttype == "tt" || multiselecttype == "ts" || multiselecttype == "tts" || multiselecttype == "ttt" || multiselecttype == "ttts") {
+					var target = $(obj).attr("targetfd");
+					var targets = target.split(",");
+					for (var k=0;k<targets.length;k++) {
+						$(cls+" .form-control[name="+targets[k]+"]").empty();
+					}
+					
+					for (var j=0;j<$(obj).find("option").length;j++) {
+						var val = $(obj).find("option:eq("+j+")").val().trim();
+						var vals = val.split("/");
+						var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+						if (lbl == undefined || lbl == null) lbl = val;
+						else lbl = lbl.trim();
+						var lbls = lbl.split("/");
+						
+						var cnt = parseInt($(obj).attr("txtcnt"));
+						for (var k=0;k<targets.length;k++) {
+							var tval = vals[k].trim();
+							var tlbl = lbls[k];
+							if (tlbl == undefined || tlbl == null) tlbl = tval;
+							var optstr = "<option value=\""+tval+"\" lbl=\""+tlbl+"\">"+tlbl+"</option>";
+							$(cls+" .form-control[name="+targets[k]+"]").append(optstr);
+						}
+					}
+				}
+			}
+		}
+		
+		for (var i=0;i<propitems.length;i++) {
+			var obj = $(propitems)[i];
+			if ($(obj).hasClass("multiselect") == true) {
+				var multiselecttype = $(obj).attr("multiselecttype");
+					for (var j=0;j<$(obj).find("option").length;j++) {
+						var oneprop = {};
+						var val = $(obj).find("option:eq("+j+")").val().trim();
+						var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+						if (lbl == undefined || lbl == null) lbl = val;
+						oneprop.propCd = $(obj).prop("name");
+						oneprop.propVal = val;
+						oneprop.propLbl = lbl;
+						
+						data.props.push(oneprop);
+					}
+			} else if ($(obj).prop("type") == "checkbox" || $(obj).prop("type") == "radio") {
+				if ($(obj).prop("checked") == true) {
+					val = $(obj).val().trim();
+					var oneprop = {};
+					oneprop.propCd = $(obj).prop("name");
+					oneprop.propVal = val;
+					oneprop.propLbl = $(obj).attr("lbl");
+					data.props.push(oneprop);
+				}
+			} else {
+				val = $(obj).val();
+				if (val == null || val == undefined) val="";
+				val = val.trim();
+				var oneprop = {};
+				oneprop.propCd = $(obj).prop("name");
+				oneprop.propVal = val;
+				
+				if ($(obj).prop('tagName').toString().toLowerCase() == "select") {
+					oneprop.propLbl = $(obj).find(" option:selected").attr("lbl");
+				}
+				data.props.push(oneprop);
+			}
+			
+		}
+		
+		
+		$(cls+" div.fileImg").each(function (idx,obj){
+			var fileimgname = $(obj).attr("name");
+			var fnkey_org = $(obj).attr("fnkeys");
+			if (fnkey_org != undefined && fnkey_org != null) {
+				var fnkeys_org = fnkey_org.split(",");
+				var fnvals = "";
+				for (var i=0;i<fnkeys_org.length;i++) {
+					if (fnkeys_org[i] == "") continue;
+					if ($(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").length>0){
+						var srcfnkey = $(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").attr("src");
+						if (fnvals != "") fnvals += ",";
+						fnvals += srcfnkey;
+					}
+				}
+				data[fileimgname+"_exist"]=fnvals;
+			}
+		});
+		
+		
+		return data;
+	}
+	
+	
+	getFormDatawithFiles (formType ,cls, data) {
+		
+		var retFormData = new FormData();
+		
+		retFormData.append('hashdata', data);
+		
+	}
+	
+	
+	formClear (formType ,cls){
+		var items = this.formItem;
+		$(cls+" input[type=hidden].form-control").val("");
+		$(cls+" input[type=text].form-control").val("");
+		$(cls+" input[type=password].form-control").val("");
+		$(cls+" input[type=file].form-control").val("");
+		$(cls+" textarea.form-control").val("");
+		$(cls+" input[type=checkbox].form-control").prop("checked",false);
+		$(cls+" input[type=radio].form-control").prop("checked",false);
+		$(cls+" button.fileAttach").attr("value","");
+		$(cls+" button.fileAttach").attr("linksrc","");
+		
+		$(cls+" select.form-control").each(function (obj) {
+			$(this).val($(this).find("option:first").val());
+		});
+		$(cls+"  select.form-control.multiselect").each(function (obj) {
+			$(this).empty();
+			$(this).closest(".form-group").find(".listcnt").attr("cnt",0);
+			$(this).closest(".form-group").find(".listcnt").html("0개");
+		});
+		
+		$(cls+" .image-uploader").remove();
+		
+	//	$(cls+" .image-uploader .uploaded").empty();
+	//	$(cls+" .image-uploader").removeClass("has-files");
+		$(cls+" .fileImg").attr("fnkeys","");
+		
+		$(cls+" .fileImg").each(function (idx, obj) {
+			var key = $(obj).attr("id");
+			var maxfile = parseInt($(obj).attr("frmmax"));
+				$("#"+key).imageUploader({
+					imagesInputName:key,
+					maxFiles: maxfile,
+					extensions: ['.jpg', '.jpeg', '.png'],
+					mimes: ['image/jpeg', 'image/png']
+				});
+		});
+	
+		
+		private_function("afterFormClear")
+		
+		
+	}
+	
+	
+	formPropertyClear (formType ,cls){
+		var items = this.formItem;
+		$(cls+" input[type=hidden].form-control.props").val("");
+		$(cls+" input[type=text].form-control.props").val("");
+		$(cls+" input[type=password].form-control.props").val("");
+		$(cls+" input[type=file].form-control.props").val("");
+		$(cls+" textarea.form-control.props").val("");
+		$(cls+" input[type=checkbox].form-control.props").prop("checked",false);
+		$(cls+" input[type=radio].form-control.props").prop("checked",false);
+		$(cls+" button.fileAttach.props").attr("value","");
+		$(cls+" button.fileAttach.props").attr("linksrc","");
+		
+		$(cls+" select.form-control.props").each(function (obj) {
+			$(this).val($(this).find("option:first").val());
+		});
+		$(cls+"  select.form-control.multiselect.props").each(function (obj) {
+			$(this).empty();
+			$(this).closest(".multiformgroup").find(".listcnt").attr("cnt",0);
+			$(this).closest(".multiformgroup").find(".listcnt").html("0개");
+		});
+		
+	}
+	
+	setFormDisable (formType ,cls ,mode){
+		$(cls+" .form-control").prop("disabled",mode);
+		$(cls+" button").prop("disabled",mode);
+		
+		if (mode == true) {
+			$(cls+" .fileImg").addClass("container-diable");
+		}
+		else {
+			$(cls+" .fileImg").removeClass("container-diable");
+		}
+		
+	}
+	
+	
+	openModal (dlg ,cls ,w ,h ,isModal ,isResizable ,addfunc ,initfunc){
+		dlg = $(cls).dialog({
+			autoOpen : false,
+			height : h,
+			width : w,
+			modal : isModal,
+			resizable : isResizable,
+			draggable: false,
+			buttons : {
+				"등록" : addfunc,
+				"취소" : function() {
+					dlg.dialog("close");
+					initfunc();
+				}
+			},
+			close : function() {
+				initfunc();
+			},
+			position: { my: "center", at: "center", of: window }
+		});
+		
+		
+		$(window).resize(function(){
+			dlg.dialog("option","position",{ my: "center", at: "center", of: window });
+		});
+		
+		return dlg;
+	
+	}
+	
+	
+	
+	selListAdd (btn){
+		var target = $(btn).attr("target");
+		
+		var txtcnt = $(btn).closest(".form-group").find(".multiformgroup .form-control[name="+target+"]").attr("txtcnt");
+		if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+			var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac]").val().trim();
+			if (val != "") {
+				var opt = "<option value='"+val+"'>"+val+"</option>";
+				$(btn).closest(".form-group").find(".form-control[name="+target+"]").append(opt);
+				
+				var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+				cnt++;
+				$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+				$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+			}
+			$(btn).closest(".form-group").find(".form-control[name="+target+"_ac][type=text]").val("");
+		} else {
+			var cnt = parseInt(txtcnt);
+			var valstr = "";
+			var labelstr = "";
+			for (var i=0;i<cnt;i++) {
+				if (i>0) {
+					valstr+=" / ";
+					labelstr+=" / ";
+				}
+				var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+				var label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+				if ($(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").prop('tagName').toLowerCase()=="select") {
+					label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"] option:selected").text();
+				}
+				valstr += val;
+				labelstr += label;
+			}
+			var opt = "<option value='"+valstr+"' lbl='"+labelstr+"'>"+labelstr+"</option>";
+			$(btn).closest(".form-group").find(".form-control[name="+target+"]").append(opt);
+			$(btn).closest(".form-group").find(".addtxtcontrol[type=text]").val("");
+			
+			var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+			cnt++;
+			$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+			$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+		}
+		
+	}
+	
+	
+	selListMod (btn){
+		var target = $(btn).attr("target");
+		
+		var txtcnt = $(btn).closest(".form-group").find(".multiformgroup .form-control[name="+target+"]").attr("txtcnt");
+		if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+			var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac]").val().trim();
+			if (val != "") {
+				$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").val(val);
+				$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").html(val);
+			}
+			$(btn).closest(".form-group").find(".form-control[name="+target+"_ac][type=text]").val("");
+		} else {
+			var cnt = parseInt(txtcnt);
+			var valstr = "";
+			var labelstr = "";
+			for (var i=0;i<cnt;i++) {
+				if (i>0) {
+					valstr+=" / ";
+					labelstr+=" / ";
+				}
+				var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+				var label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+				if ($(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").prop('tagName').toLowerCase()=="select") {
+					label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"] option:selected").text();
+				}
+				valstr += val;
+				labelstr += label;
+			}
+			$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").val(valstr);
+			$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").html(labelstr);
+			$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").attr("lbl",labelstr);
+	
+			$(btn).closest(".form-group").find(".addtxtcontrol[type=text]").val("");
+			
+		}
+		
+	}
+	
+	
+	
+	selListOptionClick (select){
+		
+		var opt = $(select).find("option:selected");
+		if (opt.length<=0) return;
+		var target = $(opt).parent().prop("id");
+		var txtcnt = $(opt).parent().attr("txtcnt");
+		var vals = $(opt).val();
+		
+		if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+			$(opt).closest(".form-group").find(".form-control[name="+target+"_ac]").val(vals);
+		} else {
+			var cnt = parseInt(txtcnt);
+			var valsary = vals.split("/");
+			for (var i=0;i<cnt;i++) {
+				var j=i+1;
+				var ttt = valsary[i];
+				if (ttt != undefined && ttt != null) ttt = ttt.trim();
+				$(opt).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val(ttt);
+			}
+		}
+	}
+	
+	
+	selListRemove (btn){
+		var target = $(btn).attr("target");
+		var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+		var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+		
+		$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").remove();
+	
+		var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+		cnt--;
+		if (cnt < 0) cnt = 0;
+		$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+		$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+		
+		if (linktargets != undefined && linktargets != null && linktargets.trim() != "") {
+			var linktarfds = linktargets.split(",");
+			for (var i=0;i<linktarfds.length;i++) {
+				if (target == linktarfds[i]) continue;
+				$(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")").remove();
+			}
+		}
+	}
+	
+	
+	
+	selListMoveUp (btn){
+		var target = $(btn).attr("target");
+		var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+		var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+			
+	    var selected = $(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected");
+		var before = selected.prev();
+		if (before.length > 0) {
+			selected.detach().insertBefore(before);
+			
+			if (linktargets != undefined && linktargets != null) {
+				var linktarfds = linktargets.split(",");
+				for (var i=0;i<linktarfds.length;i++) {
+					
+					if (target == linktarfds[i]) continue;
+					var optidx = $(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")");
+					var optprev = optidx.prev();
+					if (optprev.length > 0) {
+						optidx.detach().insertBefore(optprev);
+					}
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	selListMoveDn (btn){
+		var target = $(btn).attr("target");
+		var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+		var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+		
+	    var selected = $(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected");
+		var next = selected.next();
+		if (next.length > 0) {
+			selected.detach().insertAfter(next);
+			
+			if (linktargets != undefined && linktargets != null) {
+				var linktarfds = linktargets.split(",");
+				for (var i=0;i<linktarfds.length;i++) {
+					
+					if (target == linktarfds[i]) continue;
+					var optidx = $(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")");
+					var optnext = optidx.next();
+					if (optnext.length > 0) {
+						optidx.detach().insertAfter(optnext);
+					}
+				}
+			}
+		}
+		
+	
+	}
+	
+	
+	userBtnAddInfo (formid, btn){
+		var srcfd = $(btn).attr("srcfd");
+		var target = $(btn).attr("listfd");
+		
+		var srcfds = srcfd.split(",");
+		var sumstring = "";
+		var optstr = "";
+		for (var i=0;i<srcfds.length;i++) {
+			var valstr = $(formid + " .form-control[name="+srcfds[i]+"]").val();
+			var optlst = $(formid + " .form-control[name="+srcfds[i]+"] option");
+			var lblstr = "";
+			if (optlst.length > 0) {
+				lblstr = $(formid + " .form-control[name="+srcfds[i]+"] option:selected").text();
+			}
+			else lblstr = valstr;
+			if (valstr == undefined) valstr = "";
+			if (lblstr == undefined) lblstr = "";
+			valstr = valstr.trim();
+			lblstr = lblstr.trim();
+			if (i>0) sumstring+=" / ";
+			sumstring += lblstr;
+			optstr = "<option value=\""+valstr+"\" lbl=\""+lblstr+"\">"+lblstr+"</option>";
+			$(formid + " .form-control[name=real_"+srcfds[i]+"]").append(optstr);
+		}
+		optstr = "<option value=\""+sumstring+"\" >"+sumstring+"</option>";
+		$(formid + " .form-control[name="+target+"]").append(optstr);
+		
+		var listcnt = $(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt");
+		listcnt++;
+		$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+		$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+	
+		private_function("userBtnAddInfo");
+	}
+	
+	
+	
+	userBtnDelInfo (formid, btn) {
+		
+		var srcfd = $(btn).attr("srcfd");
+		var target = $(btn).attr("listfd");
+		
+		var idx = $(formid + " .form-control[name="+target+"] option").index($(formid + " .form-control[name="+target+"] option:selected"));
+		
+		if (idx >= 0) {
+			private_function("userBtnDelInfo");
+			
+			var srcfds = srcfd.split(",");
+			for (var i=0;i<srcfds.length;i++) {
+				$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+idx+")").remove();
+			}
+			$(formid + " .form-control[name="+target+"] option:eq("+idx+")").remove();
+			
+			
+			var listcnt = $(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt");
+			listcnt--;
+			$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+			$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+			
+			private_function("userBtnDelInfo");
+			
+		} else {
+			alert("삭제할 항목을 선택하세요.");
+		}
+		
+	}
+	
+	
+	
+	userBtnModInfo (formid, btn){
+		
+		var srcfd = $(btn).attr("srcfd");
+		var target = $(btn).attr("listfd");
+		var selidx = $(target).find(" option").index($(target).find(" option:selected"));
+		
+		var srcfds = srcfd.split(",");
+		var sumstring = "";
+		var optstr = "";
+		for (var i=0;i<srcfds.length;i++) {
+			var valstr = $(formid + " .form-control[name="+srcfds[i]+"]").val();
+			var optlst = $(formid + " .form-control[name="+srcfds[i]+"] option");
+			var lblstr = "";
+			if (optlst.length > 0) {
+				lblstr = $(formid + " .form-control[name="+srcfds[i]+"] option:selected").text();
+			}
+			else lblstr = valstr;
+			if (valstr == undefined) valstr = "";
+			if (lblstr == undefined) lblstr = "";
+			valstr = valstr.trim();
+			lblstr = lblstr.trim();
+			if (i>0) sumstring+=" / ";
+			sumstring += lblstr;
+			optstr = "<option value=\""+valstr+"\" lbl=\""+lblstr+"\">"+lblstr+"</option>";
+			
+			$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").val(valstr);
+			$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").attr("lbl",lblstr);
+			$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").text(lblstr);
+			
+		}
+		optstr = "<option value=\""+sumstring+"\" >"+sumstring+"</option>";
+		
+		$(formid + " .form-control[name="+target+"] option:selected").val(sumstring);
+		$(formid + " .form-control[name="+target+"] option:selected").text(sumstring);
+		
+		private_function("userBtnModInfo");
+	}
+	
+	
+	
+	setBtnInfo (formid, formCd) {
+		
+		var srcFd = $(formid + " .form-control[name="+formCd+"]").attr("srcfd");
+		var srcfds = srcFd.split(",");
+		var substr = "";
+		
+		var listcnt = $(formid + " .form-control[name=real_"+srcfds[0]+"] option").length;
+		$(formid + " .form-control[name="+formCd+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+		$(formid + " .form-control[name="+formCd+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+		for (var j=0;j<listcnt;j++) {
+			substr = "";
+			for (var i=0;i<srcfds.length;i++) {
+				var lbl = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+j+")").attr("lbl");
+				if (lbl == "") lbl = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+j+")").text();
+				if (i>0) substr += " / ";
+				substr += lbl;
+			}
+			var optstr = "<option value=\""+substr+"\">"+substr+"</option>";
+			$(formid + " .form-control[name="+formCd+"]").append(optstr);
+		}
+		
+	}
+	
+	
+	setBtnInfoToSource (formid, obj) {
+		
+		var srcFd = $(obj).attr("srcfd");
+		var srcfds = srcFd.split(",");
+		var substr = "";
+		
+		var idx = $(obj).find("option").index($(obj).find("option:selected"));
+		
+		for (var i=0;i<srcfds.length;i++) {
+			var val = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+idx+")").val();
+			$(formid + " .form-control[name="+srcfds[i]+"]").val(val);
+		}	
+	}
+	
+	
+	changeMultiSelectListByProperty (formid, obj, propData, propCds, beforeClear) {
+		
+		if (beforeClear == true) $(formid+" "+obj).empty();
+		
+		var seq = 1;
+		isfinish = false;
+		
+		while (isfinish == false) {
+			
+			var vals = "";
+			var str = "";
+			for (var i=0;i<propData.length;i++) {
+				if (propData[i].propCd == propCds[0] && propData[i].propValSeq == seq) {
+					vals += propData[i].propVal;
+					str += propData[i].propLbl;
+					break;
+				}
+			}
+			if (i>=propData.length) {
+				isfinish = true;
+				break;
+			}
+			for (var i=1;i<propCds.length;i++) {
+	
+				for (var j=0;j<propData.length;i++) {
+					if (propData[j].propCd == propCds[i] && propData[j].propValSeq == seq) {
+						vals += "/"+propData[j].propVal;
+						str += "/"+propData[j].propLbl;
+						break;
+					}
+				}
+				
+			}
+			
+			var optstr = "<option value='"+vals+"'>"+str+"</optionl>";
+			
+			$(formid+" "+obj).append(optstr);
+			
+			seq++;
+			
+		}
+			
+		for (var j=1;j<propCds.length;j++) {
+			
+		}
+		
+	}
+	
+}
+
+
+
+
+/*
+
+var cm_makeForm = function(){
+	var formItem = null;
+	var dialog = null;
+}
+cm_makeForm.prototype.setFormFDList = function(fdlist){
+	this.formItem = fdlist;
+}
+
+cm_makeForm.prototype.makeSelectOptStr = function(optlst, defval, deflabel){
+	var ret = "";
+	if (defval != null && defval != undefined) {
+		ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+	}
+	for(var i=0;i<optlst.length;i++) {
+		ret += "<option value=\""+optlst[i].value+"\" lbl=\""+optlst[i].label+"\">"+optlst[i].label+"</option>";
+	}
+	return ret;
+}
+
+cm_makeForm.prototype.makeSimpleSelectOptStr = function(val, label){
+	var ret = "";
+	ret += "<option value=\""+val+"\" lbl=\""+label+"\">"+label+"</option>";
+	return ret;
+}
+
+cm_makeForm.prototype.makeOptionString = function(formid, controlname, defval, deflabel, optlst){
+	var ret = "";
+	if (defval != null && defval != undefined) {
+		ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+	}
+	for(var i=0;i<optlst.length;i++) {
+		ret += "<option value=\""+optlst[i].value+"\" lbl=\""+optlst[i].label+"\">"+optlst[i].label+"</option>";
+	}
+	
+	$(formid+" .form-control[name="+controlname+"]").html(ret);
+
+}
+
+cm_makeForm.prototype.makeOptionStringCustom = function(formid, controlname, defval, deflabel, optlst, valfd, labfd){
+	var ret = "";
+	if (defval != null && defval != undefined) {
+		ret += "<option value=\""+defval+"\">"+deflabel+"</option>";
+	}
+	for(var i=0;i<optlst.length;i++) {
+		ret += "<option value=\""+optlst[i][valfd]+"\" lbl=\""+optlst[i][labfd]+"\">"+optlst[i][labfd]+"</option>";
+	}
+	
+	$(formid+" .form-control[name="+controlname+"]").html(ret);
+
+}
+
+cm_makeForm.prototype.makeOptionNumberString = function(formid, controlname, defval, deflabel, stno, endno){
+	var ret = "";
+	if (defval != null && defval != undefined) {
+		ret += "<option value=\""+defval+"\" lbl=\""+deflabel+"\">"+deflabel+"</option>";
+	}
+	for(var i=stno;i<=endno;i++) {
+		ret += "<option value=\""+i+"\" lbl=\""+i+"\">"+i+"</option>";
+	}
+	
+	$(formid+" .form-control[name="+controlname+"]").html(ret);
+
+}
+
+cm_makeForm.prototype.clearOption = function(formid, controlname, defval, deflabel){
+	$(formid+" .form-control[name="+controlname+"]").empty();
+	var ret = "";
+	if (defval != null && defval != undefined) {
+		ret += "<option value=\""+defval+"\">"+deflabel+"</option>";
+	}
+	$(formid+" .form-control[name="+controlname+"]").html(ret);
+
+}
+
+
+
+
+cm_makeForm.prototype.setFormData = function(formType ,cls ,data){
+	if (data == undefined || data == null) {
+		cm_makeForm.prototype.formClear(formType ,cls);
+	}
+	var items = this.formItem;
+	for (var i=0;i<items.length;i++) {
+		$(cls+" .form-control[name="+items[i].frmColNm+"]").val(data[items[i].frmColNm]);
+	}
+	var props = data["props"];
+	if (props==null) return data;
+	
+	var imgfile_id = [];
+	
+	for (var i=0;i<props.length;i++) {
+		var prop = props[i];
+		var tag = prop.propTag;
+		var propcd = prop.propCd;
+		var propVal = prop.propVal;
+		var propLbl = prop.propLbl;
+		
+		if (tag=="checkbox" || tag=="radio") {
+			if (propVal == undefined || propVal == null || propVal.trim() == "") continue;
+			$(cls+" .form-control[name="+propcd+"][value='"+propVal+"']").prop("checked",true);
+		} else if (tag=="text_selectMulti" || tag=="twotext_selectMulti" || tag=="threetext_selectMulti" || tag=="threetextselect_selectMulti" || tag=="textselect_selectMulti" || tag=="texttextselect_selectMulti" || tag=="selectMulti") {
+			
+			var opt = "<option value=\""+propVal+"\" lbl=\""+propLbl+"\">"+propLbl+"</option>";
+			$(cls+" .form-control[name="+propcd+"]").append(opt);
+			var cnt = parseInt($(cls+" .multiformgroup .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt"));
+			cnt++;
+			$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt",cnt);
+			$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").html(cnt+"개");			
+			
+			
+		} else if (tag=="search_selectMulti") {
+			
+			var opt = "<option value=\""+propVal+"\" lbl=\""+propLbl+"\">"+propLbl+"</option>";
+			$(cls+" .form-control[name="+propcd+"]").append(opt);
+			var cnt = parseInt($(cls+" .multiformgroup .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt"));
+			cnt++;
+			$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").attr("cnt",cnt);
+			$(cls+" .multiformgroup  .form-control[name="+propcd+"]").closest(".multiformgroup").find(".listcnt").html(cnt+"개");			
+		} else if (tag=="file_img") {
+			var isChecked=false;
+			for (var kk=imgfile_id.length-1;kk>=0;kk--) {
+				if (imgfile_id[kk] == propcd) isChecked = true;
+			}
+			if (isChecked==false) imgfile_id.push(propcd);
+		} else if (tag=="file_attach") {
+			$(cls+" .form-control[name="+propcd+"]").attr("linksrc",propVal);
+			$(cls+" .form-control[name="+propcd+"]").attr("value",propVal);
+		} else {
+			$(cls+" .form-control[name="+propcd+"]").val(propVal);
+		}
+	}
+	
+	if (imgfile_id.length > 0) {
+		
+			for (var j=0;j<imgfile_id.length;j++) {
+				var key = imgfile_id[j];
+				var preloaddata = [];
+				for (var i=0,idx=1;i<props.length;i++) {
+					if (props[i].propCd == key) {
+						
+						var onedata = {};
+						onedata.id=idx;
+						onedata.src=props[i].propVal;
+						idx++;
+						preloaddata.push(onedata);
+					}
+				}
+				var maxfile = parseInt($("#"+key).attr("frmmax"));
+				$("#"+key).empty();
+				if (preloaddata.length > 0) {
+					$("#"+key).imageUploader({
+						preloaded: preloaddata,
+						imagesInputName:key,
+						maxFiles: maxfile,
+						extensions: ['.jpg', '.jpeg', '.png'],
+						mimes: ['image/jpeg', 'image/png']
+					});
+				} else {
+					$("#"+key).imageUploader({
+						imagesInputName:key,
+						maxFiles: maxfile,
+						extensions: ['.jpg', '.jpeg', '.png'],
+						mimes: ['image/jpeg', 'image/png']
+					});
+				}
+			}
+			
+			for (var j=0;j<imgfile_id.length;j++) {
+				var fnkeys = "";
+				$("#"+imgfile_id[j]+" .uploaded-image img").each(function () {
+					var src = $(this).attr("src");
+					src = src.replace(/\//gi,"");
+					src = src.replace(/\./gi,"");
+					$(this).attr("fnkey",src);
+					if (fnkeys != "") fnkeys += ",";
+					fnkeys += src;
+//					var src = $(this).prop("src");
+//					var srcattr = $(this).attr("src");
+//					_ajaxUtil.getByteArrayImgSync(src ,_jsonUtil.make(_pid, {}), "#"+imgfile_id[j], "#"+imgfile_id[j]+" .uploaded-image img[src='"+srcattr+"']");
+				});
+				$("#"+imgfile_id[j]).attr("fnkeys",fnkeys);
+			}
+			
+	}
+	
+	
+	
+	$(_formId + " .form-control.multiselect.props").each( function(index, item) {
+		var type = $(item).attr("multiselecttype");
+		if (type == "tt" || type == "ts" || type == "tts" || type == "ttt" || type == "ttts") {
+			var tarfd = $(item).attr("targetfd");
+			var tarfds = tarfd.split(",");
+			for(var i=0;i<tarfds.length;i++) {
+				$(_formId + " .form-control.multiselect.props[name="+tarfds[i]+"]").empty();
+			}
+			
+		}
+	});
+	
+	
+	
+	return data;
+}
+
+
+cm_makeForm.prototype.getFormData = function(formType ,cls) {
+	
+	var val="";
+	var items = this.formItem;
+	var data={};
+	for (var i=0;i<items.length;i++) {
+		var obj = $(cls+" .form-control[name="+items[i].frmColNm+"]");
+		if ($(obj).hasClass("multiselect") == true) {
+			for (var j=0;j<$(obj).find("option").length;j++) {
+				if (j>0) val += ",";
+				val += $(obj).find("option").val().trim();
+			}
+		} else {
+			var selval = $(obj).val();
+			if (selval == undefined || selval == null) selval = "";
+			data[items[i].frmColNm] = selval.trim();
+		}
+	}
+	
+	
+	data.props=[];
+	var propitems = $(cls+" .form-control.props");
+	
+	for (var i=0;i<propitems.length;i++) {
+		var obj = $(propitems)[i];
+		if ($(obj).hasClass("multiselect") == true) {
+			var multiselecttype = $(obj).attr("multiselecttype");
+			if (multiselecttype == "tt" || multiselecttype == "ts" || multiselecttype == "tts" || multiselecttype == "ttt" || multiselecttype == "ttts") {
+				var target = $(obj).attr("targetfd");
+				var targets = target.split(",");
+				for (var k=0;k<targets.length;k++) {
+					$(cls+" .form-control[name="+targets[k]+"]").empty();
+				}
+				
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					var val = $(obj).find("option:eq("+j+")").val().trim();
+					var vals = val.split("/");
+					var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+					if (lbl == undefined || lbl == null) lbl = val;
+					else lbl = lbl.trim();
+					var lbls = lbl.split("/");
+					
+					var cnt = parseInt($(obj).attr("txtcnt"));
+					for (var k=0;k<targets.length;k++) {
+						var tval = vals[k].trim();
+						var tlbl = lbls[k];
+						if (tlbl == undefined || tlbl == null) tlbl = tval;
+						var optstr = "<option value=\""+tval+"\" lbl=\""+tlbl+"\">"+tlbl+"</option>";
+						$(cls+" .form-control[name="+targets[k]+"]").append(optstr);
+					}
+				}
+			}
+		}
+	}
+	
+	for (var i=0;i<propitems.length;i++) {
+		var obj = $(propitems)[i];
+		if ($(obj).hasClass("multiselect") == true) {
+			var multiselecttype = $(obj).attr("multiselecttype");
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					var oneprop = {};
+					var val = $(obj).find("option:eq("+j+")").val().trim();
+					var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+					if (lbl == undefined || lbl == null) lbl = val;
+					oneprop.propCd = $(obj).prop("name");
+					oneprop.propVal = val;
+					oneprop.propLbl = lbl;
+					
+					data.props.push(oneprop);
+				}
+		} else if ($(obj).prop("type") == "checkbox" || $(obj).prop("type") == "radio") {
+			if ($(obj).prop("checked") == true) {
+				val = $(obj).val().trim();
+				var oneprop = {};
+				oneprop.propCd = $(obj).prop("name");
+				oneprop.propVal = val;
+				oneprop.propLbl = $(obj).attr("lbl");
+				data.props.push(oneprop);
+			}
+		} else {
+			val = $(obj).val();
+			if (val == null || val == undefined) val="";
+			val = val.trim();
+			var oneprop = {};
+			oneprop.propCd = $(obj).prop("name");
+			oneprop.propVal = val;
+			
+			if ($(obj).prop('tagName').toString().toLowerCase() == "select") {
+				oneprop.propLbl = $(obj).find(" option:selected").attr("lbl");
+			}
+			data.props.push(oneprop);
+		}
+		
+	}
+	
+	
+	$(cls+" div.fileImg").each(function (idx,obj){
+		var fileimgname = $(obj).attr("name");
+		var fnkey_org = $(obj).attr("fnkeys");
+		if (fnkey_org != undefined && fnkey_org != null) {
+			var fnkeys_org = fnkey_org.split(",");
+			var fnvals = "";
+			for (var i=0;i<fnkeys_org.length;i++) {
+				if (fnkeys_org[i] == "") continue;
+				if ($(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").length>0){
+					var srcfnkey = $(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").attr("src");
+					if (fnvals != "") fnvals += ",";
+					fnvals += srcfnkey;
+				}
+			}
+			data[fileimgname+"_exist"]=fnvals;
+		}
+	});
+	
+	
+	return data;
+}
+
+
+
+cm_makeForm.prototype.getFormDataByCustom = function(cls ,formItem) {
+	
+	var val="";
+	var items = formItem;
+	var data={};
+	for (var i=0;i<items.length;i++) {
+		var obj = $(cls+" .form-control[name="+items[i]+"]");
+		if ($(obj).hasClass("multiselect") == true) {
+			for (var j=0;j<$(obj).find("option").length;j++) {
+				if (j>0) val += ",";
+				val += $(obj).find("option").val().trim();
+			}
+		} else {
+			var selval = $(obj).val();
+			if (selval == undefined || selval == null) selval = "";
+			data[items[i]] = selval.trim();
+		}
+	}
+	
+	
+	data.props=[];
+	var propitems = $(cls+" .form-control.props");
+	
+	for (var i=0;i<propitems.length;i++) {
+		var obj = $(propitems)[i];
+		if ($(obj).hasClass("multiselect") == true) {
+			var multiselecttype = $(obj).attr("multiselecttype");
+			if (multiselecttype == "tt" || multiselecttype == "ts" || multiselecttype == "tts" || multiselecttype == "ttt" || multiselecttype == "ttts") {
+				var target = $(obj).attr("targetfd");
+				var targets = target.split(",");
+				for (var k=0;k<targets.length;k++) {
+					$(cls+" .form-control[name="+targets[k]+"]").empty();
+				}
+				
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					var val = $(obj).find("option:eq("+j+")").val().trim();
+					var vals = val.split("/");
+					var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+					if (lbl == undefined || lbl == null) lbl = val;
+					else lbl = lbl.trim();
+					var lbls = lbl.split("/");
+					
+					var cnt = parseInt($(obj).attr("txtcnt"));
+					for (var k=0;k<targets.length;k++) {
+						var tval = vals[k].trim();
+						var tlbl = lbls[k];
+						if (tlbl == undefined || tlbl == null) tlbl = tval;
+						var optstr = "<option value=\""+tval+"\" lbl=\""+tlbl+"\">"+tlbl+"</option>";
+						$(cls+" .form-control[name="+targets[k]+"]").append(optstr);
+					}
+				}
+			}
+		}
+	}
+	
+	for (var i=0;i<propitems.length;i++) {
+		var obj = $(propitems)[i];
+		if ($(obj).hasClass("multiselect") == true) {
+			var multiselecttype = $(obj).attr("multiselecttype");
+				for (var j=0;j<$(obj).find("option").length;j++) {
+					var oneprop = {};
+					var val = $(obj).find("option:eq("+j+")").val().trim();
+					var lbl = $(obj).find("option:eq("+j+")").attr("lbl");
+					if (lbl == undefined || lbl == null) lbl = val;
+					oneprop.propCd = $(obj).prop("name");
+					oneprop.propVal = val;
+					oneprop.propLbl = lbl;
+					
+					data.props.push(oneprop);
+				}
+		} else if ($(obj).prop("type") == "checkbox" || $(obj).prop("type") == "radio") {
+			if ($(obj).prop("checked") == true) {
+				val = $(obj).val().trim();
+				var oneprop = {};
+				oneprop.propCd = $(obj).prop("name");
+				oneprop.propVal = val;
+				oneprop.propLbl = $(obj).attr("lbl");
+				data.props.push(oneprop);
+			}
+		} else {
+			val = $(obj).val();
+			if (val == null || val == undefined) val="";
+			val = val.trim();
+			var oneprop = {};
+			oneprop.propCd = $(obj).prop("name");
+			oneprop.propVal = val;
+			
+			if ($(obj).prop('tagName').toString().toLowerCase() == "select") {
+				oneprop.propLbl = $(obj).find(" option:selected").attr("lbl");
+			}
+			data.props.push(oneprop);
+		}
+		
+	}
+	
+	
+	$(cls+" div.fileImg").each(function (idx,obj){
+		var fileimgname = $(obj).attr("name");
+		var fnkey_org = $(obj).attr("fnkeys");
+		if (fnkey_org != undefined && fnkey_org != null) {
+			var fnkeys_org = fnkey_org.split(",");
+			var fnvals = "";
+			for (var i=0;i<fnkeys_org.length;i++) {
+				if (fnkeys_org[i] == "") continue;
+				if ($(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").length>0){
+					var srcfnkey = $(obj).find(".uploaded img[fnkey="+fnkeys_org[i]+"]").attr("src");
+					if (fnvals != "") fnvals += ",";
+					fnvals += srcfnkey;
+				}
+			}
+			data[fileimgname+"_exist"]=fnvals;
+		}
+	});
+	
+	
+	return data;
+}
+
+
+cm_makeForm.prototype.getFormDatawithFiles = function(formType ,cls, data) {
+	
+	var retFormData = new FormData();
+	
+	retFormData.append('hashdata', data);
+	
+}
+
+
+cm_makeForm.prototype.formClear = function(formType ,cls){
+	var items = this.formItem;
+	$(cls+" input[type=hidden].form-control").val("");
+	$(cls+" input[type=text].form-control").val("");
+	$(cls+" input[type=password].form-control").val("");
+	$(cls+" input[type=file].form-control").val("");
+	$(cls+" textarea.form-control").val("");
+	$(cls+" input[type=checkbox].form-control").prop("checked",false);
+	$(cls+" input[type=radio].form-control").prop("checked",false);
+	$(cls+" button.fileAttach").attr("value","");
+	$(cls+" button.fileAttach").attr("linksrc","");
+	
+	$(cls+" select.form-control").each(function (obj) {
+		$(this).val($(this).find("option:first").val());
+	});
+	$(cls+"  select.form-control.multiselect").each(function (obj) {
+		$(this).empty();
+		$(this).closest(".form-group").find(".listcnt").attr("cnt",0);
+		$(this).closest(".form-group").find(".listcnt").html("0개");
+	});
+	
+	$(cls+" .image-uploader").remove();
+	
+//	$(cls+" .image-uploader .uploaded").empty();
+//	$(cls+" .image-uploader").removeClass("has-files");
+	$(cls+" .fileImg").attr("fnkeys","");
+	
+	$(cls+" .fileImg").each(function (idx, obj) {
+		var key = $(obj).attr("id");
+		var maxfile = parseInt($(obj).attr("frmmax"));
+			$("#"+key).imageUploader({
+				imagesInputName:key,
+				maxFiles: maxfile,
+				extensions: ['.jpg', '.jpeg', '.png'],
+				mimes: ['image/jpeg', 'image/png']
+			});
+	});
+
+	
+	private_function("afterFormClear")
+	
+	
+}
+
+
+cm_makeForm.prototype.formPropertyClear = function(formType ,cls){
+	var items = this.formItem;
+	$(cls+" input[type=hidden].form-control.props").val("");
+	$(cls+" input[type=text].form-control.props").val("");
+	$(cls+" input[type=password].form-control.props").val("");
+	$(cls+" input[type=file].form-control.props").val("");
+	$(cls+" textarea.form-control.props").val("");
+	$(cls+" input[type=checkbox].form-control.props").prop("checked",false);
+	$(cls+" input[type=radio].form-control.props").prop("checked",false);
+	$(cls+" button.fileAttach.props").attr("value","");
+	$(cls+" button.fileAttach.props").attr("linksrc","");
+	
+	$(cls+" select.form-control.props").each(function (obj) {
+		$(this).val($(this).find("option:first").val());
+	});
+	$(cls+"  select.form-control.multiselect.props").each(function (obj) {
+		$(this).empty();
+		$(this).closest(".multiformgroup").find(".listcnt").attr("cnt",0);
+		$(this).closest(".multiformgroup").find(".listcnt").html("0개");
+	});
+	
+}
+cm_makeForm.prototype.setFormDisable = function(formType ,cls ,mode){
+	$(cls+" .form-control").prop("disabled",mode);
+	$(cls+" button").prop("disabled",mode);
+	
+	if (mode == true) {
+		$(cls+" .fileImg").addClass("container-diable");
+	}
+	else {
+		$(cls+" .fileImg").removeClass("container-diable");
+	}
+	
+}
+
+
+cm_makeForm.prototype.openModal = function(dlg ,cls ,w ,h ,isModal ,isResizable ,addfunc ,initfunc){
+	dlg = $(cls).dialog({
+		autoOpen : false,
+		height : h,
+		width : w,
+		modal : isModal,
+		resizable : isResizable,
+		draggable: false,
+		buttons : {
+			"등록" : addfunc,
+			"취소" : function() {
+				dlg.dialog("close");
+				initfunc();
+			}
+		},
+		close : function() {
+			initfunc();
+		},
+		position: { my: "center", at: "center", of: window }
+	});
+	
+	
+	$(window).resize(function(){
+		dlg.dialog("option","position",{ my: "center", at: "center", of: window });
+	});
+	
+	return dlg;
+
+}
+
+
+
+cm_makeForm.prototype.selListAdd = function(btn){
+	var target = $(btn).attr("target");
+	
+	var txtcnt = $(btn).closest(".form-group").find(".multiformgroup .form-control[name="+target+"]").attr("txtcnt");
+	if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+		var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac]").val().trim();
+		if (val != "") {
+			var opt = "<option value='"+val+"'>"+val+"</option>";
+			$(btn).closest(".form-group").find(".form-control[name="+target+"]").append(opt);
+			
+			var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+			cnt++;
+			$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+			$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+		}
+		$(btn).closest(".form-group").find(".form-control[name="+target+"_ac][type=text]").val("");
+	} else {
+		var cnt = parseInt(txtcnt);
+		var valstr = "";
+		var labelstr = "";
+		for (var i=0;i<cnt;i++) {
+			if (i>0) {
+				valstr+=" / ";
+				labelstr+=" / ";
+			}
+			var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+			var label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+			if ($(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").prop('tagName').toLowerCase()=="select") {
+				label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"] option:selected").text();
+			}
+			valstr += val;
+			labelstr += label;
+		}
+		var opt = "<option value='"+valstr+"' lbl='"+labelstr+"'>"+labelstr+"</option>";
+		$(btn).closest(".form-group").find(".form-control[name="+target+"]").append(opt);
+		$(btn).closest(".form-group").find(".addtxtcontrol[type=text]").val("");
+		
+		var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+		cnt++;
+		$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+		$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+	}
+	
+}
+
+
+cm_makeForm.prototype.selListMod = function(btn){
+	var target = $(btn).attr("target");
+	
+	var txtcnt = $(btn).closest(".form-group").find(".multiformgroup .form-control[name="+target+"]").attr("txtcnt");
+	if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+		var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac]").val().trim();
+		if (val != "") {
+			$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").val(val);
+			$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").html(val);
+		}
+		$(btn).closest(".form-group").find(".form-control[name="+target+"_ac][type=text]").val("");
+	} else {
+		var cnt = parseInt(txtcnt);
+		var valstr = "";
+		var labelstr = "";
+		for (var i=0;i<cnt;i++) {
+			if (i>0) {
+				valstr+=" / ";
+				labelstr+=" / ";
+			}
+			var val = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+			var label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val().trim();
+			if ($(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").prop('tagName').toLowerCase()=="select") {
+				label = $(btn).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"] option:selected").text();
+			}
+			valstr += val;
+			labelstr += label;
+		}
+		$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").val(valstr);
+		$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").html(labelstr);
+		$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").attr("lbl",labelstr);
+
+		$(btn).closest(".form-group").find(".addtxtcontrol[type=text]").val("");
+		
+	}
+	
+}
+
+
+
+cm_makeForm.prototype.selListOptionClick = function(select){
+	
+	var opt = $(select).find("option:selected");
+	if (opt.length<=0) return;
+	var target = $(opt).parent().prop("id");
+	var txtcnt = $(opt).parent().attr("txtcnt");
+	var vals = $(opt).val();
+	
+	if (txtcnt == "" || txtcnt == null || txtcnt == undefined) {
+		$(opt).closest(".form-group").find(".form-control[name="+target+"_ac]").val(vals);
+	} else {
+		var cnt = parseInt(txtcnt);
+		var valsary = vals.split("/");
+		for (var i=0;i<cnt;i++) {
+			var j=i+1;
+			var ttt = valsary[i];
+			if (ttt != undefined && ttt != null) ttt = ttt.trim();
+			$(opt).closest(".form-group").find(".form-control[name="+target+"_ac_"+(i+1)+"]").val(ttt);
+		}
+	}
+}
+
+
+cm_makeForm.prototype.selListRemove = function(btn){
+	var target = $(btn).attr("target");
+	var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+	var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+	
+	$(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected").remove();
+
+	var cnt = parseInt($(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt"));
+	cnt--;
+	if (cnt < 0) cnt = 0;
+	$(btn).closest(".form-group").find(".multiformgroup .listcnt").attr("cnt",cnt);
+	$(btn).closest(".form-group").find(".multiformgroup .listcnt").html(cnt+"개");
+	
+	if (linktargets != undefined && linktargets != null && linktargets.trim() != "") {
+		var linktarfds = linktargets.split(",");
+		for (var i=0;i<linktarfds.length;i++) {
+			if (target == linktarfds[i]) continue;
+			$(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")").remove();
+		}
+	}
+}
+
+
+
+cm_makeForm.prototype.selListMoveUp = function(btn){
+	var target = $(btn).attr("target");
+	var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+	var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+		
+    var selected = $(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected");
+	var before = selected.prev();
+	if (before.length > 0) {
+		selected.detach().insertBefore(before);
+		
+		if (linktargets != undefined && linktargets != null) {
+			var linktarfds = linktargets.split(",");
+			for (var i=0;i<linktarfds.length;i++) {
+				
+				if (target == linktarfds[i]) continue;
+				var optidx = $(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")");
+				var optprev = optidx.prev();
+				if (optprev.length > 0) {
+					optidx.detach().insertBefore(optprev);
+				}
+			}
+		}
+	}
+	
+}
+
+
+
+cm_makeForm.prototype.selListMoveDn = function(btn){
+	var target = $(btn).attr("target");
+	var linktargets = $(btn).closest(".form-group").find("button.searchdialog").attr("tarfd");
+	var idx = $(btn).closest(".form-group").find(".form-control[name="+target+"] option").index($(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected"));
+	
+    var selected = $(btn).closest(".form-group").find(".form-control[name="+target+"] option:selected");
+	var next = selected.next();
+	if (next.length > 0) {
+		selected.detach().insertAfter(next);
+		
+		if (linktargets != undefined && linktargets != null) {
+			var linktarfds = linktargets.split(",");
+			for (var i=0;i<linktarfds.length;i++) {
+				
+				if (target == linktarfds[i]) continue;
+				var optidx = $(_formId+" .form-control[name="+linktarfds[i]+"] option:eq("+idx+")");
+				var optnext = optidx.next();
+				if (optnext.length > 0) {
+					optidx.detach().insertAfter(optnext);
+				}
+			}
+		}
+	}
+	
+
+}
+
+
+
+
+
+cm_makeForm.prototype.userBtnAddInfo = function(formid, btn){
+	var srcfd = $(btn).attr("srcfd");
+	var target = $(btn).attr("listfd");
+	
+	var srcfds = srcfd.split(",");
+	var sumstring = "";
+	var optstr = "";
+	for (var i=0;i<srcfds.length;i++) {
+		var valstr = $(formid + " .form-control[name="+srcfds[i]+"]").val();
+		var optlst = $(formid + " .form-control[name="+srcfds[i]+"] option");
+		var lblstr = "";
+		if (optlst.length > 0) {
+			lblstr = $(formid + " .form-control[name="+srcfds[i]+"] option:selected").text();
+		}
+		else lblstr = valstr;
+		if (valstr == undefined) valstr = "";
+		if (lblstr == undefined) lblstr = "";
+		valstr = valstr.trim();
+		lblstr = lblstr.trim();
+		if (i>0) sumstring+=" / ";
+		sumstring += lblstr;
+		optstr = "<option value=\""+valstr+"\" lbl=\""+lblstr+"\">"+lblstr+"</option>";
+		$(formid + " .form-control[name=real_"+srcfds[i]+"]").append(optstr);
+	}
+	optstr = "<option value=\""+sumstring+"\" >"+sumstring+"</option>";
+	$(formid + " .form-control[name="+target+"]").append(optstr);
+	
+	var listcnt = $(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt");
+	listcnt++;
+	$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+	$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+
+	private_function("userBtnAddInfo");
+}
+
+
+
+cm_makeForm.prototype.userBtnDelInfo = function(formid, btn) {
+	
+	var srcfd = $(btn).attr("srcfd");
+	var target = $(btn).attr("listfd");
+	
+	var idx = $(formid + " .form-control[name="+target+"] option").index($(formid + " .form-control[name="+target+"] option:selected"));
+	
+	if (idx >= 0) {
+		private_function("userBtnDelInfo");
+		
+		var srcfds = srcfd.split(",");
+		for (var i=0;i<srcfds.length;i++) {
+			$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+idx+")").remove();
+		}
+		$(formid + " .form-control[name="+target+"] option:eq("+idx+")").remove();
+		
+		
+		var listcnt = $(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt");
+		listcnt--;
+		$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+		$(formid + " .form-control[name="+target+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+		
+		private_function("userBtnDelInfo");
+		
+	} else {
+		alert("삭제할 항목을 선택하세요.");
+	}
+	
+}
+
+
+
+cm_makeForm.prototype.userBtnModInfo = function(formid, btn){
+	
+	var srcfd = $(btn).attr("srcfd");
+	var target = $(btn).attr("listfd");
+	var selidx = $(target).find(" option").index($(target).find(" option:selected"));
+	
+	var srcfds = srcfd.split(",");
+	var sumstring = "";
+	var optstr = "";
+	for (var i=0;i<srcfds.length;i++) {
+		var valstr = $(formid + " .form-control[name="+srcfds[i]+"]").val();
+		var optlst = $(formid + " .form-control[name="+srcfds[i]+"] option");
+		var lblstr = "";
+		if (optlst.length > 0) {
+			lblstr = $(formid + " .form-control[name="+srcfds[i]+"] option:selected").text();
+		}
+		else lblstr = valstr;
+		if (valstr == undefined) valstr = "";
+		if (lblstr == undefined) lblstr = "";
+		valstr = valstr.trim();
+		lblstr = lblstr.trim();
+		if (i>0) sumstring+=" / ";
+		sumstring += lblstr;
+		optstr = "<option value=\""+valstr+"\" lbl=\""+lblstr+"\">"+lblstr+"</option>";
+		
+		$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").val(valstr);
+		$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").attr("lbl",lblstr);
+		$(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+selidx+")").text(lblstr);
+		
+	}
+	optstr = "<option value=\""+sumstring+"\" >"+sumstring+"</option>";
+	
+	$(formid + " .form-control[name="+target+"] option:selected").val(sumstring);
+	$(formid + " .form-control[name="+target+"] option:selected").text(sumstring);
+	
+	private_function("userBtnModInfo");
+}
+
+
+
+cm_makeForm.prototype.setBtnInfo = function(formid, formCd) {
+	
+	var srcFd = $(formid + " .form-control[name="+formCd+"]").attr("srcfd");
+	var srcfds = srcFd.split(",");
+	var substr = "";
+	
+	var listcnt = $(formid + " .form-control[name=real_"+srcfds[0]+"] option").length;
+	$(formid + " .form-control[name="+formCd+"]").closest(".form-group").find(".listcnt").attr("cnt",listcnt);
+	$(formid + " .form-control[name="+formCd+"]").closest(".form-group").find(".listcnt").text(listcnt+"개");
+	for (var j=0;j<listcnt;j++) {
+		substr = "";
+		for (var i=0;i<srcfds.length;i++) {
+			var lbl = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+j+")").attr("lbl");
+			if (lbl == "") lbl = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+j+")").text();
+			if (i>0) substr += " / ";
+			substr += lbl;
+		}
+		var optstr = "<option value=\""+substr+"\">"+substr+"</option>";
+		$(formid + " .form-control[name="+formCd+"]").append(optstr);
+	}
+	
+}
+
+
+cm_makeForm.prototype.setBtnInfoToSource = function(formid, obj) {
+	
+	var srcFd = $(obj).attr("srcfd");
+	var srcfds = srcFd.split(",");
+	var substr = "";
+	
+	var idx = $(obj).find("option").index($(obj).find("option:selected"));
+	
+	for (var i=0;i<srcfds.length;i++) {
+		var val = $(formid + " .form-control[name=real_"+srcfds[i]+"] option:eq("+idx+")").val();
+		$(formid + " .form-control[name="+srcfds[i]+"]").val(val);
+	}	
+}
+
+
+
+
+
+
+cm_makeForm.prototype.changeMultiSelectListByProperty = function(formid, obj, propData, propCds, beforeClear) {
+	
+	if (beforeClear == true) $(formid+" "+obj).empty();
+	
+	var seq = 1;
+	isfinish = false;
+	
+	while (isfinish == false) {
+		
+		var vals = "";
+		var str = "";
+		for (var i=0;i<propData.length;i++) {
+			if (propData[i].propCd == propCds[0] && propData[i].propValSeq == seq) {
+				vals += propData[i].propVal;
+				str += propData[i].propLbl;
+				break;
+			}
+		}
+		if (i>=propData.length) {
+			isfinish = true;
+			break;
+		}
+		for (var i=1;i<propCds.length;i++) {
+
+			for (var j=0;j<propData.length;i++) {
+				if (propData[j].propCd == propCds[i] && propData[j].propValSeq == seq) {
+					vals += "/"+propData[j].propVal;
+					str += "/"+propData[j].propLbl;
+					break;
+				}
+			}
+			
+		}
+		
+		var optstr = "<option value='"+vals+"'>"+str+"</optionl>";
+		
+		$(formid+" "+obj).append(optstr);
+		
+		seq++;
+		
+	}
+	
+	
+		
+	for (var j=1;j<propCds.length;j++) {
+		
+	}
+	
+}
+
+
+
+*/
+

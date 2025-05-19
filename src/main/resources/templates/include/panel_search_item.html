@@ -1,0 +1,95 @@
+
+
+<th:block th:fragment="searchpanelItems">
+	
+	<th:block th:each="item : ${mainContentSchema}">
+		
+		<th:block th:if = "${item.fdIsSearch.toString().equals('Y')}">
+			
+			
+				<th:block th:if = "${item.fdVisible.toString().equals('Y')}">
+									<div th:attr="class='col-md-'+${item.fdWidth}">
+				</th:block>
+				<th:block th:if = "${item.fdVisible.toString().equals('N')}">
+									<div th:attr="class='hidden col-md-'+${item.fdWidth}">
+				</th:block>
+									
+				
+										<div class="form-group">
+											<label>
+												<span th:utext="${item.fdLabel}"></span>
+				<th:block th:if = "${item.fdTagType != 'select_list' and item.fdModalPid != ''}">
+												<span class="selListAdd itemactions" th:attr="actPid=${item.fdModalPid},actTarget=${item.fdModalPidTargets},actResult=${item.fdModalPidResults},actParams=${item.fdModalPidParams},actOptions=${item.fdModalPidOptions}" onclick="selListActionAdd(this);" data-toggle="modal" data-target="#commonModal" th:data-whatever="${item.fdAliasNm}"><i class="fa fa-fw fa-plus-circle"></i></span>
+												<!--span class="selListDel itemactions" th:attr="actTarget=${item.fdModalPidTargets}" onclick="selListActionDel(this);"><i class="fa fa-fw fa-minus-circle"></i></span-->
+				</th:block>
+											</label>
+				
+				<th:block th:if = "${item.fdTagType.toString().equals('select')}">
+											<select class="form-control select2 hidden" style="width: 100%;" th:name="${item.fdAliasNm}"
+												value="" 
+												th:attr="deflist=${item.fdList},deflistpid=${item.fdListPid},defdisabled=${item.fdDisabled}"
+												th:utext="|<option value=''>선택</option> ${item.fdListTag}|">
+											</select>
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('select_multi')}">
+											<select multiple class="form-control multiple" style="width: 100%;"
+												 th:name="${item.fdAliasNm}" value=""
+												 th:attr="deflist=${item.fdList},deflistpid=${item.fdListPid},defdisabled=${item.fdDisabled},defnoupdate=${item.fdNoUpdate}">
+											</select>
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('text')}">
+											<input type="text" class="form-control" style="width: 100%;" th:name="${item.fdAliasNm}"
+												value=""
+												th:attr="defdisabled=${item.fdDisabled}">
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('date')}">
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input type="text" class="form-control pull-right datepicker" style="width: 100%;"
+													th:name="${item.fdAliasNm}" value="" th:attr="defdisabled=${item.fdDisabled}">
+											</div>
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('datetime')}">
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input type="text" class="form-control pull-right datetimepicker" style="width: 100%;"
+													th:name="${item.fdAliasNm}" value="" th:attr="defdisabled=${item.fdDisabled}">
+											</div>
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('period_date')}">
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input type="text" class="form-control pull-right reservation" style="width: 100%;"
+													th:name="${item.fdAliasNm}" value="" th:attr="defdisabled=${item.fdDisabled}">
+											</div>
+				</th:block>
+				<th:block th:if = "${item.fdTagType.toString().equals('period_datetime')}">
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input type="text" class="form-control pull-right reservationtime" style="width: 100%;"
+													th:name="${item.fdAliasNm}" value="" th:attr="defdisabled=${item.fdDisabled}">
+											</div>
+				</th:block>
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+			
+		</th:block>
+		
+	</th:block>
+	<div class='col-md-1'>
+		<div class="form-group btns">
+			<button type="button" class="btn btn-primary btn-search"><i class="fa fa-search"></i></button>
+		</div>
+	</div>
+
+</th:block>>

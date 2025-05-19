@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<div th:replace="~{include/script_public_2::head}"></div>
+<head>
+	<script src="/js/content/account/login.js"></script>
+	<link rel="stylesheet" href="/css/content/account/login.css">	
+	<script src="/js/content/home.js"></script>
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		
+		<!-- Top Header -->
+		<div th:replace="~{include/header_top_1::header}"></div>
+		
+		<!-- Left Menu -->
+		<div th:replace="~{include/left_menu_1::aside}"></div>
+		
+		
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			
+			
+			
+			<select id="evtType" class="hidden">
+
+<div th:each="item:${comOptEvtType}" class="">
+			<option th:value="${item.value}" th:text="${item.label}"></option>
+</div>
+
+			</select>
+	
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 th:text="${cm.pageTitle}"></h1>
+			</section> <!-- Content Header (Page header) -->
+			
+			<!-- Main content -->
+			<section class="content">
+				<!-- Small boxes (Stat box) -->
+				<div class="row">
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+								<h3 th:text="${getTotalSchduleInfo[0].totalcnt}"></h3>
+								<p>작업 일정</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-fw fa-calendar-check-o"></i>
+								<!-- i class="ion ion-bag"></i -->
+							</div>							
+							<a href="/workSchedule" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>			
+						</div>
+					</div>
+					
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3 th:text="${getTotalWorkerInfo[0].totalcnt}"></h3>
+								<p>작업자</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-fw fa-user"></i>
+							</div>
+							<a href="/workSchedule" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<th:block th:if="${#lists.size(getTotalWorkareaInfo) == 0}">
+									<h3>0</h3>
+								</th:block>
+								<th:block th:if="${#lists.size(getTotalWorkareaInfo) > 0}">
+									<h3 th:text="${getTotalWorkareaInfo[0].totalCnt}"></h3>
+								</th:block>
+								<p>작업 지역</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-fw fa-flag"></i>
+							</div>
+							<a href="/workSchedule" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					
+					
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-red">
+							<div class="inner">
+								<div th:if ="${#lists.size(getTotalEventInfo) == 0}">
+									<h3>0</h3>
+								</div>
+								<div th:if ="${#lists.size(getTotalEventInfo) > 0}">
+									<h3 th:text="${getTotalEventInfo[0].totalcntEmgcy}"></h3>
+								</div>
+								<p>발생 이벤트</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-fw fa-bell"></i>
+							</div>
+							<a href="/analysisWorker" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+
+
+
+					
+				</div> <!-- Small boxes (Stat box) -->
+				
+				
+				
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+				
+				
+					<section class="col-lg-7 connectedSortable">
+						
+						
+						<!-- TO DO List -->
+						
+						<div class="box box-primary">
+							<div class="box-header">
+								<i class="ion ion-clipboard"></i>
+						
+								<h3 class="box-title">Today Schedule</h3>
+								
+								<div class="box-tools pull-right">
+									<span th:text="${#lists.size(getScheduleInfo)}"></span>건
+<!--								
+									<ul class="pagination pagination-sm inline">
+										<li><a href="#">&laquo;</a></li>
+										<li><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">&raquo;</a></li>
+									</ul>
+-->									
+									
+								</div>
+							</div>
+						
+						
+						
+						
+						
+							<!-- /.box-header -->
+							<div class="box-body">
+								<ul class="todo-list">
+									<li th:if="${getScheduleInfo != null}" th:each="item:${getScheduleInfo}">
+										<!-- drag handle -->
+										<span class="tmp_handle">
+											<i class="fa fa-ellipsis-v"></i>
+											<i class="fa fa-ellipsis-v"></i>
+										</span>
+										<!-- checkbox -->
+										<input type="checkbox" value="" class="hidden">
+										<!-- todo text -->
+										<span class="text" th:text="${item.schdlTitle}"></span>
+										<!-- Emphasis label -->
+										<small class="label label-danger"><i class="fa fa-flag"></i>
+											<span th:text="${item.areaTitle}"></span>
+										</small>
+										<small class="label label-warning"><i class="fa fa-calendar-o"></i>
+											<span th:text="${item.schdlStDt}"></span>~<span th:text="${item.schdlEdDt}"></span>
+										</small>
+										<small class="label label-info"><i class="fa fa-clock-o"></i>
+											<span th:text="${item.schdlStTm}"></span>~<span th:text="${item.schdlEdTm}"></span>
+										</small>
+										<small class="label label-info"><i class="fa fa-user"></i>
+											<span th:text="${item.wrkCnt}"></span>명
+										</small>
+										
+										<small class="label label-danger hidden"><i class="fa fa-clock-o"></i><span th:text="${item.areaTitle}"></span></small>
+										<small class="label label-success hidden"><i class="fa fa-clock-o"></i> 2 mins</small>
+										<small class="label label-primary hidden"><i class="fa fa-clock-o"></i> 2 mins</small>
+										<small class="label label-default hidden"><i class="fa fa-clock-o"></i> 2 mins</small>
+										<small class="label label-warning hidden"><i class="fa fa-clock-o"></i></small>
+										<small class="label label-info hidden"><i class="fa fa-clock-o"></i></small>
+										<!-- General tools such as edit or delete-->
+										<!--div class="tools">
+											<i class="fa fa-edit"></i>
+											<i class="fa fa-trash-o"></i>
+										</div -->
+									</li>
+
+								</ul>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer clearfix no-border">
+								<button type="button" class="btn btn-default pull-right" onclick="location.href='/workSchedule'"><i class="fa fa-plus"></i> Add item</button>
+							</div>
+						</div>
+						
+						
+					</section> <!-- Left col -->
+				
+				
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<section class="col-lg-5 connectedSortable">
+						<!-- solid sales graph -->
+						<div class="box box-solid bg-teal-gradient">
+							<div class="box-header">
+								<i class="fa fa-th"></i>
+						
+								<h3 class="box-title">Today Event</h3>
+						
+								<div class="box-tools pull-right">
+									<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body border-radius-none">
+								<canvas id="todayEventInfo" class="chartArea">
+							</div>
+							
+<script>
+	
+</script>
+								
+							
+							<!-- /.box-body -->
+				
+							<div class="box-footer no-border hidden">
+								<div class="row">
+									<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+										<input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+											data-fgColor="#39CCCC">
+						
+										<div class="knob-label">Mail-Orders</div>
+									</div>
+									<!-- ./col -->
+									<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+										<input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+											data-fgColor="#39CCCC">
+						
+										<div class="knob-label">Online</div>
+									</div>
+									<!-- ./col -->
+									<div class="col-xs-4 text-center">
+										<input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+											data-fgColor="#39CCCC">
+						
+										<div class="knob-label">In-Store</div>
+									</div>
+									<!-- ./col -->
+								</div>
+								<!-- /.row -->
+							</div>
+							
+							<!-- /.box-footer -->
+						</div>
+						<!-- /.box -->
+						
+					</section> <!-- right col -->				
+				
+				
+				
+				
+				
+				
+				</div> <!-- Main row -->
+				
+				
+				
+				
+				
+				
+			</section> <!-- Main content -->
+			
+			
+			
+			
+			
+			
+			
+			
+		</div>
+		<!-- /.content-wrapper -->
+		
+		
+		
+		
+		<div th:replace="~{include/footer_public_1::footer}"></div>
+		
+		
+		
+	</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

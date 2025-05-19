@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>로그인 - PUBLIC ACTION</title>
+	<meta charset="utf-8"/>
+	<meta name="description" content="PUBLIC ACTION" />
+	<meta name="keywords" content="PUBLIC ACTION" />
+	<meta name="author" content="PUBLIC ACTION" />
+
+	<link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="../../css/select2.min.css" />
+	<link type="text/css" rel="stylesheet" href="../../css/common_font.css?ver=1" />
+	<link type="text/css" rel="stylesheet" href="../../css/common.css?ver=12">
+	<link type="text/css" rel="stylesheet" href="../../css/contents.css?ver=13">
+
+	<script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../../js/select2.min.js"></script>
+	<script type="text/javascript" src="../../js/ui.js"></script>
+
+	<!-- select -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".select2").select2();
+		});
+	</script>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="#">AUTOMART</a></h1>
+		<div class="util">
+<!--
+			<ul>
+				<li class="name"><strong>홍길동</strong>님 로그인 중입니다.</li>
+				<li><a href="#">관심등록물건</a></li>
+				<li><a href="#">로그아웃</a></li>
+			</ul>
+-->
+			<ul>
+				<li><a href="#">로그인</a></li>
+				<li><a href="#">기관로그인</a></li>
+				<li><a href="#">회원가입</a></li>
+			</ul>
+		</div>
+		<nav id="gnb">
+			<h2 class="hidden">주메뉴</h2>
+			<ul class="depth1">
+				<li class="on"><a href="#">공매공고</a></li>
+				<li><a href="#">공매물건</a>
+					<div class="submenu">
+						<ul>
+							<li><a href="/">진행물건검색</a></li>
+							<li><a href="/">매각결과검색</a></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="#">MY PAGE</a>
+					<div class="submenu">
+						<ul>
+							<li><a href="/">회원정보수정</a></li>
+							<li><a href="/">나의입찰내역</a></li>
+							<li><a href="/">관심등록물건</a></li>
+						</ul>
+					</div>
+				</li>
+				<li><a href="#">고객센터</a>
+					<div class="submenu">
+						<ul>
+							<li><a href="/">공지사항</a></li>
+							<li><a href="/">공매절차</a></li>
+							<li><a href="/">FAQ</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<div class="link">
+				<p><strong>유체동산공매</strong>다양한 공매물건을<br/>편리하게 입찰할 수 있습니다.</p>
+			</div>
+		</nav>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="container">
+		<div class="visual sub1">
+			<div class="title">
+				<h3>로그인</h3>
+				<p class="location">
+					<span class="home">홈</span>
+					<span class="arrow">&gt;</span>
+					<span>로그인</span>
+				</p>
+			</div>
+		</div>
+
+		<section id="contents" class="contents">
+			<form action="">
+				<fieldset class="login_box">
+					<legend>로그인</legend>
+					<p class="txt1">회원가입자 로그인</p>
+					<input type="text" title="아이디" placeholder="아이디를 입력해주세요" />
+					<input type="password" title="비밀번호" placeholder="비밀번호를 입력해주세요" />
+					<input type="checkbox" id="agree_t1"> <label for="agree_t1">아이디 저장</label>
+					<button type="submit">Login</button>
+				</fieldset>
+<!--
+				<div class="btn_center">
+					<button type="button" class="btn_ty8">아이디/비밀번호 찾기</button>
+					<button type="button" class="btn_ty8">회원가입</button>
+				</div>
+-->
+			</form>
+		</section>
+	</article>
+	<!-- //container -->
+	<hr />
+
+	<footer id="footer">
+		<nav class="footer_menu">
+			<h2 class="hidden">하단 메뉴</h2>
+			<ul>
+				<li><a href="#">이용약관</a></li>
+				<li><a href="#">회사소개</a></li>
+				<li><a href="#">개인정보처리방침</a></li>
+<!--
+				<li><a href="#">찾아오시는길</a></li>
+-->
+			</ul>
+		</nav>
+		<div class="footer_bottom">
+<!--
+			<div class="logo">Pulic Auction</div>
+			<address>(08513) 서울특별시 금천구 벚꽃로 234, 313호(가산동, 에이스하이엔드타워6차) 대표전화: 02)6299-5476</address>
+			<p class="copyright">Copyright ⓒ 2017 AutoMart Co.ltd,. All Rights Reserved.</p>
+-->
+			<div class="logo">경기도청</div>
+			<address>(16444) 수원시 팔달구 효원로 1 (매산로3가) / 북부청사 11780 의정부시 청사로 1 / 경기도 콜센터 031-120 </address>
+			<p class="copyright">© GYEONGGI PROVINCE All Rights Reserved.</p>
+		</div>
+	</footer>
+</div>
+</body>
+</html>

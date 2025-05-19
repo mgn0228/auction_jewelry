@@ -1,0 +1,118 @@
+
+<th:block th:fragment="head">
+	<meta charset="utf-8"/>
+	<meta name="description" content="PUBLIC ACTION" />
+	<meta name="keywords" content="PUBLIC ACTION" />
+	<meta name="author" content="PUBLIC ACTION" />
+	
+	<link rel="icon" href="/img/common/favicon.ico">
+	<link rel="favicon" href="/img/common/favicon.ico">
+
+	<link type="text/css" rel="stylesheet" href="/jewelry/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="/jewelry/css/select2.min.css" />
+	<link type="text/css" rel="stylesheet" href="/jewelry/css/common_font.css?ver=1" />
+	<link type="text/css" rel="stylesheet" href="/jewelry/css/common.css?ver=12">
+	<link type="text/css" rel="stylesheet" href="/jewelry/css/contents.css?ver=13">
+
+	<script type="text/javascript" src="/jewelry/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/jewelry/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/jewelry/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/jewelry/js/select2.min.js"></script>
+	<script type="text/javascript" src="/jewelry/js/ui.js"></script>
+
+	<!-- select -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".select2").select2();
+		});
+	</script>
+
+
+
+<!-- 
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title th:text="${serviceName}"></title>
+	< !-- Tell the browser to be responsive to screen width -- >
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	
+	<link rel="icon" href="/img/common/favicon.png">
+	<link rel="favicon" href="/img/common/favicon.png">
+	
+	< !-- Bootstrap 3.3.6 -- >
+	<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+	< !-- Font Awesome -- >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	< !-- Ionicons -- >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	< !-- Theme style -- >
+	<link rel="stylesheet" href="/dist/AdminLTE.min.css">
+	<link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+	< !-- iCheck -- >
+	<link rel="stylesheet" href="/vendor/iCheck/square/blue.css">
+
+
+	< !-- jQuery 2.2.3 -- >
+	<script src="/vendor/jQuery/jquery-2.2.3.min.js"></script>
+	< !-- Bootstrap 3.3.6 -- >
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	< !-- iCheck -- >
+	<script src="/vendor/iCheck/icheck.min.js"></script>
+	< !-- CryptoJS3.1.2 -- >
+	<script src="/vendor/CryptoJS-3.1.2/rollups/aes.js"></script>
+	<script src="/vendor/CryptoJS-3.1.2/rollups/sha256.js"></script>
+	
+	<script src="/vendor/summernote/summernote.js"></script>
+	<link href="/vendor/summernote/summernote.css" rel="stylesheet" />
+	
+-->	
+	
+	
+	<!-- CryptoJS3.1.2 -->
+	<script src="/vendor/CryptoJS-3.1.2/rollups/aes.js"></script>
+	<script src="/vendor/CryptoJS-3.1.2/rollups/sha256.js"></script>
+	
+	<!-- common -->
+	<script src="/js/common/cm.ajaxUtil.js"></script>
+	<script src="/js/common/cm.jsonUtil.js"></script>
+	<script src="/js/common/cm.formUtil.js"></script>
+	<script src="/js/common/cm.searchUtil.js"></script>
+	<script src="/js/common/cm.datatableUtil.js"></script>
+	<script src="/js/common/cm.menuUtil.js"></script>
+	<script src="/js/common/cm.stringUtil.js"></script>
+	<script src="/js/common/cm.chart.chartJs.js"></script>
+	<script src="/js/common/cm.kakaoMapUtil.js"></script>
+	<script src="/js/common/cm.modalUtil.js"></script>
+	<script src="/js/common/cm.excelUtil.js"></script>
+	
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>s
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+ 	<script>
+		var _pid = "[[${pid}]]";
+		var _sid = "[[${sid}]]";
+		var _utilAjax = new cm_ajaxUtil();
+		var _utilJson = new cm_jsonUtil();
+		var _utilForm = new cm_formUtil();
+		var _utilString = new cm_stringUtil();
+		
+		
+		function logoutprocess () {
+			var data = {};
+			var ret = _utilAjax.sendSyncRet("/account/logout", _utilJson.make(_pid,data));
+			if (ret.result == "OK") {
+				location.replace("/");
+			} else {
+				alert(ret.message);
+			}
+		}
+		
+		
+	</script>
+	
+	
+</th:block>

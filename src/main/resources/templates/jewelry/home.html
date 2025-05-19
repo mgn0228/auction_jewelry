@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>main  지방세 체납공매 입찰</title>
+<th:block th:replace="~{jewelry_include/script_public_home::head}"></th:block>
+<th:block th:replace="~{jewelry_include/script_custom_js_css::custom_js_css}"></th:block>
+</head>
+
+<body>
+<div id="skipnavi">
+	<a href="#gnb">주메뉴 바로가기</a>
+	<a href="#contents">본문 바로가기</a>
+</div>
+
+<div class="wrap">
+	<header id="header">
+		<h1 class="logo"><a href="/">AUTOMART</a></h1>
+<th:block th:replace="~{jewelry_include/nav_public_1::nav}"></th:block>
+		<div id="gnb_bg"></div>
+	</header>
+	<!-- //header -->
+	<hr />
+
+	<article id="container" class="main_container">
+		<div class="main_visual">
+			<div class="visual_in">
+				<p class="tit"><strong>동산공매<span> 압류물건공매 </span> </strong> 
+					지방세 체납 동산 공매 </p>
+				<p> 지방세 체납자의 압류 동산(귀금속, 명품, 기타 동산 등)을 <br/>
+					인터넷 공매 시스템을 통해 편리하고 공정하게 공개 매각하는 <br/>
+					시스템입니다. </p>
+			</div>
+		</div>
+		<h3 class="hidden">공매물건</h3>
+		<div class="link_box">
+			<ul>
+			<!--
+				<li class="m1">
+					<a href="#">
+						<strong><span>시계/가방</span> 공매물건</strong>
+						<span class="num"> 진행 50  /  마감 0</span>
+						<span class="go">바로가기</span>
+					</a>
+				</li>
+				<li class="m2">
+					<a href="#">
+						<strong><span>귀금속</span> 공매물건</strong>
+						<span class="num"> 진행 50  /  마감 0</span>
+						<span class="go">바로가기</span>
+					</a>
+				</li>
+				<li class="m3">
+					<a href="#">
+						<strong><span>기타</span> 공매물건</strong>
+						<span class="num"> 진행 50  /  마감 0</span>
+						<span class="go">바로가기</span>
+					</a>
+				</li>
+			-->
+				<th:block th:each="item , itemstatus : ${getCategoryStatusCount}">
+					<li th:class="'m' + ${itemstatus.index + 1}">
+						<a href="#">
+							<strong><span th:text="${item.categoryNm1}">시계/가방</span> 공매물건</strong>
+							<span class="num"
+								  th:text="${'진행 ' + item.totalInProgressCount + '  /  마감 ' + item.totalFinishedCount}"> 진행 10  /  마감 90</span>
+							<span class="go">바로가기</span>
+						</a>
+					</li>
+				</th:block>
+			</ul>
+		</div>
+
+		<section id="contents" class="main_contents">
+			<div class="notice_wrap">
+				<h3 class="tit_mty1">공매 공고 정보</h3>
+				<div class="notice_box">
+					<div class="box m1">
+						<h4>입찰공고일정</h4>
+						<ul class="list">
+							<li><span> [ 체납동산 공매일정 ] </span>
+							</li>
+							<li><span> 입찰시작 : 2020-10-19 09:00 </span>
+								<br /><span> 입찰마감 : 2020-10-21 18:00 </span>
+								<br /><span> 매각발표 : 2020-10-23 14:00 </span>
+								<br /><span> 수납마감 : 2020-10-28 18:00 </span>
+								<br />
+								<br /><span> 물품 수령 : 공고 내용 참조 </span>
+							</li>
+						</ul>
+					</div>
+					<div class="box m2">
+						<h4>공매진행절차</h4>
+						<ul>
+							<li><a href="#">공매절차 </a></li>
+							<li><a href="#">잔금수납방법</a></li>
+						</ul>
+					</div>
+<!--
+					<div class="box m3">
+						<h4>입찰진행</h4>
+						<div class="goods">
+							<a href="#">
+								<span><img src="../../images/temp/goods_1.jpg" alt="" /></span>
+								[명품] 샤넬가방 25421
+							</a>
+						</div>
+					</div>
+					<div class="box m4">
+						<h4>공지사항</h4>
+						<ul class="list">
+							<li><a href="#">[입찰안내] 시흥시청 입찰공고 내용의 제목이 들어갑니다. </a><span>2017-07-10</span></li>
+							<li><a href="#">[입찰안내] 시흥시청 입찰공고 내용의 제목이 들어갑니다. </a><span>2017-07-10</span></li>
+						</ul>
+					</div>
+-->
+				</div>
+			</div>
+		</section>
+	</article>
+
+
+	<!-- //container -->
+	<hr />
+
+
+	<th:block th:replace="~{jewelry_include/footer_public_1::footer}"></div>
+
+	
+	
+</div>
+</body>
+</html>

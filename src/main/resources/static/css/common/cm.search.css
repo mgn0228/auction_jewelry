@@ -1,0 +1,23 @@
+/*!
+common search css
+*/
+
+
+.search-panel .form-group.btns {
+	text-align: center;
+	padding: 20%;
+	padding: 5px;
+}
+
+
+.search-panel .itemactions {
+	cursor: pointer;
+}
+
+@media (max-width: 992px) {
+	.search-panel .form-group.btns {
+		text-align: left;
+		padding: 10px;
+	}
+
+}
