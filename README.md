@@ -17,11 +17,13 @@
   - CONTENT_PAGES_PROPS : CONTENT_PAGES와 연결된 속성 정보
 
 사용자 요청 (PID)
-        ↓
+↓
 CONTENT_PAGES + CONTENT_PAGES_PROPS 조회
-        ↓
-    필요한 Sub PID 확인
-        ↓
-   INFO_DATABASE 조회 (쿼리/테이블 메타)
-        ↓
+↓
+필요한 Sub PID 확인
+↓
+INFO_DATABASE 조회 (쿼리/테이블 메타)
+↓
 INFO_TABLE_FIELDS 조회 (필드 상세 메타)
+↓
+동적 화면/폼/목록/메뉴 생성
