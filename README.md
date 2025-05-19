@@ -1,15 +1,10 @@
 ### 구성
-- Spring Boot : 3.4.1
+- Spring Boot : 3.1.2
 - Java : 17.x.x
 - Build : Maven
 - IDE : IntelliJ
 - Dababase
   - MariaDB
 - DB 쿼리 작성
-  - JDBC
-- 로그인 처리
-  - Spring Security
-  - JWT
-- API 명세서 작성
-  - Swagger
+  - Mybatis
 ---
