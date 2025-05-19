@@ -8,3 +8,10 @@
 - DB 쿼리 작성
   - Mybatis
 ---
+### 구조
+- 테이블 스키마와 요청값을 기반으로 동적 SQL을 생성하여 처리
+  - INFO_MENU : 메뉴 항목의 코드값 그룹
+  - INFO_DATABASE : 페이지(PID)별로 어떤 프로시저 또는 쿼를 수행할지에 대한 메타 정보
+  - INFO_TABLE_FIELDS : INFO_DATABASE에서 정의한 쿼리에 포함될 필드들에 대한 상세 설정
+  - CONTENT_PAGES : 화면(PID) 단위로 어떤 페이지가 있고, 그 페이지가 어떤 속성을 가졌는지를 정의
+  - CONTENT_PAGES_PROPS : CONTENT_PAGES와 연결된 속성 정보
